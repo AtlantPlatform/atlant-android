@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/system_image"
+    android:scaleType="centerCrop"
+    android:src="@drawable/atl_fon"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:gravity="center">
+
+      <include layout="@layout/view_logo_name"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin"
+      android:layout_marginBottom="@dimen/activity_vertical_margin"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin"
+      android:gravity="bottom"
+      android:orientation="vertical">
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_selected_border">
+
+        <Button
+          android:id="@+id/login_selected_bt_create"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/highlight"
+          android:text="@string/login_selected_create_wallet"/>
+
+      </RelativeLayout>
+
+      <Button
+        android:id="@+id/login_selected_bt_import"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_title_margin"
+        android:background="@drawable/highlight"
+        android:text="@string/login_selected_wallet"/>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+</RelativeLayout>

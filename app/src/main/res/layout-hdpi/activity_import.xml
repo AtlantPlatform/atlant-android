@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/system_image"
+    android:scaleType="centerCrop"
+    android:src="@drawable/atl_fon"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <TextView
+      android:textStyle="bold"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin"
+      android:gravity="center"
+      android:text="@string/import_wallet_title"
+      android:textColor="@color/md_white_1000"
+      android:textSize="@dimen/text_size_24"/>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_marginBottom="@dimen/activity_vertical_margin"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/import_wallet_text1"
+          android:textColor="@color/import_color1"
+          android:textSize="@dimen/text_size_14"/>
+
+        <EditText
+          android:id="@+id/import_private_key_edit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/activity_vertical_title_margin"
+          android:padding="10dp"
+          android:background="@drawable/import_edit"
+          android:hint="@string/import_wallet_edit_hint"
+          android:inputType="textMultiLine"
+          android:maxLength="64"
+          android:maxLines="2"
+          android:textColor="@color/md_white_1000"
+          android:textColorHint="@color/colorSecondaryText"
+          android:textSize="@dimen/text_size_18"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/activity_vertical_margin"
+          android:text="@string/import_wallet_text2"
+          android:textColor="@color/import_color1"
+          android:textSize="@dimen/text_size_14"/>
+
+        <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+          <ImageView
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/import_ellipse"
+            android:contentDescription="@string/system_image"/>
+
+          <ImageView
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/import_ellipse"
+            android:contentDescription="@string/system_image"/>
+
+          <ImageView
+            android:id="@+id/import_qr_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/import_ellipse_press"
+            android:contentDescription="@string/system_image"/>
+
+          <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/system_image"
+            android:src="@drawable/ic_camera"/>
+
+        </RelativeLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="bottom">
+
+      <Button
+        android:id="@+id/bt_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/highlight_bt_blue"/>
+    </LinearLayout>
+
+  </LinearLayout>
+
+</RelativeLayout>

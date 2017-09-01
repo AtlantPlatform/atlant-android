@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory
+    android:key="@string/pref_security_title"
+    android:title="@string/pref_security_title">
+    <Preference
+      android:key="@string/pref_security_pin"
+      android:title="@string/pref_security_pin"/>
+  </PreferenceCategory>
+
+  <PreferenceCategory
+    android:key="@string/pref_control_title"
+    android:title="@string/pref_control_title">
+    <Preference
+      android:key="@string/pref_control_export"
+      android:title="@string/pref_control_export"/>
+    <Preference
+      android:key="@string/pref_control_import"
+      android:title="@string/pref_control_import"/>
+    <Preference
+      android:key="@string/pref_control_delete"
+      android:title="@string/pref_control_delete"/>
+  </PreferenceCategory>
+
+  <PreferenceCategory
+    android:key="@string/pref_about_app_title"
+    android:title="@string/pref_about_app_title">
+    <Preference
+      android:key="@string/pref_about_app_version"
+      android:title="0"/>
+  </PreferenceCategory>
+
+</PreferenceScreen>

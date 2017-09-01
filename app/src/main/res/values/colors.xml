@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+  <!--common colors-->
+  <color name="colorPrimary">#021929</color>
+  <color name="colorPrimaryDark">#021929</color>
+  <color name="colorAccent">#009eff</color>
+  <color name="colorAccent10percent">#19009eff</color>
+  <color name="colorAccentLight">#32009eff</color>
+  <color name="colorWindow">#ffffff</color>
+  <color name="grey_light">#e5e5e5</color>
+  <color name="grey_hint">#e5e5e5</color>
+  <color name="alpha">#00000000</color>
+
+  <!--button-->
+  <color name="button_blue_normal">@color/accent</color>
+  <color name="button_blue_press">@color/primary</color>
+
+  <!--text-->
+  <color name="colorPrimaryText">#000</color>
+  <color name="colorSecondaryText">#ababab</color>
+
+  <!--dialog-->
+  <color name="dialog_accent">@color/accent</color>
+  <color name="dialog_message">#737374</color>
+  <color name="dialog_fon">@color/md_white_1000</color>
+
+  <!--import-->
+  <color name="import_color1">#708699</color>
+
+  <!--transactions-->
+  <color name="transactions_received">#49dfb6</color>
+  <color name="transactions_send">@color/accent</color>
+  <color name="transactions_date">#c2c2c2</color>
+  <color name="transactions_value">#737373</color>
+  <color name="transactions_background">#eff6fc</color>
+
+  <!--camera-->
+  <color name="viewfinder_mask" tools:ignore="UnusedResources">#c8000000</color>
+  <color name="viewfinder_laser" tools:ignore="UnusedResources">@color/accent</color>
+  <color name="viewfinder_border" tools:ignore="UnusedResources">@color/primary</color>
+
+  <!-- MaterialDrawer DEFAULT colors -->
+  <color name="material_drawer_primary_text">@color/md_white_1000</color>
+  <color name="material_drawer_primary_icon">@color/accent</color>
+  <color name="material_drawer_secondary_text">@color/accent</color>
+  <color name="material_drawer_divider">#08364d</color>
+
+</resources>

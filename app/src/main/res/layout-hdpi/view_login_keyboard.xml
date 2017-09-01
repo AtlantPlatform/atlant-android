@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/keyboard"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@color/md_white_1000"
+  android:orientation="vertical"
+  android:showDividers="beginning|middle|end">
+
+  <TableRow style="@style/LoginKeyboard">
+
+    <TextView
+      android:id="@+id/login_keyboard_key_1"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_one"/>
+
+    <TextView
+      android:id="@+id/login_keyboard_key_2"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_two"/>
+
+    <TextView
+      android:id="@+id/login_keyboard_key_3"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_three"/>
+  </TableRow>
+
+  <TableRow style="@style/LoginKeyboard">
+
+    <TextView
+      android:id="@+id/login_keyboard_key_4"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_four"/>
+
+    <TextView
+      android:id="@+id/login_keyboard_key_5"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_five"/>
+
+    <TextView
+      android:id="@+id/login_keyboard_key_6"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_six"/>
+  </TableRow>
+
+  <TableRow style="@style/LoginKeyboard">
+
+    <TextView
+      android:id="@+id/login_keyboard_key_7"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_seven"/>
+
+    <TextView
+      android:id="@+id/login_keyboard_key_8"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_eight"/>
+
+    <TextView
+      android:id="@+id/login_keyboard_key_9"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_nine"/>
+  </TableRow>
+
+  <TableRow style="@style/LoginKeyboard">
+
+    <TextView
+      android:id="@+id/login_keyboard_key_clear"
+      style="@style/LoginKeyboardButton"
+      android:enabled="false"
+      android:text=""/>
+
+    <TextView
+      android:id="@+id/login_keyboard_key_0"
+      style="@style/LoginKeyboardButton"
+      android:text="@string/keyboard_number_zero"/>
+
+    <ImageView
+      android:id="@+id/login_keyboard_key_backspace"
+      style="@style/LoginKeyboardButton"
+      android:contentDescription="@string/system_image"
+      android:textAppearance="?android:attr/textAppearanceMedium"/>
+  </TableRow>
+</TableLayout>

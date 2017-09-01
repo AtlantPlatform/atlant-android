@@ -1,0 +1,114 @@
+<resources>
+  <!--app-->
+  <string name="app_name">Atlant</string>
+  <string name="app_prefix_coin">ATL</string>
+
+  <!--menu & toolbar-->
+  <string name="menu_qr_code">QR-сode</string>
+  <string name="menu_no_title"> </string>
+  <string name="menu_balance">Balance</string>
+
+  <!--material drawer-->
+  <string name="material_drawer_title">Menu</string>
+  <string name="material_drawer_send">Send</string>
+  <string name="material_drawer_receive">Receive</string>
+  <string name="material_drawer_settings">Settings</string>
+
+  <!--login selected-->
+  <string name="login_selected_create_wallet">Create new wallet</string>
+  <string name="login_selected_wallet">Import wallet</string>
+
+  <!--login-->
+  <string name="login_create_password_text">Create PIN code</string>
+  <string name="login_confirm_password_text">Confirm PIN code</string>
+  <string name="login_enter_password_text">Enter PIN code</string>
+  <string name="login_change_current_password">Enter the current PIN code</string>
+  <string name="login_change_new_password">Enter the new PIN code</string>
+  <string name="login_change_new_repeat_password">Confirm the current PIN code</string>
+  <string name="login_dialog_decrypt_wallet">Decoding of a wallet…</string>
+  <string name="login_dialog_create_wallet">Creating a wallet…</string>
+  <string name="login_dialog_change_wallet">Change password…</string>
+  <string name="keyboard_number_one">1</string>
+  <string name="keyboard_number_two">2</string>
+  <string name="keyboard_number_three">3</string>
+  <string name="keyboard_number_four">4</string>
+  <string name="keyboard_number_five">5</string>
+  <string name="keyboard_number_six">6</string>
+  <string name="keyboard_number_seven">7</string>
+  <string name="keyboard_number_eight">8</string>
+  <string name="keyboard_number_nine">9</string>
+  <string name="keyboard_number_zero">0</string>
+  <string name="login_message_wrong_password">Wrong PIN code! Please, repeat again!</string>
+  <string name="login_message_successfully_change_password">Successfully changed the PIN code!</string>
+
+  <!--import-->
+  <string name="import_wallet_title">Import\nATL-wallet</string>
+  <string name="import_wallet_text1">Private key ATL-wallet key</string>
+  <string name="import_wallet_text2">QR-code</string>
+  <string name="import_wallet_edit_hint">Enter the key</string>
+
+  <!--export-->
+  <string name="export_title">Private key ATL-wallet key</string>
+  <string name="export_private_key_text">Private key</string>
+  <string name="export_QR_code_text">QR-code</string>
+
+  <!--send-->
+  <string name="send_title">Send</string>
+  <string name="send_no_money">Attention! Insufficient balance!</string>
+  <string name="send_to_text">To</string>
+  <string name="send_address_hint">Enter the address</string>
+  <string name="send_value_hint">0.00</string>
+  <string name="send_invalid_data">Invalid address format</string>
+  <string name="send_no_correct_money">Attention! You can send more 0.000000000000000001 ATL</string>
+  <string name="send_process">Send…</string>
+  <string name="send_preparing">Preparing for send…</string>
+  <string name="send_successful_send">Transaction sent successfully</string>
+  <string name="send_error_send">Send error, try again</string>
+  <string name="send_dialog_text_warning">You irrevocably send %1$s ATL by the address %2$s</string>
+
+  <!--receive-->
+  <string name="receive_title">Receive</string>
+  <string name="receive_explanation">Click here to copy this address.\nSend the address to the recipient.</string>
+
+  <!--setting-->
+  <string name="pref_security_title">Security</string>
+  <string name="pref_security_pin">Change password</string>
+  <string name="pref_control_title">Manage your wallet</string>
+  <string name="pref_control_delete">Remove a wallet</string>
+  <string name="pref_control_import">Import a wallet</string>
+  <string name="pref_control_export">Export a wallet</string>
+  <string name="pref_dialog_delete">If you delete the wallet, you will lose access to it. Do you want to continue?</string>
+  <string name="pref_dialog_import">If you import a new wallet, you will lose access to the current wallet. Do you want to continue?</string>
+  <string name="pref_about_app_title">Application version</string>
+  <string name="pref_about_app_version">0</string>
+
+  <!--camera-->
+  <string name="camera_permission">You must have the Camera permission</string>
+  <string name="camera_failScan">Invalid QR-code</string>
+
+  <!--transaction-->
+  <string name="transaction_status_send">Sent</string>
+  <string name="transaction_status_received">Received</string>
+
+  <!--transactions no-->
+  <string name="no_transactions_intro">Transactions</string>
+  <string name="no_transactions_explanation">Transactions will be displayed when you receive or send an ATL.</string>
+
+  <!--button-->
+  <string name="bt_next">Next</string>
+  <string name="bt_send">Send</string>
+  <string name="bt_close">Close</string>
+  <string name="bt_dialog_continue">Continue</string>
+  <string name="bt_dialog_back">Close</string>
+  <string name="bt_dialog_ok">OK</string>
+
+  <!--system-->
+  <string name="system_key_copied">Address copied to clipboard</string>
+  <string name="system_error">Error</string>
+  <string name="system_no_internet_connection">No internet connection</string>
+  <string name="system_wallet_loading_error">Error loading data</string>
+  <string name="system_timeout">Could not connect to the server, please try again later.</string>
+  <string name="system_image">Image</string>
+  <string name="system_atl_default">0 ATL</string>
+
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/send_to_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/send_to_text"
+      android:textColor="@color/colorSecondaryText"
+      android:textSize="@dimen/text_size_14"/>
+
+    <EditText
+      android:id="@+id/send_address_edit"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_title_margin"
+      android:background="@android:color/transparent"
+      android:hint="@string/send_address_hint"
+      android:inputType="textMultiLine"
+      android:maxLength="42"
+      android:maxLines="2"
+      android:textColorHint="@color/grey_hint"
+      android:textSize="@dimen/text_size_18"/>
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/grey_light"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/app_prefix_coin"
+      android:textColor="@color/colorSecondaryText"
+      android:textSize="@dimen/text_size_18"/>
+
+    <EditText
+      android:id="@+id/send_value"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_title_margin"
+      android:background="@android:color/transparent"
+      android:gravity="center"
+      android:hint="@string/send_value_hint"
+      android:inputType="numberDecimal"
+      android:lines="1"
+      android:textColor="@android:color/black"
+      android:textColorHint="@color/grey_hint"
+      android:textSize="@dimen/text_size_24"/>
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/grey_light"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <Button
+      android:id="@+id/bt_close"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/bt_send"/>
+
+  </LinearLayout>
+
+</LinearLayout>

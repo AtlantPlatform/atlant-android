@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/activity_homescreen"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <FrameLayout
+    android:id="@+id/fragment_content_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+  <FrameLayout
+    android:id="@+id/screen_overlay_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+  <com.frostchein.atlant.views.NoTransactionView
+    android:id="@+id/no_transactions_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+</RelativeLayout>
