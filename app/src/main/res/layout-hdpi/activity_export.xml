@@ -55,14 +55,26 @@
         android:textColor="@color/colorSecondaryText"
         android:textSize="@dimen/text_size_14"/>
 
-      <ImageView
-        android:id="@+id/export_qr_image"
-        android:layout_width="@dimen/system_qr_size"
-        android:layout_height="@dimen/system_qr_size"
-        android:layout_marginTop="@dimen/activity_vertical_title_margin"
-        android:contentDescription="@string/system_image"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_qrcode_default"/>
+      <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_title_margin">
+
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"/>
+
+        <ImageView
+          android:id="@+id/export_qr_image"
+          android:layout_width="@dimen/system_qr_size"
+          android:layout_height="@dimen/system_qr_size"
+          android:contentDescription="@string/system_image"
+          android:scaleType="centerInside"
+          android:src="@drawable/ic_qrcode_default"/>
+
+      </RelativeLayout>
 
     </LinearLayout>
 

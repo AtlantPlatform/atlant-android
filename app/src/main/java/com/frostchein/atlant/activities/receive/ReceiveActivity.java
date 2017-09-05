@@ -94,7 +94,7 @@ public class ReceiveActivity extends BaseActivity implements ReceiveView, TextWa
 
   @Override
   public void onKeyCopied() {
-    AnimationUtils.copyBufferText(getContext(), textAddress);
+    AnimationUtils.copyBufferText(textAddress,500);
     showMessage(getString(R.string.system_key_copied));
   }
 

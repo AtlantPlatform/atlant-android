@@ -18,6 +18,7 @@ import com.frostchein.atlant.dagger2.component.AppComponent;
 import com.frostchein.atlant.dagger2.component.DaggerImportActivityComponent;
 import com.frostchein.atlant.dagger2.component.ImportActivityComponent;
 import com.frostchein.atlant.dagger2.modules.ImportActivityModule;
+import com.frostchein.atlant.utils.AnimationUtils;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DimensUtil;
 import com.frostchein.atlant.utils.IntentUtil.EXTRA_STRING;
@@ -34,6 +35,10 @@ public class ImportActivity extends BaseActivity implements ImportView, TextWatc
   ImageView imageQrCode;
   @BindView(R.id.bt_next)
   Button btNext;
+  @BindView(R.id.import_qr_anim1_image)
+  ImageView imageCircle1;
+  @BindView(R.id.import_qr_anim2_image)
+  ImageView imageCircle2;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,8 @@ public class ImportActivity extends BaseActivity implements ImportView, TextWatc
   @Override
   protected void initUI() {
     editPrivateKey.addTextChangedListener(this);
+    AnimationUtils.animationScale(imageCircle1, 1f, 0.75f, 1000);
+    AnimationUtils.animationScale(imageCircle2, 1f, 0.75f, 1000);
   }
 
   @Override
