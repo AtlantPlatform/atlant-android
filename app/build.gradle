@@ -2,17 +2,17 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 apply plugin: 'com.getkeepsafe.dexcount'
 
-
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     defaultConfig {
+        def release = (project.gradle.startParameter.taskNames.any { it.toLowerCase().contains('release') })
         applicationId "com.frostchein.atlant"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "0.1 alpha"
-        multiDexEnabled true
+        multiDexEnabled release
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -21,13 +21,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    output.outputFile.name.replace(".apk", "_" + "atlant" + "_" + versionName + ".apk"))
+        }
+    }
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
         }
     }
-
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86'
+            universalApk true
+        }
+    }
     packagingOptions {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
