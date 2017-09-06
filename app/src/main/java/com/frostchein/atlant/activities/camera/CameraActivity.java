@@ -119,7 +119,7 @@ public class CameraActivity extends BaseActivity implements CameraView {
     }
 
     if (typeResult == TAG_FROM_HOME) {
-      goToSendActivity(false, result);
+      goToSendActivity(true, result);
     }
   }
 
