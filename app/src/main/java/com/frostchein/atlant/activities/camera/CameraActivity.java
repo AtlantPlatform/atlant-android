@@ -12,7 +12,7 @@ import com.frostchein.atlant.dagger2.component.CameraActivityComponent;
 import com.frostchein.atlant.dagger2.component.DaggerCameraActivityComponent;
 import com.frostchein.atlant.dagger2.modules.CameraActivityModule;
 import com.frostchein.atlant.utils.CredentialHolder;
-import com.frostchein.atlant.utils.IntentUtil;
+import com.frostchein.atlant.utils.IntentUtils;
 import javax.inject.Inject;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -41,7 +41,7 @@ public class CameraActivity extends BaseActivity implements CameraView {
 
   @Override
   public void initUI() {
-    typeResult = getIntent().getIntExtra(IntentUtil.EXTRA_STRING.TYPE_RESULT, typeResult);
+    typeResult = getIntent().getIntExtra(IntentUtils.EXTRA_STRING.TYPE_RESULT, typeResult);
     presenter.onCreate(typeResult);
   }
 
