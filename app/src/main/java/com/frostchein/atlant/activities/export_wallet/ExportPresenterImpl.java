@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import com.frostchein.atlant.Config;
 import com.frostchein.atlant.activities.base.BasePresenter;
-import com.frostchein.atlant.utils.BitmapUtil;
+import com.frostchein.atlant.utils.BitmapUtils;
 import com.frostchein.atlant.utils.CredentialHolder;
 import javax.inject.Inject;
 
@@ -30,8 +30,8 @@ public class ExportPresenterImpl implements ExportPresenter, BasePresenter {
     @Override
     protected Void doInBackground(Void... params) {
       try {
-        bitmap = BitmapUtil.QR.generateBitmap(CredentialHolder.getPrivateKey(), Config.SIZE_PX_QR, Config.SIZE_PX_QR,
-            BitmapUtil.QR.MARGIN_NONE);
+        bitmap = BitmapUtils.QR.generateBitmap(CredentialHolder.getPrivateKey(), Config.SIZE_PX_QR, Config.SIZE_PX_QR,
+            BitmapUtils.QR.MARGIN_NONE);
       } catch (Exception ignored) {
 
       }

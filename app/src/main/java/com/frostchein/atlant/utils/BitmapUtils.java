@@ -12,7 +12,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class BitmapUtil {
+public class BitmapUtils {
 
   /**
    * Generation QR

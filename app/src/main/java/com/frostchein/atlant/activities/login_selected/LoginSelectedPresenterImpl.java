@@ -6,7 +6,7 @@ import javax.inject.Inject;
 public class LoginSelectedPresenterImpl implements LoginSelectedPresenter, BasePresenter {
 
     @Inject
-    public LoginSelectedPresenterImpl(LoginSelectedView loginSelectedView) {
+    LoginSelectedPresenterImpl(LoginSelectedView loginSelectedView) {
 
     }
 

@@ -1,6 +1,6 @@
 package com.frostchein.atlant.utils;
 
-public final class IntentUtil {
+public final class IntentUtils {
 
   public static class EXTRA_STRING {
 

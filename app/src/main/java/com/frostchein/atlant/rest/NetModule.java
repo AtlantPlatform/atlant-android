@@ -51,12 +51,11 @@ public class NetModule {
         }
       });
 
-      OkHttpClient okHttpClient = builder
+      return builder
           .connectTimeout(TIME_OUT_SEC, TimeUnit.SECONDS)
           .writeTimeout(TIME_OUT_SEC, TimeUnit.SECONDS)
           .readTimeout(TIME_OUT_SEC, TimeUnit.SECONDS)
           .build();
-      return okHttpClient;
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

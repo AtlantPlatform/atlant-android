@@ -20,8 +20,8 @@ import com.frostchein.atlant.dagger2.component.ImportActivityComponent;
 import com.frostchein.atlant.dagger2.modules.ImportActivityModule;
 import com.frostchein.atlant.utils.AnimationUtils;
 import com.frostchein.atlant.utils.CredentialHolder;
-import com.frostchein.atlant.utils.DimensUtil;
-import com.frostchein.atlant.utils.IntentUtil.EXTRA_STRING;
+import com.frostchein.atlant.utils.DimensUtils;
+import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
 import javax.inject.Inject;
 
 public class ImportActivity extends BaseActivity implements ImportView, TextWatcher {
@@ -133,10 +133,10 @@ public class ImportActivity extends BaseActivity implements ImportView, TextWatc
   public void stateBtContinue(boolean state) {
     if (!state) {
       btNext.setAlpha(
-          DimensUtil.getFloatFromResources(getContext(), R.dimen.system_bt_disable_opacity));
+          DimensUtils.getFloatFromResources(getContext(), R.dimen.system_bt_disable_opacity));
     } else {
       btNext.setAlpha(
-          DimensUtil.getFloatFromResources(getContext(), R.dimen.system_bt_normal_opacity));
+          DimensUtils.getFloatFromResources(getContext(), R.dimen.system_bt_normal_opacity));
     }
     btNext.setEnabled(state);
   }

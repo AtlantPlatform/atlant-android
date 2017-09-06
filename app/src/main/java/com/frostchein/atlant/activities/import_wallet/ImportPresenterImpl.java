@@ -9,7 +9,7 @@ public class ImportPresenterImpl implements ImportPresenter, BasePresenter {
   private ImportView view;
 
   @Inject
-  public ImportPresenterImpl(ImportView view) {
+  ImportPresenterImpl(ImportView view) {
     this.view = view;
   }
 

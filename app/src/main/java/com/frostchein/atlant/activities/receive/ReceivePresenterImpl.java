@@ -7,9 +7,9 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import com.frostchein.atlant.Config;
 import com.frostchein.atlant.activities.base.BasePresenter;
-import com.frostchein.atlant.utils.BitmapUtil;
+import com.frostchein.atlant.utils.BitmapUtils;
 import com.frostchein.atlant.utils.CredentialHolder;
-import com.frostchein.atlant.utils.IntentUtil.EXTRA_STRING;
+import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
 import com.frostchein.atlant.utils.ParserDataFromQr;
 import javax.inject.Inject;
 
@@ -19,7 +19,7 @@ public class ReceivePresenterImpl implements ReceivePresenter, BasePresenter {
   private String line;
 
   @Inject
-  public ReceivePresenterImpl(ReceiveView view) {
+  ReceivePresenterImpl(ReceiveView view) {
     this.view = view;
   }
 
@@ -52,7 +52,7 @@ public class ReceivePresenterImpl implements ReceivePresenter, BasePresenter {
     @Override
     protected Void doInBackground(Void... params) {
       try {
-        bitmap = BitmapUtil.QR.generateBitmap(line, Config.SIZE_PX_QR, Config.SIZE_PX_QR, BitmapUtil.QR.MARGIN_NONE);
+        bitmap = BitmapUtils.QR.generateBitmap(line, Config.SIZE_PX_QR, Config.SIZE_PX_QR, BitmapUtils.QR.MARGIN_NONE);
       } catch (Exception ignored) {
 
       }

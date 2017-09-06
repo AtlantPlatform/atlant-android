@@ -21,7 +21,7 @@ import com.frostchein.atlant.R;
 import com.frostchein.atlant.activities.base.BaseActivity;
 import com.frostchein.atlant.views.DialogError;
 
-public final class DialogUtil {
+public final class DialogUtils {
 
   private static Dialog dialog;
 
@@ -50,7 +50,7 @@ public final class DialogUtil {
             .setOnDismissListener(new DialogInterface.OnDismissListener() {
               @Override
               public void onDismiss(DialogInterface dialog) {
-                DialogUtil.dialog = null;
+                DialogUtils.dialog = null;
               }
             })
             .setPositiveButton(positiveRes, dialogListener)
@@ -82,7 +82,7 @@ public final class DialogUtil {
             .setOnDismissListener(new DialogInterface.OnDismissListener() {
               @Override
               public void onDismiss(DialogInterface dialog) {
-                DialogUtil.dialog = null;
+                DialogUtils.dialog = null;
               }
             })
             .setCancelable(false)
@@ -104,7 +104,7 @@ public final class DialogUtil {
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
           @Override
           public void onDismiss(DialogInterface dialog) {
-            DialogUtil.dialog = null;
+            DialogUtils.dialog = null;
           }
         });
         showDialogFullSize(context);

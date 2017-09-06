@@ -106,14 +106,14 @@ public class CameraActivity extends BaseActivity implements CameraView {
   public void onSuccessfulScanQR(String result) {
     if (typeResult == TAG_FROM_SEND) {
       Intent intent = new Intent();
-      intent.putExtra(IntentUtil.EXTRA_STRING.ADDRESS, result);
+      intent.putExtra(IntentUtils.EXTRA_STRING.ADDRESS, result);
       setResult(RESULT_OK, intent);
       finish();
     }
 
     if (typeResult == TAG_FROM_IMPORT) {
       Intent intent = new Intent();
-      intent.putExtra(IntentUtil.EXTRA_STRING.PRIVATE_KEY, result);
+      intent.putExtra(IntentUtils.EXTRA_STRING.PRIVATE_KEY, result);
       setResult(RESULT_OK, intent);
       finish();
     }

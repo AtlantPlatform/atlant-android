@@ -14,8 +14,8 @@ import com.frostchein.atlant.dagger2.component.DaggerLoginActivityComponent;
 import com.frostchein.atlant.dagger2.component.LoginActivityComponent;
 import com.frostchein.atlant.dagger2.modules.LoginActivityModule;
 import com.frostchein.atlant.utils.CredentialHolder;
-import com.frostchein.atlant.utils.IntentUtil;
-import com.frostchein.atlant.utils.IntentUtil.EXTRA_STRING;
+import com.frostchein.atlant.utils.IntentUtils;
+import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
 import com.frostchein.atlant.views.LoginKeyboardView;
 import com.frostchein.atlant.views.PasswordView;
 import javax.inject.Inject;
@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity implements LoginView, TextWatche
 
   @Override
   public void initUI() {
-    type = getIntent().getIntExtra(IntentUtil.EXTRA_STRING.TYPE_RESULT, type);
+    type = getIntent().getIntExtra(IntentUtils.EXTRA_STRING.TYPE_RESULT, type);
     if (type == TYPE_AUTHORISATION_IMPORT) {
       privateKey = getIntent().getStringExtra(EXTRA_STRING.PRIVATE_KEY);
     }

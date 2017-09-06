@@ -43,12 +43,12 @@
 
   <!--import-->
   <string name="import_wallet_title">Import\nATL-wallet</string>
-  <string name="import_wallet_text1">Private key ATL-wallet key</string>
+  <string name="import_wallet_text1">Private key ATL-wallet</string>
   <string name="import_wallet_text2">QR-code</string>
   <string name="import_wallet_edit_hint">Enter the key</string>
 
   <!--export-->
-  <string name="export_title">Private key ATL-wallet key</string>
+  <string name="export_title">Private key\nATL-wallet</string>
   <string name="export_private_key_text">Private key</string>
   <string name="export_QR_code_text">QR-code</string>
 

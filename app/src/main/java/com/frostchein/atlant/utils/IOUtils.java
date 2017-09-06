@@ -9,10 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-final class IOUtil {
-
-  private IOUtil() {
-  }
+final class IOUtils {
 
   static void saveFileWithText(File file, String text) {
     if (file != null && !TextUtils.isEmpty(text)) {

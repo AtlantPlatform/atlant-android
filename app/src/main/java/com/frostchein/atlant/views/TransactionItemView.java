@@ -8,7 +8,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import com.frostchein.atlant.R;
 import com.frostchein.atlant.model.TransactionItems;
-import com.frostchein.atlant.utils.DateUtil;
+import com.frostchein.atlant.utils.DateUtils;
 import com.frostchein.atlant.utils.DigitsUtils;
 
 public class TransactionItemView extends BaseCustomView {
@@ -49,7 +49,7 @@ public class TransactionItemView extends BaseCustomView {
       TransactionItems transactionItems = (TransactionItems) objects[0];
 
       dateTextView.setText(
-          DateUtil.getFormattedFullDate(DigitsUtils.getBase10from16(transactionItems.getTimeStamp()).longValue()));
+          DateUtils.getFormattedFullDate(DigitsUtils.getBase10from16(transactionItems.getTimeStamp()).longValue()));
 
       countTextView.setText(
           DigitsUtils.ATLtoString(DigitsUtils.getBase10from16(transactionItems.getData())) + " "

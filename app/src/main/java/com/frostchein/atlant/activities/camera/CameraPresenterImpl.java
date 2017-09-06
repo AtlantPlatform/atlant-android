@@ -15,7 +15,7 @@ public class CameraPresenterImpl implements CameraPresenter,
   private int typeResult;
 
   @Inject
-  public CameraPresenterImpl(CameraView view) {
+  CameraPresenterImpl(CameraView view) {
     this.view = view;
   }
 

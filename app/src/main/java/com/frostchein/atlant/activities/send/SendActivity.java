@@ -18,11 +18,11 @@ import com.frostchein.atlant.dagger2.component.SendActivityComponent;
 import com.frostchein.atlant.dagger2.modules.SendActivityModule;
 import com.frostchein.atlant.model.Balance;
 import com.frostchein.atlant.model.Transactions;
-import com.frostchein.atlant.utils.ConnectivityUtil;
+import com.frostchein.atlant.utils.ConnectivityUtils;
 import com.frostchein.atlant.utils.DecimalDigitsInputFilter;
-import com.frostchein.atlant.utils.DialogUtil;
-import com.frostchein.atlant.utils.IntentUtil;
-import com.frostchein.atlant.utils.IntentUtil.EXTRA_STRING;
+import com.frostchein.atlant.utils.DialogUtils;
+import com.frostchein.atlant.utils.IntentUtils;
+import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
 import com.frostchein.atlant.views.AtlToolbarView;
 import com.frostchein.atlant.views.BaseCustomView;
 import javax.inject.Inject;
@@ -120,7 +120,7 @@ public class SendActivity extends BaseActivity implements SendView {
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == BaseActivity.REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
-      sendPresenter.onCreate(data.getStringExtra(IntentUtil.EXTRA_STRING.ADDRESS));
+      sendPresenter.onCreate(data.getStringExtra(IntentUtils.EXTRA_STRING.ADDRESS));
     }
   }
 
@@ -175,16 +175,16 @@ public class SendActivity extends BaseActivity implements SendView {
   public void dialogConfirmTransaction() {
     String text = String.format(getResources().getString(R.string.send_dialog_text_warning),
         send_value_edit.getText(), send_address_edit.getText());
-    DialogUtil.openDialogChoice(getContext(), R.string.app_name, text, R.string.bt_dialog_continue,
+    DialogUtils.openDialogChoice(getContext(), R.string.app_name, text, R.string.bt_dialog_continue,
         R.string.bt_dialog_back, new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            DialogUtil.hideDialog();
+            DialogUtils.hideDialog();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
               @Override
               public void run() {
-                if (!ConnectivityUtil.isNetworkOnline(getContext())) {
+                if (!ConnectivityUtils.isNetworkOnline(getContext())) {
                   onNoInternetConnection();
                 } else {
                   sendPresenter.onSendTransaction();

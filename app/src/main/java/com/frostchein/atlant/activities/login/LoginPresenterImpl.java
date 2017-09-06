@@ -6,7 +6,7 @@ import com.frostchein.atlant.events.login.SuccessfulAuthorisation;
 import com.frostchein.atlant.events.login.SuccessfulChangePassword;
 import com.frostchein.atlant.events.login.WrongPassword;
 import com.frostchein.atlant.utils.CredentialHolder;
-import com.frostchein.atlant.utils.DialogUtil;
+import com.frostchein.atlant.utils.DialogUtils;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -21,7 +21,7 @@ public class LoginPresenterImpl implements LoginPresenter, BasePresenter {
   private String privateKey;
 
   @Inject
-  public LoginPresenterImpl(LoginView view) {
+  LoginPresenterImpl(LoginView view) {
     this.view = view;
   }
 
@@ -151,7 +151,7 @@ public class LoginPresenterImpl implements LoginPresenter, BasePresenter {
   @Subscribe(threadMode = ThreadMode.MAIN)
   public void onSuccessfulChangePassword(SuccessfulChangePassword event) {
     if (view != null) {
-      DialogUtil.hideDialog();
+      DialogUtils.hideDialog();
       view.onSuccessfulChangePassword(password);
     }
   }

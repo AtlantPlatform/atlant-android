@@ -14,7 +14,7 @@ import com.frostchein.atlant.rest.AtlantApi;
 import com.frostchein.atlant.rest.AtlantClient;
 import com.frostchein.atlant.rest.NetModule;
 import com.frostchein.atlant.rest.WalletRestHandler;
-import com.frostchein.atlant.utils.ConnectivityUtil;
+import com.frostchein.atlant.utils.ConnectivityUtils;
 import com.frostchein.atlant.utils.CredentialHolder;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,7 +56,7 @@ public class HomePresenterImpl implements HomePresenter, BasePresenter {
   @Override
   public void refreshContent() {
     if (view != null) {
-      if (ConnectivityUtil.isNetworkOnline(view.getContext())) {
+      if (ConnectivityUtils.isNetworkOnline(view.getContext())) {
         WalletRestHandler.requestWalletBalance(view.getContext(), atlantClient);
       } else {
         view.onNoInternetConnection();

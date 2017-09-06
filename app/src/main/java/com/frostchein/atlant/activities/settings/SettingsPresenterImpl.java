@@ -9,7 +9,7 @@ public class SettingsPresenterImpl implements SettingsPresenter, BasePresenter {
   private SettingsView view;
 
   @Inject
-  public SettingsPresenterImpl(SettingsView view) {
+  SettingsPresenterImpl(SettingsView view) {
     this.view = view;
   }
 

@@ -21,7 +21,6 @@ public class MyWallet {
 
   private Credentials credentials;
 
-
   public MyWallet() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
     while (true) {
       credentials = Credentials.create(Keys.createEcKeyPair());
@@ -89,7 +88,4 @@ public class MyWallet {
     }
     return data;
   }
-
-
-
 }

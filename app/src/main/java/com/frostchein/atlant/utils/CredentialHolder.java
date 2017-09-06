@@ -105,7 +105,7 @@ public final class CredentialHolder {
   }
 
   public static boolean isFileExist(Context context, String path) {
-    return IOUtil.isFileExist(getFile(context, path));
+    return IOUtils.isFileExist(getFile(context, path));
   }
 
   public static boolean isLogged() {
@@ -124,7 +124,7 @@ public final class CredentialHolder {
   public static void deleteWallet(Context context) {
     myWallet = null;
     try {
-      IOUtil.deleteFile(getFile(context, PATH_WALLET));
+      IOUtils.deleteFile(getFile(context, PATH_WALLET));
       deleteWalletInfo(context);
     } catch (Exception e) {
       e.printStackTrace();
@@ -133,8 +133,8 @@ public final class CredentialHolder {
 
   public static void deleteWalletInfo(Context context) {
     try {
-      IOUtil.deleteFile(getFile(context, PATH_BALANCE));
-      IOUtil.deleteFile(getFile(context, PATH_TRANSACTION));
+      IOUtils.deleteFile(getFile(context, PATH_BALANCE));
+      IOUtils.deleteFile(getFile(context, PATH_TRANSACTION));
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -143,14 +143,14 @@ public final class CredentialHolder {
   public static void saveWalletInfo(Context context, Balance balance, Transactions transactions) {
     Gson gson = new Gson();
     String json = gson.toJson(balance);
-    IOUtil.saveFileWithText(getFile(context, PATH_BALANCE), json);
+    IOUtils.saveFileWithText(getFile(context, PATH_BALANCE), json);
     json = gson.toJson(transactions);
-    IOUtil.saveFileWithText(getFile(context, PATH_TRANSACTION), json);
+    IOUtils.saveFileWithText(getFile(context, PATH_TRANSACTION), json);
   }
 
   public static Balance getWalletBalance(Context context) {
     if (isFileExist(context, PATH_BALANCE)) {
-      String str = IOUtil.getTextFromFile(getFile(context, PATH_BALANCE));
+      String str = IOUtils.getTextFromFile(getFile(context, PATH_BALANCE));
       Gson gson = new Gson();
       Type type = new TypeToken<Balance>() {
       }.getType();
@@ -161,7 +161,7 @@ public final class CredentialHolder {
 
   public static Transactions getWalletTransaction(Context context) {
     if (isFileExist(context, PATH_TRANSACTION)) {
-      String str = IOUtil.getTextFromFile(getFile(context, PATH_TRANSACTION));
+      String str = IOUtils.getTextFromFile(getFile(context, PATH_TRANSACTION));
       Gson gson = new Gson();
       Type type = new TypeToken<Transactions>() {
       }.getType();

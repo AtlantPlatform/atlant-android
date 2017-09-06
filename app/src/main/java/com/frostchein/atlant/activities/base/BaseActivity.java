@@ -44,8 +44,8 @@ import com.frostchein.atlant.drawer_menu.DrawerContent;
 import com.frostchein.atlant.drawer_menu.DrawerHelper;
 import com.frostchein.atlant.events.login.CredentialsCleared;
 import com.frostchein.atlant.utils.CredentialHolder;
-import com.frostchein.atlant.utils.DialogUtil;
-import com.frostchein.atlant.utils.IntentUtil;
+import com.frostchein.atlant.utils.DialogUtils;
+import com.frostchein.atlant.utils.IntentUtils;
 import com.frostchein.atlant.views.BaseCustomView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -277,7 +277,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
   protected void goToSendActivity(boolean withFinish, String address) {
     createIntentWithoutFlags(SendActivity.class);
-    intent.putExtra(IntentUtil.EXTRA_STRING.ADDRESS, address);
+    intent.putExtra(IntentUtils.EXTRA_STRING.ADDRESS, address);
     startActivity(REQUEST_CODE_SEND, withFinish);
   }
 
@@ -289,15 +289,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   protected void goToLoginActivity(boolean withFinish, int typeResult) {
     BaseActivity.typeResult = typeResult;
     createIntentWithFlags(LoginActivity.class);
-    intent.putExtra(IntentUtil.EXTRA_STRING.TYPE_RESULT, typeResult);
+    intent.putExtra(IntentUtils.EXTRA_STRING.TYPE_RESULT, typeResult);
     startActivity(REQUEST_CODE_LOGIN, withFinish);
   }
 
   protected void goToLoginActivity(boolean withFinish, int typeResult, String privateKey) {
     BaseActivity.typeResult = typeResult;
     createIntentWithFlags(LoginActivity.class);
-    intent.putExtra(IntentUtil.EXTRA_STRING.TYPE_RESULT, typeResult);
-    intent.putExtra(IntentUtil.EXTRA_STRING.PRIVATE_KEY, privateKey);
+    intent.putExtra(IntentUtils.EXTRA_STRING.TYPE_RESULT, typeResult);
+    intent.putExtra(IntentUtils.EXTRA_STRING.PRIVATE_KEY, privateKey);
     startActivity(REQUEST_CODE_LOGIN, withFinish);
   }
 
@@ -322,7 +322,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
       ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
     } else {
       createIntentWithoutFlags(CameraActivity.class);
-      intent.putExtra(IntentUtil.EXTRA_STRING.TYPE_RESULT, typeResult);
+      intent.putExtra(IntentUtils.EXTRA_STRING.TYPE_RESULT, typeResult);
       startActivity(REQUEST_CODE_CAMERA, withFinish);
     }
   }
@@ -387,12 +387,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
   @Override
   public void showProgressDialog(String dialogMessage) {
-    DialogUtil.openDialogProgress(this, getResources().getString(R.string.app_name), dialogMessage);
+    DialogUtils.openDialogProgress(this, getResources().getString(R.string.app_name), dialogMessage);
   }
 
   @Override
   public void hideProgressDialog() {
-    DialogUtil.hideDialog();
+    DialogUtils.hideDialog();
   }
 
   protected void onToolbarActionHomeSelected() {
@@ -434,7 +434,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   }
 
   private void restartApp() {
-    DialogUtil.hideDialog();
+    DialogUtils.hideDialog();
     Intent i = getBaseContext().getPackageManager()
         .getLaunchIntentForPackage(getBaseContext().getPackageName());
     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -449,7 +449,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
   @Override
   public void onScreenError(String text) {
-    DialogUtil.openDialogError(getContext(), getString(R.string.system_error), text, R.drawable.ic_dialog_error, null);
+    DialogUtils.openDialogError(getContext(), getString(R.string.system_error), text, R.drawable.ic_dialog_error, null);
   }
 
   @Override
@@ -458,7 +458,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     if (requestCode == PERMISSION_REQUEST_CAMERA) {
       if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
         createIntentWithoutFlags(CameraActivity.class);
-        intent.putExtra(IntentUtil.EXTRA_STRING.TYPE_RESULT, typeResult);
+        intent.putExtra(IntentUtils.EXTRA_STRING.TYPE_RESULT, typeResult);
         startActivity(REQUEST_CODE_CAMERA, false);
       } else {
         showMessage(getString(R.string.camera_permission));

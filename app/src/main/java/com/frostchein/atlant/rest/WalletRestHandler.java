@@ -64,7 +64,7 @@ public final class WalletRestHandler {
                 public void run() {
                   ArrayList<TransactionItems> listIn = response.body().getTransactionItems();
                   for (int i = 0; i < listIn.size(); i++) {
-                    listIn.get(i).setTransactionsIn(transactionIn);
+                    listIn.get(i).setTransactionsIn(true);
                   }
                   requestWalletTransactions(context, atlantClient, balance, false, listIn);
                 }
@@ -79,7 +79,7 @@ public final class WalletRestHandler {
                 public void run() {
                   List<TransactionItems> listOut = response.body().getTransactionItems();
                   for (int i = 0; i < listOut.size(); i++) {
-                    listOut.get(i).setTransactionsIn(transactionIn);
+                    listOut.get(i).setTransactionsIn(false);
                   }
                   //ADD TRANSACTIONS
                   transactionItems.addAll(listOut);

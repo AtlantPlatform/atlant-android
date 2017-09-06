@@ -11,7 +11,7 @@ import com.frostchein.atlant.dagger2.component.SettingsActivityComponent;
 import com.frostchein.atlant.dagger2.modules.SettingsActivityModule;
 import com.frostchein.atlant.events.login.CredentialsCleared;
 import com.frostchein.atlant.fragments.preferences.PreferenceFragment;
-import com.frostchein.atlant.utils.DialogUtil;
+import com.frostchein.atlant.utils.DialogUtils;
 import javax.inject.Inject;
 
 public class SettingsActivity extends BaseActivity implements SettingsView {
@@ -46,7 +46,7 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
 
       @Override
       public void importWallet() {
-        DialogUtil.openDialogChoice(getContext(), R.string.app_name,
+        DialogUtils.openDialogChoice(getContext(), R.string.app_name,
             getString(R.string.pref_dialog_import), R.string.bt_dialog_continue,
             R.string.bt_dialog_back, new DialogInterface.OnClickListener() {
               @Override
@@ -58,7 +58,7 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
 
       @Override
       public void deleteWallet() {
-        DialogUtil.openDialogChoice(getContext(), R.string.app_name,
+        DialogUtils.openDialogChoice(getContext(), R.string.app_name,
             getString(R.string.pref_dialog_delete), R.string.bt_dialog_continue,
             R.string.bt_dialog_back, new DialogInterface.OnClickListener() {
               @Override
