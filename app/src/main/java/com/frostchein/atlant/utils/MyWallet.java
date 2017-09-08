@@ -22,12 +22,7 @@ public class MyWallet {
   private Credentials credentials;
 
   public MyWallet() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
-    while (true) {
-      credentials = Credentials.create(Keys.createEcKeyPair());
-      if (isCorrectPrivateKey()) {
-        break;
-      }
-    }
+    credentials = Credentials.create(Keys.createEcKeyPair());
   }
 
   public MyWallet(byte[] privateKey) {
@@ -46,23 +41,16 @@ public class MyWallet {
   }
 
   public String getPrivateKey() {
-    return String.format("%02x", credentials.getEcKeyPair().getPrivateKey());
+    String s = String.format("%02x", credentials.getEcKeyPair().getPrivateKey());
+    return String.format("%64s", s).replace(" ","0");
   }
 
   public byte[] getBytePrivateKey() {
     return credentials.getEcKeyPair().getPrivateKey().toByteArray();
   }
 
-  public String getPublicKey() {
-    return String.format("%02x", credentials.getEcKeyPair().getPublicKey());
-  }
-
   public byte[] getBytePublicKey() {
     return credentials.getEcKeyPair().getPublicKey().toByteArray();
-  }
-
-  public boolean isCorrectPrivateKey() {
-    return WalletUtils.isValidPrivateKey(getPrivateKey());
   }
 
   public void saveWallet(String password, File file) throws CipherException, IOException {
