@@ -14,7 +14,6 @@ import com.frostchein.atlant.rest.NetModule;
 import com.frostchein.atlant.rest.TransactionRestHandler;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
-import com.frostchein.atlant.utils.ParserDataFromQr;
 import com.frostchein.atlant.utils.tokens.Token;
 import java.math.BigInteger;
 import javax.inject.Inject;
@@ -49,10 +48,8 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
         view.setType(token.getName());
       }
 
-      ParserDataFromQr parserDataFromQr = new ParserDataFromQr(line);
-      if (parserDataFromQr.isCorrect()) {
-        view.setAddress(parserDataFromQr.getAddress());
-        view.setValue(parserDataFromQr.getAmount());
+      if (WalletUtils.isValidAddress(line)) {
+        view.setAddress(line);
       }
       view.setBalance(balance);
     }

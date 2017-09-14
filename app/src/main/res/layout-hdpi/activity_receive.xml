@@ -7,46 +7,6 @@
 
   <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <TextView
-      android:id="@+id/send_unit"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="@string/app_prefix_coin"
-      android:textColor="@color/colorSecondaryText"
-      android:textSize="@dimen/text_size_18"/>
-
-    <EditText
-      android:id="@+id/receive_value"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/activity_vertical_title_margin"
-      android:background="@android:color/transparent"
-      android:gravity="center"
-      android:hint="@string/send_value_hint"
-      android:inputType="numberDecimal"
-      android:lines="1"
-      android:textColor="@android:color/black"
-      android:textColorHint="@color/grey_hint"
-      android:textSize="@dimen/text_size_24"/>
-
-  </LinearLayout>
-
-  <View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="@color/grey_light"/>
-
-  <LinearLayout
-    android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
     android:layout_marginTop="@dimen/activity_vertical_margin"

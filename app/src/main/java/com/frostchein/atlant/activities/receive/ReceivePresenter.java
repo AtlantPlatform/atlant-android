@@ -8,5 +8,4 @@ public interface ReceivePresenter extends BasePresenter {
 
   void onCopyAddress();
 
-  void onGenerationQR(double value);
 }

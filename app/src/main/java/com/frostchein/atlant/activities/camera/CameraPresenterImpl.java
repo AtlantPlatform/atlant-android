@@ -1,7 +1,6 @@
 package com.frostchein.atlant.activities.camera;
 
 import com.frostchein.atlant.activities.base.BasePresenter;
-import com.frostchein.atlant.utils.ParserDataFromQr;
 import com.google.zxing.Result;
 import javax.inject.Inject;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -40,8 +39,7 @@ public class CameraPresenterImpl implements CameraPresenter,
   @Override
   public void handleResult(Result result) {
     if (typeResult == CameraActivity.TAG_FROM_SEND || typeResult == CameraActivity.TAG_FROM_HOME) {
-      ParserDataFromQr parserDataFromQr = new ParserDataFromQr(result.getText());
-      if (parserDataFromQr.isCorrect()) {
+      if (WalletUtils.isValidAddress(result.getText())) {
         view.onSuccessfulScanQR(result.getText());
       } else {
         view.onFailScanQR();

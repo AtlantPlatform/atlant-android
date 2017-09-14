@@ -2,10 +2,6 @@ package com.frostchein.atlant.activities.receive;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -17,10 +13,9 @@ import com.frostchein.atlant.dagger2.component.DaggerReceiveActivityComponent;
 import com.frostchein.atlant.dagger2.component.ReceiveActivityComponent;
 import com.frostchein.atlant.dagger2.modules.ReceiveActivityModule;
 import com.frostchein.atlant.utils.AnimationUtils;
-import com.frostchein.atlant.utils.DecimalDigitsInputFilter;
 import javax.inject.Inject;
 
-public class ReceiveActivity extends BaseActivity implements ReceiveView, TextWatcher {
+public class ReceiveActivity extends BaseActivity implements ReceiveView {
 
   @Inject
   ReceivePresenter presenter;
@@ -29,8 +24,6 @@ public class ReceiveActivity extends BaseActivity implements ReceiveView, TextWa
   ImageView imageQrCode;
   @BindView(R.id.receive_address_text)
   TextView textAddress;
-  @BindView(R.id.receive_value)
-  EditText editValue;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +35,6 @@ public class ReceiveActivity extends BaseActivity implements ReceiveView, TextWa
   @Override
   protected void initUI() {
     presenter.onCreated();
-    editValue.addTextChangedListener(this);
-    editValue.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(100, 18)});
     imageQrCode.setImageBitmap(null);
   }
 
@@ -94,7 +85,7 @@ public class ReceiveActivity extends BaseActivity implements ReceiveView, TextWa
 
   @Override
   public void onKeyCopied() {
-    AnimationUtils.copyBufferText(textAddress,500);
+    AnimationUtils.copyBufferText(textAddress, 500);
     showMessage(getString(R.string.system_key_copied));
   }
 
@@ -108,24 +99,6 @@ public class ReceiveActivity extends BaseActivity implements ReceiveView, TextWa
     textAddress.setText(address);
   }
 
-  @Override
-  public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-  }
-
-  @Override
-  public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    try {
-      presenter.onGenerationQR(Double.parseDouble(editValue.getText().toString()));
-    } catch (Exception e) {
-      presenter.onGenerationQR(0);
-    }
-  }
-
-  @Override
-  public void afterTextChanged(Editable editable) {
-
-  }
 
   @OnClick(R.id.receive_address_text)
   public void OnClickAddress() {

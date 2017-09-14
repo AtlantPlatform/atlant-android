@@ -10,7 +10,6 @@ import com.frostchein.atlant.activities.base.BasePresenter;
 import com.frostchein.atlant.utils.BitmapUtils;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
-import com.frostchein.atlant.utils.ParserDataFromQr;
 import javax.inject.Inject;
 
 public class ReceivePresenterImpl implements ReceivePresenter, BasePresenter {
@@ -36,12 +35,7 @@ public class ReceivePresenterImpl implements ReceivePresenter, BasePresenter {
   @Override
   public void onCreated() {
     view.setAddress(CredentialHolder.getAddress());
-    onGenerationQR(0);
-  }
-
-  @Override
-  public void onGenerationQR(double value) {
-    line = ParserDataFromQr.generationLine(CredentialHolder.getAddress(), value);
+    line = CredentialHolder.getAddress();
     new GenerationQR().execute();
   }
 
