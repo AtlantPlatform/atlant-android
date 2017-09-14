@@ -26,6 +26,8 @@ public interface AtlantApi {
       @Query("module") String module,
       @Query("action") String action,
       @Query("address") String address,
+      @Query("page") int page,
+      @Query("offset") int offset,
       @Query("sort") String sort,
       @Query("apikey") String apiKey
   );

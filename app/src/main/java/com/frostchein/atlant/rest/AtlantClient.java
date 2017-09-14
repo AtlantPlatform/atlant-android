@@ -35,7 +35,7 @@ public class AtlantClient {
 
   Call<Transactions> getTransactions(@NonNull Callback<Transactions> walletCallback, String address) {
     Call<Transactions> walletCall = atlantApi
-        .getTransactions("account", "txlist", address, "desc", Config.API_KEY_ETHERSCAN);
+        .getTransactions("account", "txlist", address, 1, Config.MAX_TRANSACTIONS, "desc", Config.API_KEY_ETHERSCAN);
     walletCall.enqueue(walletCallback);
     return walletCall;
   }

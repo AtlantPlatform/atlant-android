@@ -19,5 +19,6 @@ public class Config {
   public static long TOKEN_ATL_ID = 0L;
 
   public static int SIZE_PX_QR = 500;
+  public static int MAX_TRANSACTIONS = 500;
 
 }
