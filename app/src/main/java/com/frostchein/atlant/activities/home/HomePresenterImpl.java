@@ -1,5 +1,6 @@
 package com.frostchein.atlant.activities.home;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import com.frostchein.atlant.Config;
@@ -60,16 +61,7 @@ public class HomePresenterImpl implements HomePresenter, BasePresenter {
 
   @Override
   public void onUpdateLocal() {
-    Object transactions;
-    Balance balance;
-    if (CredentialHolder.getCurrentToken() == null) {
-      transactions = CredentialHolder.getTransaction(view.getContext());
-      balance = CredentialHolder.getBalance(view.getContext());
-    } else {
-      transactions = CredentialHolder.getTransaction(view.getContext(), CredentialHolder.getCurrentToken());
-      balance = CredentialHolder.getBalance(view.getContext(), CredentialHolder.getCurrentToken());
-    }
-    setViewWalletInfo(balance, transactions);
+    new AsyncTaskLoadLocal().execute();
   }
 
   @Override
@@ -121,7 +113,6 @@ public class HomePresenterImpl implements HomePresenter, BasePresenter {
       } else {
         view.setNoTransactionsOnView();
       }
-      view.onRefreshComplete();
     }
   }
 
@@ -149,11 +140,18 @@ public class HomePresenterImpl implements HomePresenter, BasePresenter {
       return;
     }
     if (view != null) {
-      Balance balance = onStatusSuccess.getBalance();
-      Object transactions = onStatusSuccess.getTransactions();
-      Token token = CredentialHolder.getCurrentToken();
+      final Balance balance = onStatusSuccess.getBalance();
+      final Object transactions = onStatusSuccess.getTransactions();
+      final Token token = CredentialHolder.getCurrentToken();
 
-      CredentialHolder.saveWalletInfo(view.getContext(), balance, transactions, token);
+      Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+          CredentialHolder.saveWalletInfo(view.getContext(), balance, transactions, token);
+        }
+      });
+      thread.start();
+
       setViewWalletInfo(balance, transactions);
       view.onRefreshComplete();
     }
@@ -178,6 +176,30 @@ public class HomePresenterImpl implements HomePresenter, BasePresenter {
     if (view != null) {
       view.onTimeout();
       view.onRefreshComplete();
+    }
+  }
+
+  private class AsyncTaskLoadLocal extends AsyncTask<Void, Void, Void> {
+
+    Object transactions;
+    Balance balance;
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+      if (CredentialHolder.getCurrentToken() == null) {
+        transactions = CredentialHolder.getTransaction(view.getContext());
+        balance = CredentialHolder.getBalance(view.getContext());
+      } else {
+        transactions = CredentialHolder.getTransaction(view.getContext(), CredentialHolder.getCurrentToken());
+        balance = CredentialHolder.getBalance(view.getContext(), CredentialHolder.getCurrentToken());
+      }
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+      super.onPostExecute(aVoid);
+      setViewWalletInfo(balance, transactions);
     }
   }
 }
