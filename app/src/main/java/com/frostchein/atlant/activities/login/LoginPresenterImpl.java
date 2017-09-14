@@ -142,6 +142,7 @@ public class LoginPresenterImpl implements LoginPresenter, BasePresenter {
         CredentialHolder.createPublicKeyByPrivateKey();
       } else {
         isSuccessCurrentPassword = true;
+        CredentialHolder.loadSetting(view.getContext());
         view.onSuccessfulAuthorisation(password);
       }
     }

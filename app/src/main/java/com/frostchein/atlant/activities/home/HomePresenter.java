@@ -7,6 +7,8 @@ public interface HomePresenter extends BasePresenter {
 
   void onCreate(Bundle savedInstanceState);
 
+  void onChangeValue(int pos);
+
   void onUpdateLocal();
 
   void refreshContent();

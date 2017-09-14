@@ -17,20 +17,19 @@ import com.frostchein.atlant.dagger2.component.HomeActivityComponent;
 import com.frostchein.atlant.dagger2.modules.HomeActivityModule;
 import com.frostchein.atlant.fragments.transactions.TransactionsFragment;
 import com.frostchein.atlant.model.Balance;
-import com.frostchein.atlant.model.TransactionItems;
-import com.frostchein.atlant.views.AtlToolbarView;
 import com.frostchein.atlant.views.BaseCustomView;
 import com.frostchein.atlant.views.NoTransactionView;
+import com.frostchein.atlant.views.ToolbarView;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
 
-public class HomeActivity extends BaseActivity implements HomeView {
+public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.CallBack {
 
   @Inject
   HomePresenter presenter;
   @Inject
-  AtlToolbarView atlToolbarView;
+  ToolbarView toolbarView;
 
   private TransactionsFragment transactionsFragment;
 
@@ -73,21 +72,23 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
   @Override
   public void initUI() {
+    toolbarView.setCallback(this);
     screenOverlayView.setVisibility(View.GONE);
     swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.accent));
   }
 
   @Override
-  public void setTransactionsRecyclerFragmentOnView(ArrayList<TransactionItems> transactionItems) {
+  public void setTransactionsOnFragment(ArrayList<Object> arrayList) {
     fragmentContentFrame.setVisibility(View.VISIBLE);
     noTransactionView.setVisibility(View.GONE);
-    transactionsFragment.update(transactionItems);
+    transactionsFragment.update(arrayList);
   }
 
   @Override
   public void setNoTransactionsOnView() {
     fragmentContentFrame.setVisibility(View.GONE);
     noTransactionView.setVisibility(View.VISIBLE);
+    noTransactionView.invalidate();
   }
 
   @Override
@@ -152,12 +153,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
   @Override
   protected BaseCustomView getCustomToolbar() {
-    return atlToolbarView;
+    return toolbarView;
   }
 
   @Override
   public void setContentOnToolbar(Balance balance) {
-    atlToolbarView.setContent(balance);
+    toolbarView.setContent(balance);
   }
 
   @Override
@@ -172,5 +173,10 @@ public class HomeActivity extends BaseActivity implements HomeView {
         && resultCode == Activity.RESULT_OK) {
       presenter.onUpdateLocal();
     }
+  }
+
+  @Override
+  public void onItemsClick(int pos) {
+    presenter.onChangeValue(pos);
   }
 }

@@ -32,7 +32,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/activity_vertical_title_margin"
     android:gravity="end"
-    android:text="@string/system_atl_default"
+    android:text="@string/system_value_default"
     android:textColor="@color/transactions_value"
     android:textSize="@dimen/text_size_18"/>
 

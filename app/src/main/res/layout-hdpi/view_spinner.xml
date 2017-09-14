@@ -1,0 +1,10 @@
+<TextView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@android:id/text1"
+  style="?android:attr/spinnerItemStyle"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:gravity="center"
+  android:text="@string/app_prefix_coin"
+  android:textColor="@color/md_white_1000"
+  android:textSize="@dimen/text_size_24"/>

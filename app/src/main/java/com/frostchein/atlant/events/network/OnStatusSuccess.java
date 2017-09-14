@@ -3,13 +3,12 @@ package com.frostchein.atlant.events.network;
 import com.frostchein.atlant.model.Balance;
 import com.frostchein.atlant.model.GasPrice;
 import com.frostchein.atlant.model.Nonce;
-import com.frostchein.atlant.model.Transactions;
 
 public class OnStatusSuccess {
 
   private int request;
   private Balance balance;
-  private Transactions transactions;
+  private Object transactions;
   private Nonce nonce;
   private GasPrice gasPrice;
 
@@ -17,7 +16,7 @@ public class OnStatusSuccess {
     this.request = request;
   }
 
-  public OnStatusSuccess(int request, Balance balance, Transactions transactions) {
+  public OnStatusSuccess(int request, Balance balance, Object transactions) {
     this.request = request;
     this.balance = balance;
     this.transactions = transactions;
@@ -33,6 +32,10 @@ public class OnStatusSuccess {
     return request;
   }
 
+  public void setRequest(int request) {
+    this.request = request;
+  }
+
   public Balance getBalance() {
     return balance;
   }
@@ -41,11 +44,11 @@ public class OnStatusSuccess {
     this.balance = balance;
   }
 
-  public Transactions getTransactions() {
+  public Object getTransactions() {
     return transactions;
   }
 
-  public void setTransactions(Transactions transactions) {
+  public void setTransactions(Object transactions) {
     this.transactions = transactions;
   }
 
@@ -53,7 +56,15 @@ public class OnStatusSuccess {
     return nonce;
   }
 
+  public void setNonce(Nonce nonce) {
+    this.nonce = nonce;
+  }
+
   public GasPrice getGasPrice() {
     return gasPrice;
+  }
+
+  public void setGasPrice(GasPrice gasPrice) {
+    this.gasPrice = gasPrice;
   }
 }

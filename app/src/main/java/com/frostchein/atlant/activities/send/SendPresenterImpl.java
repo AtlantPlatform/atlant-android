@@ -8,7 +8,6 @@ import com.frostchein.atlant.events.network.OnStatusError;
 import com.frostchein.atlant.events.network.OnStatusSuccess;
 import com.frostchein.atlant.events.network.OnStatusTimeOut;
 import com.frostchein.atlant.model.Balance;
-import com.frostchein.atlant.model.Transactions;
 import com.frostchein.atlant.rest.AtlantApi;
 import com.frostchein.atlant.rest.AtlantClient;
 import com.frostchein.atlant.rest.NetModule;
@@ -16,6 +15,7 @@ import com.frostchein.atlant.rest.TransactionRestHandler;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
 import com.frostchein.atlant.utils.ParserDataFromQr;
+import com.frostchein.atlant.utils.tokens.Token;
 import java.math.BigInteger;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,7 +28,6 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
   private AtlantClient atlantClient;
   private boolean isPrepare = true;
   private Balance balance;
-  private Transactions transactions;
 
   @Inject
   SendPresenterImpl(SendView view) {
@@ -37,12 +36,19 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
     atlantClient = new AtlantClient(atlantApi);
   }
 
-
   @Override
   public void onCreate(String line) {
     if (view != null) {
-      balance = CredentialHolder.getWalletBalance(view.getContext());
-      transactions = CredentialHolder.getWalletTransaction(view.getContext());
+
+      Token token = CredentialHolder.getCurrentToken();
+      if (token == null) {
+        balance = CredentialHolder.getBalance(view.getContext());
+        view.setType(Config.WALLET_ETH);
+      } else {
+        balance = CredentialHolder.getBalance(view.getContext(), token);
+        view.setType(token.getName());
+      }
+
       ParserDataFromQr parserDataFromQr = new ParserDataFromQr(line);
       if (parserDataFromQr.isCorrect()) {
         view.setAddress(parserDataFromQr.getAddress());
@@ -74,7 +80,7 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
         return;
       }
 
-      if (value > Double.parseDouble(DigitsUtils.ATLtoString(new BigInteger(balance.getResult())))) {
+      if (value > Double.parseDouble(DigitsUtils.valueToString(new BigInteger(balance.getResult())))) {
         view.onNoMoney();
         return;
       }
@@ -88,10 +94,9 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
     if (view != null) {
       isPrepare = true;
       view.showProgressDialog(view.getContext().getString(R.string.send_preparing));
-      TransactionRestHandler.preparationTransaction(atlantClient);
+      TransactionRestHandler.preparationTransaction(atlantClient, CredentialHolder.getAddress());
     }
   }
-
 
   @Subscribe(threadMode = ThreadMode.MAIN)
   public void onError(OnStatusError onStatusError) {
@@ -134,15 +139,33 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
           public void run() {
             isPrepare = false;
             view.showProgressDialog(view.getContext().getString(R.string.send_process));
-            TransactionRestHandler
-                .sendTransaction(atlantClient, onStatusSuccess.getNonce(), onStatusSuccess.getGasPrice(),
-                    view.getAddress(), view.getValue());
+
+            try {
+              Token token = CredentialHolder.getCurrentToken();
+              if (token != null) {
+                TransactionRestHandler.sendTransactionToken(
+                    atlantClient,
+                    onStatusSuccess.getNonce(), onStatusSuccess.getGasPrice(),
+                    view.getAddress(), view.getValue(),
+                    CredentialHolder.getCredentials(), Config.GAS_LIMIT,
+                    token.getContractAddress(),
+                    token.getContractId());
+              } else {
+                TransactionRestHandler.sendTransaction(atlantClient,
+                    onStatusSuccess.getNonce(), onStatusSuccess.getGasPrice(),
+                    view.getAddress(), view.getValue(),
+                    CredentialHolder.getCredentials(), Config.GAS_LIMIT);
+              }
+            } catch (Exception e) {
+              e.printStackTrace();
+              view.hideProgressDialog();
+              view.onError(view.getContext().getString(R.string.send_error_send));
+            }
+
           }
         }, 100);
       } else {
-        //  balance.setResult(balance.getResult() - value);
-        CredentialHolder.saveWalletInfo(view.getContext(), balance, transactions);
-        view.onSuccessfulSend(onStatusSuccess.getTransactions());
+        view.onSuccessfulSend();
       }
     }
   }

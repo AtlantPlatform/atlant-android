@@ -7,8 +7,13 @@
     <item name="android:windowBackground">@color/colorWindow</item>
     <item name="android:listViewStyle">@style/AppTheme.ListView</item>
     <item name="android:buttonStyle">@style/AppTheme.Button</item>
+    <item name="android:selectableItemBackground">@drawable/highlight</item>
     <item name="android:textColor">@color/colorPrimaryText</item>
     <item name="buttonStyle">@style/AppTheme.Button</item>
+  </style>
+
+  <style name="AppTheme.NoActionBar.Dark">
+    <item name="android:windowBackground">@color/colorPrimary</item>
   </style>
 
   <style name="AppTheme.NoActionBar">
@@ -25,6 +30,7 @@
   <style name="AppTheme.NoActionBar.SplashScreen">
     <item name="android:windowBackground">@drawable/splash_screen</item>
   </style>
+
 
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 

@@ -48,7 +48,7 @@ public class UnitTestApp {
     String str2 = "3.510499999999999999";
 
     BigInteger bd = new BigInteger(str);
-    String result = DigitsUtils.ATLtoString(bd);
+    String result = DigitsUtils.valueToString(bd);
 
     BigDecimal bigDecimal = new BigDecimal(str2);
     BigDecimal result2 = bigDecimal.multiply(BigDecimal.valueOf(DigitsUtils.divide));

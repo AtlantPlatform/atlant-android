@@ -15,7 +15,7 @@ public final class DrawerContent {
    * Section action
    */
   private static SectionDrawerItem sectionAction = new SectionDrawerItem()
-      .withName(R.string.app_prefix_coin)
+      .withName(R.string.material_drawer_actions)
       .withEnabled(false);
 
   private static PrimaryDrawerItem sendItem = new PrimaryDrawerItem()

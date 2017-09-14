@@ -5,6 +5,7 @@ import com.frostchein.atlant.model.GasPrice;
 import com.frostchein.atlant.model.Nonce;
 import com.frostchein.atlant.model.SendTransactions;
 import com.frostchein.atlant.model.Transactions;
+import com.frostchein.atlant.model.TransactionsTokens;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -12,7 +13,7 @@ import retrofit2.http.Query;
 public interface AtlantApi {
 
   @GET("api")
-  Call<Balance> getWalletBalance(
+  Call<Balance> getBalance(
       @Query("module") String module,
       @Query("action") String action,
       @Query("contractaddress") String contractAddress,
@@ -21,7 +22,16 @@ public interface AtlantApi {
   );
 
   @GET("api")
-  Call<Transactions> getWalletTransactionsIn(
+  Call<Transactions> getTransactions(
+      @Query("module") String module,
+      @Query("action") String action,
+      @Query("address") String address,
+      @Query("sort") String sort,
+      @Query("apikey") String apiKey
+  );
+
+  @GET("api")
+  Call<TransactionsTokens> getTokenTransactionsIn(
       @Query("module") String module,
       @Query("action") String action,
       @Query("fromBlock") int fromBlock,
@@ -32,7 +42,7 @@ public interface AtlantApi {
   );
 
   @GET("api")
-  Call<Transactions> getWalletTransactionsOut(
+  Call<TransactionsTokens> getTokenTransactionsOut(
       @Query("module") String module,
       @Query("action") String action,
       @Query("fromBlock") int fromBlock,

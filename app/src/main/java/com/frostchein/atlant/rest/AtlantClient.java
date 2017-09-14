@@ -7,6 +7,7 @@ import com.frostchein.atlant.model.GasPrice;
 import com.frostchein.atlant.model.Nonce;
 import com.frostchein.atlant.model.SendTransactions;
 import com.frostchein.atlant.model.Transactions;
+import com.frostchein.atlant.model.TransactionsTokens;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -18,41 +19,64 @@ public class AtlantClient {
     this.atlantApi = atlantApi;
   }
 
-  void getWalletBalance(@NonNull Callback<Balance> walletCallback, String address) {
+  Call<Balance> getBalance(@NonNull Callback<Balance> walletCallback, String address) {
     Call<Balance> walletCall = atlantApi
-        .getWalletBalance("account", "tokenbalance", Config.CONTRACT_ADDRESS, address, Config.API_KEY_ETHERSCAN);
+        .getBalance("account", "balance", null, address, Config.API_KEY_ETHERSCAN);
     walletCall.enqueue(walletCallback);
+    return walletCall;
   }
 
-  void getWalletTransactions(@NonNull Callback<Transactions> walletCallback, String address, boolean transactionIn) {
+  Call<Balance> getTokenBalance(@NonNull Callback<Balance> walletCallback, String address, String contractAddress) {
+    Call<Balance> walletCall = atlantApi
+        .getBalance("account", "tokenbalance", contractAddress, address, Config.API_KEY_ETHERSCAN);
+    walletCall.enqueue(walletCallback);
+    return walletCall;
+  }
+
+  Call<Transactions> getTransactions(@NonNull Callback<Transactions> walletCallback, String address) {
+    Call<Transactions> walletCall = atlantApi
+        .getTransactions("account", "txlist", address, "desc", Config.API_KEY_ETHERSCAN);
+    walletCall.enqueue(walletCallback);
+    return walletCall;
+  }
+
+  Call<TransactionsTokens> getTokenTransactions(@NonNull Callback<TransactionsTokens> walletCallback,
+      String contractAddress,
+      String address,
+      boolean transactionIn) {
     if (transactionIn) {
-      Call<Transactions> walletCall = atlantApi
-          .getWalletTransactionsIn("logs", "getLogs", 0, "latest", Config.CONTRACT_ADDRESS, formatAddress(address),
+      Call<TransactionsTokens> walletCall = atlantApi
+          .getTokenTransactionsIn("logs", "getLogs", 0, "latest", contractAddress, formatAddress(address),
               Config.API_KEY_ETHERSCAN);
       walletCall.enqueue(walletCallback);
+      return walletCall;
     } else {
-      Call<Transactions> walletCall = atlantApi
-          .getWalletTransactionsOut("logs", "getLogs", 0, "latest", Config.CONTRACT_ADDRESS, formatAddress(address),
+      Call<TransactionsTokens> walletCall = atlantApi
+          .getTokenTransactionsOut("logs", "getLogs", 0, "latest", contractAddress, formatAddress(address),
               Config.API_KEY_ETHERSCAN);
       walletCall.enqueue(walletCallback);
+      return walletCall;
     }
   }
 
-  void getGasPrice(@NonNull Callback<GasPrice> callback) {
+  Call<GasPrice> getGasPrice(@NonNull Callback<GasPrice> callback) {
     Call<GasPrice> priceCall = atlantApi.getGasPrice("proxy", "eth_gasPrice", Config.API_KEY_ETHERSCAN);
     priceCall.enqueue(callback);
+    return priceCall;
   }
 
-  void getNonce(@NonNull Callback<Nonce> callback, String address) {
+  Call<Nonce> getNonce(@NonNull Callback<Nonce> callback, String address) {
     Call<Nonce> nonceCall = atlantApi
         .getNonce("proxy", "eth_getTransactionCount", address, "latest", Config.API_KEY_ETHERSCAN);
     nonceCall.enqueue(callback);
+    return nonceCall;
   }
 
-  void sendTransaction(@NonNull Callback<SendTransactions> callback, String hex) {
-    Call<SendTransactions> nonceCall = atlantApi
+  Call<SendTransactions> sendTransaction(@NonNull Callback<SendTransactions> callback, String hex) {
+    Call<SendTransactions> sendTransactionCall = atlantApi
         .sendTransaction("proxy", "eth_sendRawTransaction", hex, Config.API_KEY_ETHERSCAN);
-    nonceCall.enqueue(callback);
+    sendTransactionCall.enqueue(callback);
+    return sendTransactionCall;
   }
 
   private String formatAddress(String address) {

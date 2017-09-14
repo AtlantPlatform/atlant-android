@@ -447,8 +447,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
   }
 
-  @Override
-  public void onScreenError(String text) {
+  protected void onScreenError(String text) {
     DialogUtils.openDialogError(getContext(), getString(R.string.system_error), text, R.drawable.ic_dialog_error, null);
   }
 

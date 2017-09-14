@@ -2,7 +2,6 @@ package com.frostchein.atlant.activities.send;
 
 import com.frostchein.atlant.activities.base.BaseView;
 import com.frostchein.atlant.model.Balance;
-import com.frostchein.atlant.model.Transactions;
 
 public interface SendView extends BaseView {
 
@@ -11,6 +10,8 @@ public interface SendView extends BaseView {
   void setValue(String value);
 
   void setBalance(Balance balance);
+
+  void setType(String walletName);
 
   String getAddress();
 
@@ -24,7 +25,7 @@ public interface SendView extends BaseView {
 
   void dialogConfirmTransaction();
 
-  void onSuccessfulSend(Transactions transactions);
+  void onSuccessfulSend();
 
   void onError(String message);
 

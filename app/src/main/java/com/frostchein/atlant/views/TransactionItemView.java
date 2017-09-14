@@ -6,10 +6,14 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.TextView;
 import butterknife.BindView;
+import com.frostchein.atlant.Config;
 import com.frostchein.atlant.R;
-import com.frostchein.atlant.model.TransactionItems;
+import com.frostchein.atlant.model.TransactionsItem;
+import com.frostchein.atlant.model.TransactionsTokensItem;
+import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DateUtils;
 import com.frostchein.atlant.utils.DigitsUtils;
+import java.math.BigInteger;
 
 public class TransactionItemView extends BaseCustomView {
 
@@ -45,24 +49,71 @@ public class TransactionItemView extends BaseCustomView {
    */
   @Override
   public void setContent(Object... objects) {
-    if (objects != null) {
-      TransactionItems transactionItems = (TransactionItems) objects[0];
+    try {
+      if (objects != null) {
 
-      dateTextView.setText(
-          DateUtils.getFormattedFullDate(DigitsUtils.getBase10from16(transactionItems.getTimeStamp()).longValue()));
+        BigInteger bigIntegerData = null;
+        BigInteger bigIntegerValue = null;
 
-      countTextView.setText(
-          DigitsUtils.ATLtoString(DigitsUtils.getBase10from16(transactionItems.getData())) + " "
-              + getResources()
-              .getString(R.string.app_prefix_coin));
+        if (objects[0] instanceof TransactionsItem) {
+          TransactionsItem transactionsItem = (TransactionsItem) objects[0];
 
-      if (transactionItems.isTransactionsIn()) {
-        statusTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.transactions_received));
-        statusTextView.setText(getResources().getString(R.string.transaction_status_received));
-      } else {
-        statusTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.transactions_send));
-        statusTextView.setText(getResources().getString(R.string.transaction_status_send));
+          bigIntegerData = DigitsUtils.getBase10FromString(transactionsItem.getTimeStamp());
+          bigIntegerValue = DigitsUtils.getBase10FromString(transactionsItem.getValue());
+
+          if (!transactionsItem.getFrom().equalsIgnoreCase(CredentialHolder.getAddress())) {
+            setReceived();
+          } else {
+            setSent();
+          }
+        }
+
+        if (objects[0] instanceof TransactionsTokensItem) {
+          TransactionsTokensItem transactionsTokensItem = (TransactionsTokensItem) objects[0];
+
+          bigIntegerData = DigitsUtils.getBase10from16(transactionsTokensItem.getTimeStamp());
+          bigIntegerValue = DigitsUtils.getBase10from16(transactionsTokensItem.getData());
+
+          if (transactionsTokensItem.isTransactionsIn()) {
+            setReceived();
+          } else {
+            setSent();
+          }
+        }
+
+        if (bigIntegerData != null && bigIntegerValue != null) {
+          setDate(bigIntegerData);
+          setValue(bigIntegerValue);
+        }
+
       }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
+
+  private void setReceived() {
+    statusTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.transactions_received));
+    statusTextView.setText(getResources().getString(R.string.transaction_status_received));
+  }
+
+  private void setSent() {
+    statusTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.transactions_send));
+    statusTextView.setText(getResources().getString(R.string.transaction_status_send));
+  }
+
+  private void setDate(BigInteger date) {
+    dateTextView.setText(DateUtils.getFormattedFullDate(date.longValue()));
+  }
+
+  private void setValue(BigInteger value) {
+    String name;
+    if (CredentialHolder.getCurrentToken() != null) {
+      name = CredentialHolder.getCurrentToken().getName();
+    } else {
+      name = Config.WALLET_ETH;
+    }
+    countTextView.setText(DigitsUtils.valueToString(value) + " " + name);
+  }
+
 }

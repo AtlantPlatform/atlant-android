@@ -10,6 +10,7 @@
 
   <!--material drawer-->
   <string name="material_drawer_title">Menu</string>
+  <string name="material_drawer_actions">Actions</string>
   <string name="material_drawer_send">Send</string>
   <string name="material_drawer_receive">Receive</string>
   <string name="material_drawer_settings">Settings</string>
@@ -42,13 +43,13 @@
   <string name="login_message_successfully_change_password">Successfully changed the PIN code!</string>
 
   <!--import-->
-  <string name="import_wallet_title">Import\nATL-wallet</string>
-  <string name="import_wallet_text1">Private key ATL-wallet</string>
+  <string name="import_wallet_title">Import wallet</string>
+  <string name="import_wallet_text1">Private wallet key</string>
   <string name="import_wallet_text2">QR-code</string>
-  <string name="import_wallet_edit_hint">Enter the key</string>
+  <string name="import_wallet_edit_hint">Enter private key</string>
 
   <!--export-->
-  <string name="export_title">Private key\nATL-wallet</string>
+  <string name="export_title">Private wallet key</string>
   <string name="export_private_key_text">Private key</string>
   <string name="export_QR_code_text">QR-code</string>
 
@@ -59,12 +60,12 @@
   <string name="send_address_hint">Enter the address</string>
   <string name="send_value_hint">0.00</string>
   <string name="send_invalid_data">Invalid address format</string>
-  <string name="send_no_correct_money">Attention! You can send more 0.000000000000000001 ATL</string>
+  <string name="send_no_correct_money">Attention! You can send more 0.000000000000000001 %1$s</string>
   <string name="send_process">Send…</string>
   <string name="send_preparing">Preparing for send…</string>
   <string name="send_successful_send">Transaction sent successfully</string>
   <string name="send_error_send">Send error, try again</string>
-  <string name="send_dialog_text_warning">You irrevocably send %1$s ATL by the address %2$s</string>
+  <string name="send_dialog_text_warning">You irrevocably send %1$s %2$s by the address %3$s</string>
 
   <!--receive-->
   <string name="receive_title">Receive</string>
@@ -91,8 +92,8 @@
   <string name="transaction_status_received">Received</string>
 
   <!--transactions no-->
-  <string name="no_transactions_intro">Transactions</string>
-  <string name="no_transactions_explanation">Transactions will be displayed when you receive or send an ATL.</string>
+  <string name="no_transactions_title">Transactions</string>
+  <string name="no_transactions_messages">Transactions will be displayed when you receive or send an %1$s.</string>
 
   <!--button-->
   <string name="bt_next">Next</string>
@@ -109,6 +110,6 @@
   <string name="system_wallet_loading_error">Error loading data</string>
   <string name="system_timeout">Could not connect to the server, please try again later.</string>
   <string name="system_image">Image</string>
-  <string name="system_atl_default">0 ATL</string>
+  <string name="system_value_default">0</string>
 
 </resources>

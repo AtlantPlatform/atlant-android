@@ -8,13 +8,12 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.frostchein.atlant.R;
-import com.frostchein.atlant.model.TransactionItems;
 import com.frostchein.atlant.views.TransactionItemView;
 import java.util.ArrayList;
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.MyViewHolder> {
 
-  private ArrayList<TransactionItems> arrayItems;
+  private ArrayList<Object> arrayItems;
 
   class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,7 +32,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     }
   }
 
-  public TransactionsAdapter(ArrayList<TransactionItems> arrayItems) {
+  public TransactionsAdapter(ArrayList<Object> arrayItems) {
     this.arrayItems = arrayItems;
   }
 
@@ -51,9 +50,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
   @Override
   public void onBindViewHolder(MyViewHolder holder, int position) {
     if (position != getItemCount() - 1) {
-      TransactionItems transactionItems = arrayItems.get(position);
-      holder.transactionItemView.setContent(transactionItems);
-
+      holder.transactionItemView.setContent(arrayItems.get(position));
       if (position % 2 != 0) {
         holder.linearLayout.setBackgroundResource(R.color.transactions_background);
       } else {

@@ -1,6 +1,5 @@
 package com.frostchein.atlant.utils;
 
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -11,14 +10,13 @@ public class DigitsUtils {
   public static final long divide = 1000000000000000000L;
   private static final int round = 18;
 
-
   private static String formatShow(BigDecimal value) {
     DecimalFormat percentFormat = new DecimalFormat(MASK);
     percentFormat.setDecimalSeparatorAlwaysShown(false);
     return percentFormat.format(value).replace(',', '.');
   }
 
-  public static String ATLtoString(BigInteger value) {
+  public static String valueToString(BigInteger value) {
     BigDecimal bigDecimal = new BigDecimal(value);
     return formatShow(bigDecimal.divide(BigDecimal.valueOf(divide), round, 0));
   }
@@ -32,4 +30,9 @@ public class DigitsUtils {
     }
     return new BigInteger(stringBuilder.toString(), 16);
   }
+
+  public static BigInteger getBase10FromString(String s) {
+    return new BigInteger(s);
+  }
+
 }

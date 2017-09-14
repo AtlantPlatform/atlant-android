@@ -12,8 +12,6 @@ public interface BaseView {
 
   void onNoInternetConnection();
 
-  void onScreenError(String text);
-
   void showProgressDialog(String dialogMessage);
 
   void hideProgressDialog();

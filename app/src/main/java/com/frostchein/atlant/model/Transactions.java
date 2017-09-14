@@ -7,37 +7,38 @@ import java.util.ArrayList;
 
 public class Transactions {
 
-  @SerializedName("status")
-  @Expose
-  private String status;
-  @SerializedName("message")
-  @Expose
-  private String message;
-  @SerializedName("result")
-  @Expose
-  private ArrayList<TransactionItems> transactionItems = null;
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("message")
+    @Expose
+    private String message;
+    @SerializedName("result")
+    @Expose
+    private ArrayList<TransactionsItem> transactionsItem = null;
 
-  public String getStatus() {
-    return status;
-  }
+    public String getStatus() {
+        return status;
+    }
 
-  public void setStatus(String status) {
-    this.status = status;
-  }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-  public String getMessage() {
-    return message;
-  }
+    public String getMessage() {
+        return message;
+    }
 
-  public void setMessage(String message) {
-    this.message = message;
-  }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-  public ArrayList<TransactionItems> getTransactionItems() {
-    return transactionItems;
-  }
+    public ArrayList<TransactionsItem> getTransactionsItem() {
+        return transactionsItem;
+    }
 
-  public void setTransactionItems(ArrayList<TransactionItems> transactionItems) {
-    this.transactionItems = transactionItems;
-  }
+    public void setTransactionsItem(ArrayList<TransactionsItem> transactionsItem) {
+        this.transactionsItem = transactionsItem;
+    }
+
 }

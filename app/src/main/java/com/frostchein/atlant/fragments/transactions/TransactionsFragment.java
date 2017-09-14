@@ -12,7 +12,6 @@ import com.frostchein.atlant.dagger2.component.DaggerFragmentTransactionsCompone
 import com.frostchein.atlant.dagger2.component.FragmentTransactionsComponent;
 import com.frostchein.atlant.dagger2.modules.FragmentTransactionsModule;
 import com.frostchein.atlant.fragments.base.BaseFragment;
-import com.frostchein.atlant.model.TransactionItems;
 import java.util.ArrayList;
 import javax.inject.Inject;
 
@@ -33,8 +32,8 @@ public class TransactionsFragment extends BaseFragment implements TransactionsFr
 
   }
 
-  public void update(ArrayList<TransactionItems> transactionItems) {
-    TransactionsAdapter adapter = new TransactionsAdapter(transactionItems);
+  public void update(ArrayList<Object> arrayList) {
+    TransactionsAdapter adapter = new TransactionsAdapter(arrayList);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
   }
