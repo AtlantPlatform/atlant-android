@@ -25,32 +25,41 @@
       android:textColor="@color/accent"
       android:textSize="@dimen/text_size_14"/>
 
-    <LinearLayout
+    <RelativeLayout
       android:id="@+id/toolbar_liner"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="center"
       android:orientation="horizontal">
 
-      <TextView
-        android:id="@+id/toolbar_value"
+      <HorizontalScrollView
+        android:id="@+id/toolbar_horizontal_scroll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="end"
-        android:text="@string/system_value_default"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_size_24"/>
+        android:layout_toLeftOf="@+id/toolbar_spinner">
+
+        <TextView
+          android:id="@+id/toolbar_value"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="@string/system_value_default"
+          android:textColor="@android:color/white"
+          android:textSize="@dimen/text_size_24"/>
+
+      </HorizontalScrollView>
 
       <Spinner
         android:id="@+id/toolbar_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:backgroundTint="@android:color/white"
         tools:targetApi="lollipop"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
   </LinearLayout>
 
