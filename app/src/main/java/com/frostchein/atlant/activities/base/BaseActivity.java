@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -131,6 +132,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
       baseCustomViewToolbar.setVisibility(View.VISIBLE);
     } else {
       baseCustomViewToolbar.setVisibility(View.GONE);
+    }
+
+    if (!(this instanceof HomeActivity)) {
+      AppBarLayout.LayoutParams p = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+      p.setScrollFlags(0);
+      toolbar.setLayoutParams(p);
     }
 
     setDrawerMenu();

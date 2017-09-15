@@ -3,51 +3,51 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:fitsSystemWindows="true"
   android:orientation="vertical">
 
-  <android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/refresh"
+  <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+      android:id="@+id/appbar"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:fitsSystemWindows="false"
-      android:orientation="vertical">
+      android:layout_height="wrap_content"
+      android:theme="@style/AppTheme.AppBarOverlay">
 
-      <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+      <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+      </android.support.v7.widget.Toolbar>
 
-        <android.support.v7.widget.Toolbar
-          android:id="@+id/toolbar"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="?attr/colorPrimary"
-          app:popupTheme="@style/AppTheme.PopupOverlay">
-        </android.support.v7.widget.Toolbar>
+      <FrameLayout
+        android:id="@+id/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical"/>
 
-        <FrameLayout
-          android:id="@+id/custom_toolbar"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="?attr/colorPrimary"
-          android:gravity="center_vertical"/>
+    </android.support.design.widget.AppBarLayout>
 
-      </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+      android:id="@+id/refresh"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
       <FrameLayout
         android:id="@+id/base_activity_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-  </android.support.v4.widget.SwipeRefreshLayout>
+  </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>
