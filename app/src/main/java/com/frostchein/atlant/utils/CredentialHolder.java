@@ -100,8 +100,9 @@ public final class CredentialHolder {
       @Override
       public void run() {
         try {
-          myWallet = new MyWallet();
+          MyWallet myWallet = new MyWallet();
           myWallet.loadCredentials(password, getFile(context, PATH_WALLET));
+          CredentialHolder.myWallet = myWallet;
           EventBus.getDefault().post(new SuccessfulAuthorisation());
         } catch (Exception e) {
           e.printStackTrace();
