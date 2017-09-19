@@ -2,17 +2,19 @@ package com.frostchein.atlant.utils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class DigitsUtils {
 
-  private static final String MASK = "0.##################";
+  private static final String MASK = "0.########";
   public static final long divide = 1000000000000000000L;
   private static final int round = 18;
 
   private static String formatShow(BigDecimal value) {
     DecimalFormat percentFormat = new DecimalFormat(MASK);
     percentFormat.setDecimalSeparatorAlwaysShown(false);
+    percentFormat.setRoundingMode(RoundingMode.DOWN);
     return percentFormat.format(value).replace(',', '.');
   }
 
