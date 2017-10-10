@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:fontFamily="sans-serif-thin"
-            android:hint="@string/send_address_hint"
+            android:hint="@string/import_wallet_edit_hint"
             android:inputType="textMultiLine"
             android:maxLength="64"
             android:maxLines="2"
