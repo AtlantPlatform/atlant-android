@@ -12,6 +12,7 @@ import android.os.PowerManager;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.AppBarLayout.LayoutParams;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,7 +25,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +48,7 @@ import com.frostchein.atlant.drawer_menu.DrawerHelper;
 import com.frostchein.atlant.events.login.CredentialsCleared;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DialogUtils;
+import com.frostchein.atlant.utils.FontsUtils;
 import com.frostchein.atlant.utils.IntentUtils;
 import com.frostchein.atlant.views.BaseCustomView;
 import com.mikepenz.materialdrawer.Drawer;
@@ -71,9 +74,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   private static int typeResult;
 
   protected DrawerHelper drawerHelper;
-
+  @BindView(R.id.appbar)
+  protected AppBarLayout appBarLayout;
   @BindView(R.id.toolbar)
   protected Toolbar toolbar;
+  @BindView(R.id.toolbar_title_text)
+  protected TextView toolbarTitle;
   @BindView(R.id.refresh)
   protected SwipeRefreshLayout swipeRefreshLayout;
   @BindView(R.id.custom_toolbar)
@@ -94,7 +100,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
   @Override
   public void setContentView(@LayoutRes int layoutResID) {
-    LinearLayout rootLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+    RelativeLayout rootLayout = (RelativeLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
 
     FrameLayout activityContainer = rootLayout.findViewById(R.id.base_activity_content);
     getLayoutInflater().inflate(layoutResID, activityContainer, true);
@@ -104,8 +110,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     setupComponent(MyApplication.get(this).getAppComponent());
     ButterKnife.bind(this);
-    setSupportActionBar(toolbar);
 
+    toolbar.setTitle("");
+    FontsUtils.toOctarineBold(getContext(), toolbarTitle);
+    setSupportActionBar(toolbar);
     if (useToolbar()) {
       toolbar.setVisibility(View.VISIBLE);
     } else {
@@ -135,9 +143,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     if (!(this instanceof HomeActivity)) {
-      AppBarLayout.LayoutParams p = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
-      p.setScrollFlags(0);
-      toolbar.setLayoutParams(p);
+      disableScrollToolbar();
     }
 
     setDrawerMenu();
@@ -242,14 +248,24 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
   }
 
+  public void disableScrollToolbar() {
+    LayoutParams p = (LayoutParams) toolbar.getLayoutParams();
+    p.setScrollFlags(0);
+    toolbar.setLayoutParams(p);
+  }
+
+  public void enableScrollToolbar() {
+    LayoutParams p = (LayoutParams) toolbar.getLayoutParams();
+    p.setScrollFlags(LayoutParams.SCROLL_FLAG_ENTER_ALWAYS | LayoutParams.SCROLL_FLAG_SCROLL);
+    toolbar.setLayoutParams(p);
+  }
+
   private void updateDrawerMenu() {
     drawerHelper.setDrawerContent(DrawerContent.getDrawerContent());
   }
 
   protected void setToolbarTitle(int resourceString) {
-    if (getSupportActionBar() != null) {
-      getSupportActionBar().setTitle(resourceString);
-    }
+    toolbarTitle.setText(resourceString);
   }
 
   @Override

@@ -16,6 +16,7 @@ import com.frostchein.atlant.dagger2.modules.LoginActivityModule;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.IntentUtils;
 import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
+import com.frostchein.atlant.utils.FontsUtils;
 import com.frostchein.atlant.views.LoginKeyboardView;
 import com.frostchein.atlant.views.PasswordView;
 import javax.inject.Inject;
@@ -32,6 +33,8 @@ public class LoginActivity extends BaseActivity implements LoginView, TextWatche
   @Inject
   LoginPresenter presenter;
 
+  @BindView(R.id.name)
+  TextView textName;
   @BindView(R.id.login_password_view)
   PasswordView passwordView;
   @BindView(R.id.login_text_view)
@@ -41,6 +44,7 @@ public class LoginActivity extends BaseActivity implements LoginView, TextWatche
   @BindView(R.id.login_keyboard)
   LoginKeyboardView loginKeyboardView;
 
+
   private int type = TYPE_CHANGE_PASSWORD;
   private String privateKey = null;
 
@@ -49,6 +53,7 @@ public class LoginActivity extends BaseActivity implements LoginView, TextWatche
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
     EventBus.getDefault().register(presenter);
+    FontsUtils.toOctarineBold(getContext(), textName);
   }
 
   @Override

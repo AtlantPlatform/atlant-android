@@ -2,27 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:gravity="center_horizontal"
+  android:layout_marginTop="@dimen/activity_vertical_margin"
+  android:layout_marginBottom="@dimen/activity_vertical_margin"
+  android:layout_marginLeft="@dimen/activity_horizontal_margin"
+  android:layout_marginRight="@dimen/activity_horizontal_margin"
   android:orientation="vertical">
 
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_gravity="center_horizontal"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+
     <TextView
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="72dp"
+      android:layout_marginTop="@dimen/activity_vertical_margin"
       android:gravity="center"
       android:text="@string/receive_explanation"
-      android:textColor="@color/colorSecondaryText"
-      android:textSize="@dimen/text_size_12"/>
+      android:textColor="@color/colorPrimaryText"
+      android:textSize="@dimen/text_size_14"/>
 
     <RelativeLayout
       android:layout_width="wrap_content"
@@ -49,11 +51,20 @@
       android:id="@+id/receive_address_text"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/activity_vertical_title_margin"
+      android:layout_marginTop="@dimen/activity_vertical_margin2x"
       android:gravity="center"
-      android:text="address"
+      android:text="@string/system_text"
       android:textColor="@color/colorPrimaryText"
       android:textSize="@dimen/text_size_14"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom|center_horizontal">
+
+    <include layout="@layout/view_copyright"/>
 
   </LinearLayout>
 

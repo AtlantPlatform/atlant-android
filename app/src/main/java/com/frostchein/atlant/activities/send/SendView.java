@@ -11,7 +11,7 @@ public interface SendView extends BaseView {
 
   void setBalance(Balance balance);
 
-  void setType(String walletName);
+  void setWalletName(String walletName);
 
   String getAddress();
 
@@ -30,5 +30,7 @@ public interface SendView extends BaseView {
   void onError(String message);
 
   void onTimeout();
+
+  void setContentOnToolbar(Balance balance);
 
 }

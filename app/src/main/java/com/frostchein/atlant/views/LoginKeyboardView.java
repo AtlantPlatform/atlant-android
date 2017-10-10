@@ -1,13 +1,14 @@
 package com.frostchein.atlant.views;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import android.content.Intent;
+import android.net.Uri;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.frostchein.atlant.R;
@@ -37,7 +38,9 @@ public class LoginKeyboardView extends BaseCustomView implements View.OnClickLis
   @BindView(R.id.login_keyboard_key_9)
   protected TextView key9View;
   @BindView(R.id.login_keyboard_key_backspace)
-  protected ImageView keyBackspaceView;
+  protected RelativeLayout keyBackspaceView;
+  @BindView(R.id.login_keyboard_key_sos)
+  protected Button btSOS;
 
   public LoginKeyboardView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -60,10 +63,7 @@ public class LoginKeyboardView extends BaseCustomView implements View.OnClickLis
     key8View.setOnClickListener(this);
     key9View.setOnClickListener(this);
     keyBackspaceView.setOnClickListener(this);
-
-    Drawable drawable = ContextCompat.getDrawable(getContext(), R.mipmap.ic_keyboard_delete);
-    drawable.setAlpha(70);
-    keyBackspaceView.setImageDrawable(drawable);
+    btSOS.setOnClickListener(this);
   }
 
   @Override
@@ -90,6 +90,10 @@ public class LoginKeyboardView extends BaseCustomView implements View.OnClickLis
           }
         }
         break;
+        case R.id.login_keyboard_key_sos:
+          Intent telegram = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/AtlantHelpBot"));
+          getContext().startActivity(telegram);
+          break;
         default: {
           passwordField.append(((TextView) v).getText());
         }

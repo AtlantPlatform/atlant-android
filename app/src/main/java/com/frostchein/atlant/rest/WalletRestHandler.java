@@ -1,6 +1,5 @@
 package com.frostchein.atlant.rest;
 
-import com.frostchein.atlant.activities.base.BaseActivity;
 import com.frostchein.atlant.events.network.OnStatusSuccess;
 import com.frostchein.atlant.model.Balance;
 import com.frostchein.atlant.model.Transactions;
@@ -22,12 +21,12 @@ public final class WalletRestHandler {
   private static Call<Transactions> callTransactions;
   private static Call<TransactionsTokens> callTransactionsTokens;
 
-  public static void requestWalletInfo(AtlantClient atlantClient, String address, Token token) {
-    requestBalance(atlantClient, address, token);
+  public static void requestWalletInfo(AtlantClient atlantClient, String address, Token token, int requestCode) {
+    requestBalance(atlantClient, address, token, requestCode);
   }
 
-  public static void requestWalletInfo(AtlantClient atlantClient, String address) {
-    requestBalance(atlantClient, address, null);
+  public static void requestWalletInfo(AtlantClient atlantClient, String address, int requestCode) {
+    requestBalance(atlantClient, address, null, requestCode);
   }
 
   public static void cancel() {
@@ -49,18 +48,19 @@ public final class WalletRestHandler {
   private static void requestBalance(
       final AtlantClient atlantClient,
       final String address,
-      final Token token) {
+      final Token token,
+      final int requestCode) {
 
     BaseRequest<Balance> callback = new BaseRequest<>(new BaseRequest.Callback<Balance>() {
       @Override
       public void onResponse(Response<Balance> response) {
         if (token == null) {
-          requestTransactions(atlantClient, address, response.body());
+          requestTransactions(atlantClient, address, response.body(), requestCode);
         } else {
-          requestTokenTransactions(atlantClient, address, token, response.body(), true, null);
+          requestTokenTransactions(atlantClient, address, token, response.body(), true, null, requestCode);
         }
       }
-    }, BaseActivity.REQUEST_CODE_HOME);
+    }, requestCode);
 
     if (token == null) {
       callBalance = atlantClient.getBalance(callback, address);
@@ -75,7 +75,8 @@ public final class WalletRestHandler {
       final Token token,
       final Balance balance,
       final boolean transactionIn,
-      final ArrayList<TransactionsTokensItem> transactionsTokensItems) {
+      final ArrayList<TransactionsTokensItem> transactionsTokensItems,
+      final int requestCode) {
 
     BaseRequest<TransactionsTokens> callback = new BaseRequest<>(
         new BaseRequest.Callback<TransactionsTokens>() {
@@ -90,7 +91,7 @@ public final class WalletRestHandler {
                   for (int i = 0; i < listIn.size(); i++) {
                     listIn.get(i).setTransactionsIn(true);
                   }
-                  requestTokenTransactions(atlantClient, address, token, balance, false, listIn);
+                  requestTokenTransactions(atlantClient, address, token, balance, false, listIn, requestCode);
                 }
               });
               thread.start();
@@ -120,13 +121,13 @@ public final class WalletRestHandler {
                   TransactionsTokens transactionsTokens = response.body();
                   transactionsTokens.setTransactionsTokensItems(transactionsTokensItems);
                   EventBus.getDefault()
-                      .post(new OnStatusSuccess(BaseActivity.REQUEST_CODE_HOME, balance, transactionsTokens));
+                      .post(new OnStatusSuccess(requestCode, balance, transactionsTokens));
                 }
               });
               thread.start();
             }
           }
-        }, BaseActivity.REQUEST_CODE_HOME);
+        }, requestCode);
 
     callTransactionsTokens = atlantClient
         .getTokenTransactions(callback, token.getContractAddress(), address, transactionIn);
@@ -135,14 +136,15 @@ public final class WalletRestHandler {
   private static void requestTransactions(
       final AtlantClient atlantClient,
       final String address,
-      final Balance balance) {
+      final Balance balance,
+      final int baseCode) {
 
     BaseRequest<Transactions> callback = new BaseRequest<>(new BaseRequest.Callback<Transactions>() {
       @Override
       public void onResponse(Response<Transactions> response) {
-        EventBus.getDefault().post(new OnStatusSuccess(BaseActivity.REQUEST_CODE_HOME, balance, response.body()));
+        EventBus.getDefault().post(new OnStatusSuccess(baseCode, balance, response.body()));
       }
-    }, BaseActivity.REQUEST_CODE_HOME);
+    }, baseCode);
 
     callTransactions = atlantClient.getTransactions(callback, address);
   }

@@ -51,11 +51,6 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
   public void onBindViewHolder(MyViewHolder holder, int position) {
     if (position != getItemCount() - 1) {
       holder.transactionItemView.setContent(arrayItems.get(position));
-      if (position % 2 != 0) {
-        holder.linearLayout.setBackgroundResource(R.color.transactions_background);
-      } else {
-        holder.linearLayout.setBackgroundResource(R.color.alpha);
-      }
     }
   }
 

@@ -75,7 +75,7 @@ public class ImportActivity extends BaseActivity implements ImportView, TextWatc
 
   @Override
   public boolean useToolbar() {
-    return false;
+    return true;
   }
 
   @Override
@@ -85,7 +85,7 @@ public class ImportActivity extends BaseActivity implements ImportView, TextWatc
 
   @Override
   public boolean useToolbarActionHome() {
-    return false;
+    return true;
   }
 
   @Override

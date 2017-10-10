@@ -12,6 +12,7 @@ import com.frostchein.atlant.dagger2.component.DaggerFragmentTransactionsCompone
 import com.frostchein.atlant.dagger2.component.FragmentTransactionsComponent;
 import com.frostchein.atlant.dagger2.modules.FragmentTransactionsModule;
 import com.frostchein.atlant.fragments.base.BaseFragment;
+import com.frostchein.atlant.utils.VerticalSpaceItemDecoration;
 import java.util.ArrayList;
 import javax.inject.Inject;
 
@@ -29,7 +30,7 @@ public class TransactionsFragment extends BaseFragment implements TransactionsFr
 
   @Override
   protected void onCreated(View view, Bundle savedInstanceState) {
-
+    recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(4));
   }
 
   public void update(ArrayList<Object> arrayList) {

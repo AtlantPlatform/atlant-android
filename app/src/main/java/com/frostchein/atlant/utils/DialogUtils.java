@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.AlertDialog;
@@ -107,6 +108,7 @@ public final class DialogUtils {
             DialogUtils.dialog = null;
           }
         });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         showDialogFullSize(context);
       }
     });
@@ -135,8 +137,8 @@ public final class DialogUtils {
       Window window = dialog.getWindow();
       assert window != null;
       lp.copyFrom(window.getAttributes());
-      lp.width = (int) (width * 0.95f);
-      lp.height = (int) (height * 0.95f);
+      lp.width = (int) (width * 0.8f);
+      lp.height = (int) (height * 0.8f);
       window.setAttributes(lp);
     } catch (Exception e) {
 

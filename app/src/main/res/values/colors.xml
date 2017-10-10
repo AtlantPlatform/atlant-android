@@ -2,48 +2,52 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
   <!--common colors-->
-  <color name="colorPrimary">#021929</color>
-  <color name="colorPrimaryDark">#021929</color>
-  <color name="colorAccent">#009eff</color>
-  <color name="colorAccent10percent">#19009eff</color>
-  <color name="colorAccentLight">#32009eff</color>
+  <color name="colorPrimary">#03354f</color>
+  <color name="colorPrimaryDark">#011928</color>
+  <color name="colorAccent">#31edd7</color>
+  <color name="colorAccent10percent">#1931edd7</color>
+  <color name="colorAccentLight">#3231edd7</color>
   <color name="colorWindow">#ffffff</color>
-  <color name="grey_light">#e5e5e5</color>
-  <color name="grey_hint">#e5e5e5</color>
   <color name="alpha">#00000000</color>
 
   <!--button-->
-  <color name="button_blue_normal">@color/accent</color>
-  <color name="button_blue_press">@color/primary</color>
+  <color name="button_gradient1_normal">#f6aa2b</color>
+  <color name="button_gradient2_normal">#fae045</color>
+  <color name="button_gradient1_press">#664711</color>
+  <color name="button_gradient2_press">#fae014</color>
+  <color name="button_press">#ff9113</color>
+  <color name="button_text">#0b315e</color>
 
   <!--text-->
-  <color name="colorPrimaryText">#000</color>
-  <color name="colorSecondaryText">#ababab</color>
+  <color name="colorPrimaryText">#fff</color>
+  <color name="colorPrimaryTextAlpha">#b4ffffff</color>
+  <color name="colorSecondaryText">#FF737374</color>
 
   <!--dialog-->
   <color name="dialog_accent">@color/accent</color>
-  <color name="dialog_message">#737374</color>
+  <color name="dialog_title">#000</color>
+  <color name="dialog_message">@color/colorSecondaryText</color>
   <color name="dialog_fon">@color/md_white_1000</color>
-
-  <!--import-->
-  <color name="import_color1">#708699</color>
+  <color name="dialog_border">#d32121</color>
 
   <!--transactions-->
-  <color name="transactions_received">#49dfb6</color>
-  <color name="transactions_send">@color/accent</color>
-  <color name="transactions_date">#c2c2c2</color>
-  <color name="transactions_value">#737373</color>
-  <color name="transactions_background">#eff6fc</color>
+  <color name="transactions_received">#7ed31e</color>
+  <color name="transactions_send">#d02020</color>
+  <color name="transactions_self">#bd10e0</color>
+  <color name="transactions_self_bg">#4cbd10e0</color>
+  <color name="transactions_received_bg">#4c31edd7</color>
+  <color name="transactions_send_bg">#4cd02020</color>
+  <color name="transactions_text">@color/colorPrimaryText</color>
 
   <!--camera-->
-  <color name="viewfinder_mask" tools:ignore="UnusedResources">#c8000000</color>
+  <color name="viewfinder_mask" tools:ignore="UnusedResources">#3c182235</color>
   <color name="viewfinder_laser" tools:ignore="UnusedResources">@color/accent</color>
-  <color name="viewfinder_border" tools:ignore="UnusedResources">@color/primary</color>
+  <color name="viewfinder_border" tools:ignore="UnusedResources">#f7bd34</color>
 
   <!-- MaterialDrawer DEFAULT colors -->
-  <color name="material_drawer_primary_text">@color/md_white_1000</color>
+  <color name="material_drawer_primary_text">@color/colorPrimaryText</color>
   <color name="material_drawer_primary_icon">@color/accent</color>
-  <color name="material_drawer_secondary_text">@color/accent</color>
-  <color name="material_drawer_divider">#08364d</color>
+  <color name="material_drawer_secondary_text">@color/colorPrimaryTextAlpha</color>
+  <color name="material_drawer_divider">#032537</color>
 
 </resources>

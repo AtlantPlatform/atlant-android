@@ -54,7 +54,7 @@ public class PasswordView extends BaseCustomView {
     layoutParams.setMargins(passwordItemMargin, 0, passwordItemMargin, 0);
     View view = new View(getContext());
     view.setLayoutParams(layoutParams);
-    view.setBackgroundResource(R.drawable.empty_password_item);
+    view.setBackgroundResource(R.drawable.login_empty_password_item);
     return view;
   }
 
@@ -62,23 +62,23 @@ public class PasswordView extends BaseCustomView {
     for (int position = 0; position < length; ++position) {
       if (max == 6) {
         passwordLayout.getChildAt(position)
-            .setBackgroundResource(R.drawable.filled_password_item);
+            .setBackgroundResource(R.drawable.login_filled_password_item);
       } else {
         passwordLayout.getChildAt(position)
-            .setBackgroundResource(R.drawable.filled_password_item);
+            .setBackgroundResource(R.drawable.login_filled_password_item);
       }
     }
     for (int position = length; position < max; ++position) {
-      passwordLayout.getChildAt(position).setBackgroundResource(R.drawable.empty_password_item);
+      passwordLayout.getChildAt(position).setBackgroundResource(R.drawable.login_empty_password_item);
     }
   }
 
   public void emptyPasswordItem(int position) {
-    passwordLayout.getChildAt(position).setBackgroundResource(R.drawable.empty_password_item);
+    passwordLayout.getChildAt(position).setBackgroundResource(R.drawable.login_empty_password_item);
   }
 
   public void fillPasswordItem(int position) {
     passwordLayout.getChildAt(position)
-        .setBackgroundResource(R.drawable.filled_password_item);
+        .setBackgroundResource(R.drawable.login_filled_password_item);
   }
 }

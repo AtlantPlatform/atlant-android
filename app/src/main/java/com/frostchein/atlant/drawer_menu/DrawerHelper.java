@@ -3,7 +3,11 @@ package com.frostchein.atlant.drawer_menu;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import com.frostchein.atlant.R;
+import com.frostchein.atlant.utils.FontsUtils;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -17,11 +21,18 @@ public final class DrawerHelper {
   @Inject
   public DrawerHelper(final AppCompatActivity activity) {
 
+    View view = LayoutInflater.from(activity).inflate(R.layout.view_menu_header, null);
+    TextView textTitle = view.findViewById(R.id.menu_title);
+    FontsUtils.toOctarineBold(activity, textTitle);
+
     drawer = new DrawerBuilder()
         .withActivity(activity)
-        .withSliderBackgroundColorRes(R.color.primary)
-        .withHeader(R.layout.header)
+        .withSliderBackgroundDrawableRes(R.drawable.menu_gradient)
+        .withHeader(R.layout.view_menu_header)
+        .withHeader(view)
         .withActionBarDrawerToggle(true)
+        .withStickyFooter(R.layout.view_menu_footer)
+        .withStickyFooterDivider(false)
         .build();
 
     if (activity instanceof Drawer.OnDrawerItemClickListener) {

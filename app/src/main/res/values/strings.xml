@@ -14,6 +14,7 @@
   <string name="material_drawer_send">Send</string>
   <string name="material_drawer_receive">Receive</string>
   <string name="material_drawer_settings">Settings</string>
+  <string name="material_drawer_general">General</string>
 
   <!--login selected-->
   <string name="login_selected_create_wallet">Create new wallet</string>
@@ -39,25 +40,26 @@
   <string name="keyboard_number_eight">8</string>
   <string name="keyboard_number_nine">9</string>
   <string name="keyboard_number_zero">0</string>
+  <string name="keyboard_sos">SOS</string>
   <string name="login_message_wrong_password">Wrong PIN code! Please, repeat again!</string>
   <string name="login_message_successfully_change_password">Successfully changed the PIN code!</string>
 
   <!--import-->
-  <string name="import_wallet_title">Import wallet</string>
-  <string name="import_wallet_text1">Private wallet key</string>
-  <string name="import_wallet_text2">QR-code</string>
-  <string name="import_wallet_edit_hint">Enter private key</string>
+  <string name="import_wallet_title">Import</string>
+  <string name="import_wallet_text1">Enter your</string>
+  <string name="import_wallet_text2">or scan QR code</string>
+  <string name="import_wallet_edit_hint">private key</string>
 
   <!--export-->
-  <string name="export_title">Private wallet key</string>
-  <string name="export_private_key_text">Private key</string>
-  <string name="export_QR_code_text">QR-code</string>
+  <string name="export_title">Export</string>
+  <string name="export_private_key_text">Your private key</string>
 
   <!--send-->
   <string name="send_title">Send</string>
+  <string name="send_you_have">You have</string>
+  <string name="send_text">What amount do you want to send?</string>
   <string name="send_no_money">Attention! Insufficient balance!</string>
-  <string name="send_to_text">To</string>
-  <string name="send_address_hint">Enter the address</string>
+  <string name="send_address_hint">Beneficiary Address</string>
   <string name="send_value_hint">0.00</string>
   <string name="send_invalid_data">Invalid address format</string>
   <string name="send_no_correct_money">Attention! You can send more 0.000000000000000001 %1$s</string>
@@ -69,7 +71,7 @@
 
   <!--receive-->
   <string name="receive_title">Receive</string>
-  <string name="receive_explanation">Click here to copy this address.\nSend the address to the recipient.</string>
+  <string name="receive_explanation">Click here to copy this address and send it to the recipient</string>
 
   <!--setting-->
   <string name="pref_security_title">Security</string>
@@ -90,26 +92,29 @@
   <!--transaction-->
   <string name="transaction_status_send">Sent</string>
   <string name="transaction_status_received">Received</string>
+  <string name="transaction_status_self">Self</string>
 
   <!--transactions no-->
-  <string name="no_transactions_title">Transactions</string>
-  <string name="no_transactions_messages">Transactions will be displayed when you receive or send an %1$s.</string>
+  <string name="no_transactions_messages">Transactions will be displayed \nwhen you receive or send\nan %1$s</string>
 
   <!--button-->
-  <string name="bt_next">Next</string>
+  <string name="bt_done">Done</string>
   <string name="bt_send">Send</string>
-  <string name="bt_close">Close</string>
+  <string name="bt_next">Next</string>
   <string name="bt_dialog_continue">Continue</string>
   <string name="bt_dialog_back">Close</string>
   <string name="bt_dialog_ok">OK</string>
 
   <!--system-->
   <string name="system_key_copied">Address copied to clipboard</string>
-  <string name="system_error">Error</string>
+  <string name="system_error">Something went wrong\n...\nPerhaps because</string>
+  <string name="system_text">Text</string>
   <string name="system_no_internet_connection">No internet connection</string>
   <string name="system_wallet_loading_error">Error loading data</string>
   <string name="system_timeout">Could not connect to the server, please try again later.</string>
   <string name="system_image">Image</string>
+  <string name="system_copyright">Copyright © Atlant.io, 2017</string>
   <string name="system_value_default">0</string>
+  <string name="system_dash">- - - - - - - - - - - - - - - - - -</string>
 
 </resources>

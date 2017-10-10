@@ -3,6 +3,7 @@ package com.frostchein.atlant.activities.login_selected;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Button;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.frostchein.atlant.R;
@@ -12,6 +13,7 @@ import com.frostchein.atlant.dagger2.component.AppComponent;
 import com.frostchein.atlant.dagger2.component.DaggerLoginSelectedActivityComponent;
 import com.frostchein.atlant.dagger2.component.LoginSelectedActivityComponent;
 import com.frostchein.atlant.dagger2.modules.LoginSelectedActivityModule;
+import com.frostchein.atlant.utils.FontsUtils;
 import javax.inject.Inject;
 
 public class LoginSelectedActivity extends BaseActivity implements LoginSelectedView {
@@ -19,6 +21,8 @@ public class LoginSelectedActivity extends BaseActivity implements LoginSelected
   @Inject
   LoginSelectedPresenter presenter;
 
+  @BindView(R.id.name)
+  TextView textName;
   @BindView(R.id.login_selected_bt_create)
   Button btCreate;
   @BindView(R.id.login_selected_bt_import)
@@ -28,6 +32,7 @@ public class LoginSelectedActivity extends BaseActivity implements LoginSelected
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login_selected);
+    FontsUtils.toOctarineBold(getContext(), textName);
   }
 
   @OnClick(R.id.login_selected_bt_create)

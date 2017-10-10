@@ -14,6 +14,7 @@ import com.frostchein.atlant.rest.NetModule;
 import com.frostchein.atlant.rest.TransactionRestHandler;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
+import com.frostchein.atlant.utils.WalletLoading;
 import com.frostchein.atlant.utils.tokens.Token;
 import java.math.BigInteger;
 import javax.inject.Inject;
@@ -21,11 +22,13 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.web3j.crypto.WalletUtils;
 
-public class SendPresenterImpl implements SendPresenter, BasePresenter {
+public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBack, BasePresenter {
 
   private SendView view;
   private AtlantClient atlantClient;
+  private WalletLoading walletLoading;
   private boolean isPrepare = true;
+  private boolean isUpdate = false;
   private Balance balance;
 
   @Inject
@@ -33,27 +36,47 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
     this.view = view;
     AtlantApi atlantApi = NetModule.getRetrofit(Config.ENDPOINT_URL).create(AtlantApi.class);
     atlantClient = new AtlantClient(atlantApi);
+    walletLoading = new WalletLoading(atlantClient, view, BaseActivity.REQUEST_CODE_SEND);
+    walletLoading.setCallBack(this);
   }
 
   @Override
   public void onCreate(String line) {
     if (view != null) {
-
-      Token token = CredentialHolder.getCurrentToken();
-      if (token == null) {
-        balance = CredentialHolder.getBalance(view.getContext());
-        view.setType(Config.WALLET_ETH);
-      } else {
-        balance = CredentialHolder.getBalance(view.getContext(), token);
-        view.setType(token.getName());
-      }
-
+      init();
       if (WalletUtils.isValidAddress(line)) {
         view.setAddress(line);
       }
       view.setBalance(balance);
     }
   }
+
+  private void init() {
+    Token token = CredentialHolder.getCurrentToken();
+    if (token == null) {
+      balance = CredentialHolder.getBalance(view.getContext());
+      view.setWalletName(Config.WALLET_ETH);
+      view.setContentOnToolbar(balance);
+    } else {
+      balance = CredentialHolder.getBalance(view.getContext(), token);
+      view.setWalletName(token.getName());
+      view.setContentOnToolbar(balance);
+    }
+  }
+
+  @Override
+  public void onChangeValue(int pos) {
+    isUpdate = true;
+    walletLoading.onChangeValue(pos);
+  }
+
+
+  @Override
+  public void refreshContent() {
+    isUpdate = true;
+    walletLoading.refreshContent();
+  }
+
 
   @Override
   public void onValidate() {
@@ -90,6 +113,7 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
   public void onSendTransaction() {
     if (view != null) {
       isPrepare = true;
+      isUpdate = false;
       view.showProgressDialog(view.getContext().getString(R.string.send_preparing));
       TransactionRestHandler.preparationTransaction(atlantClient, CredentialHolder.getAddress());
     }
@@ -99,6 +123,10 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
   public void onError(OnStatusError onStatusError) {
     if (view != null) {
       if (onStatusError.getRequest() != BaseActivity.REQUEST_CODE_SEND) {
+        return;
+      }
+      if (isUpdate) {
+        walletLoading.onError(onStatusError);
         return;
       }
       view.hideProgressDialog();
@@ -116,6 +144,10 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
       if (onStatusTimeOut.getRequest() != BaseActivity.REQUEST_CODE_SEND) {
         return;
       }
+      if (isUpdate) {
+        walletLoading.onTimeOut(onStatusTimeOut);
+        return;
+      }
       view.hideProgressDialog();
       view.onTimeout();
     }
@@ -125,6 +157,11 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
   public void onSuccess(final OnStatusSuccess onStatusSuccess) {
     if (view != null) {
       if (onStatusSuccess.getRequest() != BaseActivity.REQUEST_CODE_SEND) {
+        return;
+      }
+      if (isUpdate) {
+        walletLoading.onSuccess(onStatusSuccess);
+        init();
         return;
       }
       view.hideProgressDialog();
@@ -165,5 +202,25 @@ public class SendPresenterImpl implements SendPresenter, BasePresenter {
         view.onSuccessfulSend();
       }
     }
+  }
+
+  @Override
+  public void responseBalance(Balance balance) {
+    view.setContentOnToolbar(balance);
+  }
+
+  @Override
+  public void responseTransactions(Object Transactions) {
+
+  }
+
+  @Override
+  public void onLoadingError() {
+    view.onError(view.getContext().getString(R.string.system_wallet_loading_error));
+  }
+
+  @Override
+  public void onTimeOut() {
+    view.onTimeout();
   }
 }

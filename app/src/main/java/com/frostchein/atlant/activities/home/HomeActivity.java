@@ -44,7 +44,8 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_homescreen);
-    setToolbarTitle(R.string.menu_no_title);
+    setToolbarTitle(R.string.menu_balance);
+    toolbarView.deleteTitle();
 
     transactionsFragment = TransactionsFragment.newInstance();
     getSupportFragmentManager().beginTransaction()
@@ -53,6 +54,18 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
 
     presenter.onCreate(savedInstanceState);
     EventBus.getDefault().register(presenter);
+  }
+
+  @Override
+  public void onPause() {
+    toolbarView.setCallback(null);
+    super.onPause();
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    toolbarView.setCallback(this);
   }
 
   @Override
@@ -72,13 +85,14 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
 
   @Override
   public void initUI() {
-    toolbarView.setCallback(this);
     screenOverlayView.setVisibility(View.GONE);
     swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.accent));
   }
 
   @Override
   public void setTransactionsOnFragment(ArrayList<Object> arrayList) {
+    enableScrollToolbar();
+    toolbarView.updateChart(true);
     fragmentContentFrame.setVisibility(View.VISIBLE);
     noTransactionView.setVisibility(View.GONE);
     transactionsFragment.update(arrayList);
@@ -86,6 +100,8 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
 
   @Override
   public void setNoTransactionsOnView() {
+    disableScrollToolbar();
+    toolbarView.updateChart(false);
     fragmentContentFrame.setVisibility(View.GONE);
     noTransactionView.setVisibility(View.VISIBLE);
     noTransactionView.invalidate();

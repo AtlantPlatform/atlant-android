@@ -7,8 +7,8 @@ import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +23,7 @@ public class DialogError extends Dialog {
   @BindView(R.id.dialog_message)
   TextView textMessage;
   @BindView(R.id.dialog_bt)
-  Button bt;
+  LinearLayout bt;
 
   private Context context;
   private String title;

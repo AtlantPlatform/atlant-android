@@ -1,19 +1,13 @@
 package com.frostchein.atlant.views;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.v4.content.ContextCompat;
+import android.support.design.widget.TabLayout;
+import android.support.design.widget.TabLayout.OnTabSelectedListener;
+import android.support.design.widget.TabLayout.Tab;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.HorizontalScrollView;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.frostchein.atlant.Config;
@@ -22,22 +16,23 @@ import com.frostchein.atlant.model.Balance;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
 import com.frostchein.atlant.utils.tokens.Token;
+import com.squareup.picasso.Picasso;
 import java.math.BigInteger;
 
 public class ToolbarView extends BaseCustomView {
 
+  @BindView(R.id.toolbar_tabs)
+  TabLayout tabLayout;
   @BindView(R.id.toolbar_horizontal_scroll)
   HorizontalScrollView horizontalScrollView;
-  @BindView(R.id.toolbar_spinner)
-  Spinner spinner;
   @BindView(R.id.toolbar_title)
   TextView textTitle;
   @BindView(R.id.toolbar_value)
   TextView textValue;
+  @BindView(R.id.toolbar_chart)
+  ImageView imChart;
 
   private CallBack callback;
-  private int check = 0;
-  private int lengthValue = 0;
 
   public interface CallBack {
 
@@ -59,14 +54,6 @@ public class ToolbarView extends BaseCustomView {
 
   @Override
   protected void initView() {
-    int color = ContextCompat.getColor(getContext(), R.color.md_white_1000);
-    Drawable spinnerDrawable = spinner.getBackground().getConstantState().newDrawable();
-    spinnerDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-      spinner.setBackground(spinnerDrawable);
-    } else {
-      spinner.setBackgroundDrawable(spinnerDrawable);
-    }
 
     Token[] tokens = CredentialHolder.getTokens();
     String[] item = new String[tokens.length + 1];
@@ -76,31 +63,36 @@ public class ToolbarView extends BaseCustomView {
       item[1 + i] = tokens[i].getName();
     }
 
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.view_spinner, item);
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    spinner.setAdapter(adapter);
-    spinner.setSelection(CredentialHolder.getNumberToken() + 1);
+    for (String anItem : item) {
+      tabLayout.addTab(tabLayout.newTab().setText(anItem));
+    }
 
-    spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+    selectTab();
+    tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
       @Override
-      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (callback != null && ++check > 1) {
-          callback.onItemsClick(i - 1);
+      public void onTabSelected(Tab tab) {
+        if (callback != null) {
+          callback.onItemsClick(tab.getPosition() - 1);
         }
       }
 
       @Override
-      public void onNothingSelected(AdapterView<?> adapterView) {
+      public void onTabUnselected(Tab tab) {
 
       }
-    });
 
-    textValue.setOnClickListener(new OnClickListener() {
       @Override
-      public void onClick(View view) {
-        spinner.performClick();
+      public void onTabReselected(Tab tab) {
+
       }
+
     });
+  }
+
+  private void selectTab() {
+    TabLayout.Tab tab = tabLayout.getTabAt(CredentialHolder.getNumberToken() + 1);
+    assert tab != null;
+    tab.select();
   }
 
   @Override
@@ -129,44 +121,10 @@ public class ToolbarView extends BaseCustomView {
           value = "0";
         }
 
+        selectTab();
+
         String s = DigitsUtils.valueToString(new BigInteger(value));
         textValue.setText(s);
-
-        if (s.length() < lengthValue) {
-          RelativeLayout.LayoutParams paramsSpinner = new RelativeLayout.LayoutParams(
-              ViewGroup.LayoutParams.WRAP_CONTENT,
-              ViewGroup.LayoutParams.WRAP_CONTENT);
-          paramsSpinner.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-          paramsSpinner.addRule(RelativeLayout.CENTER_VERTICAL);
-          spinner.setLayoutParams(paramsSpinner);
-
-          RelativeLayout.LayoutParams paramsScroll = new RelativeLayout.LayoutParams(
-              ViewGroup.LayoutParams.WRAP_CONTENT,
-              ViewGroup.LayoutParams.WRAP_CONTENT);
-          paramsScroll.addRule(RelativeLayout.LEFT_OF, R.id.toolbar_spinner);
-          horizontalScrollView.setLayoutParams(paramsScroll);
-        }
-        lengthValue = s.length();
-
-        horizontalScrollView.post(new Runnable() {
-          @Override
-          public void run() {
-            if (canScroll(horizontalScrollView)) {
-              RelativeLayout.LayoutParams paramsSpinner = new RelativeLayout.LayoutParams(
-                  ViewGroup.LayoutParams.WRAP_CONTENT,
-                  ViewGroup.LayoutParams.WRAP_CONTENT);
-              paramsSpinner.addRule(RelativeLayout.BELOW, R.id.toolbar_horizontal_scroll);
-              paramsSpinner.addRule(RelativeLayout.CENTER_HORIZONTAL);
-              spinner.setLayoutParams(paramsSpinner);
-
-              RelativeLayout.LayoutParams paramsScroll = new RelativeLayout.LayoutParams(
-                  ViewGroup.LayoutParams.WRAP_CONTENT,
-                  ViewGroup.LayoutParams.WRAP_CONTENT);
-              paramsScroll.addRule(RelativeLayout.CENTER_HORIZONTAL);
-              horizontalScrollView.setLayoutParams(paramsScroll);
-            }
-          }
-        });
 
       }
     } catch (Exception e) {
@@ -174,22 +132,23 @@ public class ToolbarView extends BaseCustomView {
     }
   }
 
-  private boolean canScroll(HorizontalScrollView scrollView) {
-    View child = (View) scrollView.getChildAt(0);
-    if (child != null) {
-      int childWidth = (child).getWidth();
-      return scrollView.getWidth() < childWidth + scrollView.getPaddingLeft() + scrollView.getPaddingRight();
-    }
-    return false;
-  }
-
-  public void removeTitle() {
+  public void deleteTitle() {
     if (textTitle != null) {
       ((ViewGroup) textTitle.getParent()).removeView(textTitle);
     }
-    if (spinner != null) {
-      spinner.setEnabled(false);
-      spinner.setBackground(null);
+  }
+
+  public void deleteChart() {
+    if (imChart != null) {
+      ((ViewGroup) imChart.getParent()).removeView(imChart);
+    }
+  }
+
+  public void updateChart(boolean isTransactionsShow) {
+    if (isTransactionsShow) {
+      Picasso.with(getContext()).load(R.drawable.home_chart_1).into(imChart);
+    } else {
+      Picasso.with(getContext()).load(R.drawable.home_chart_0).into(imChart);
     }
   }
 }

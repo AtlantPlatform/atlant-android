@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <shape android:shape="rectangle">
+      <corners android:radius="@dimen/dialog_error_background_radius"/>
+      <stroke
+        android:color="@color/dialog_border"
+        android:width="@dimen/dialog_error_background_width_border"/>
+      <solid android:color="@color/dialog_fon"/>
+    </shape>
+  </item>
+</selector>

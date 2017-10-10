@@ -13,6 +13,10 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:orientation="vertical">
 
     <LinearLayout
@@ -21,41 +25,72 @@
       android:layout_weight="1"
       android:gravity="center">
 
-      <include layout="@layout/view_logo_name"/>
+      <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:letterSpacing="@dimen/text_letter_spacing"
+        android:text="@string/app_name"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="30sp"/>
 
     </LinearLayout>
 
     <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="200dp"
       android:layout_marginTop="@dimen/activity_vertical_margin"
-      android:layout_marginBottom="@dimen/activity_vertical_margin"
-      android:layout_marginLeft="@dimen/activity_horizontal_margin"
-      android:layout_marginRight="@dimen/activity_horizontal_margin"
-      android:gravity="bottom"
+      android:gravity="center_horizontal"
       android:orientation="vertical">
 
-      <RelativeLayout
-        android:layout_width="match_parent"
+      <Button
+        android:id="@+id/login_selected_bt_create"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_selected_border">
+        android:text="@string/login_selected_create_wallet"/>
+
+
+      <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/activity_vertical_title_margin">
 
         <Button
-          android:id="@+id/login_selected_bt_create"
-          android:layout_width="match_parent"
+          android:id="@+id/login_selected_bt_import"
+          android:layout_width="290dp"
           android:layout_height="wrap_content"
+
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
           android:background="@drawable/highlight"
-          android:text="@string/login_selected_create_wallet"/>
+          android:text="@string/login_selected_wallet"
+          android:textColor="@color/button_gradient2_normal"
+          android:textSize="@dimen/text_size_14"/>
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_centerHorizontal="true"
+          android:text="@string/system_dash"
+          android:textColor="@color/button_gradient2_normal"
+          android:textSize="@dimen/text_size_12"/>
 
       </RelativeLayout>
 
-      <Button
-        android:id="@+id/login_selected_bt_import"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_title_margin"
-        android:background="@drawable/highlight"
-        android:text="@string/login_selected_wallet"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center">
+
+      <include layout="@layout/view_copyright"/>
 
     </LinearLayout>
 

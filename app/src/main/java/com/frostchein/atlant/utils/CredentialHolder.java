@@ -166,7 +166,7 @@ public final class CredentialHolder {
     }
   }
 
-  public static void saveWalletInfo(Context context, Balance balance, Object transactions, Token token) {
+  static void saveWalletInfo(Context context, Balance balance, Object transactions, Token token) {
     Gson gson = new Gson();
 
     String pathBalance = PATH_ETH_BALANCE;
@@ -202,7 +202,7 @@ public final class CredentialHolder {
     return null;
   }
 
-  public static TransactionsTokens getTransaction(Context context, Token token) {
+  static TransactionsTokens getTransaction(Context context, Token token) {
     if (isFileExist(context, token.getNameFileTransactions())) {
       String str = IOUtils.getTextFromFile(getFile(context, token.getNameFileTransactions()));
       Gson gson = new Gson();
@@ -213,7 +213,7 @@ public final class CredentialHolder {
     return null;
   }
 
-  public static Transactions getTransaction(Context context) {
+  static Transactions getTransaction(Context context) {
     if (isFileExist(context, PATH_ETH_TRANSACTIONS)) {
       String str = IOUtils.getTextFromFile(getFile(context, PATH_ETH_TRANSACTIONS));
       Gson gson = new Gson();

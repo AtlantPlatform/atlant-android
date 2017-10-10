@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.OnClick;
 import com.frostchein.atlant.R;
 import com.frostchein.atlant.activities.base.BaseActivity;
 import com.frostchein.atlant.dagger2.component.AppComponent;
@@ -21,14 +20,14 @@ public class ExportActivity extends BaseActivity implements ExportView {
 
   @BindView(R.id.export_qr_image)
   ImageView imageQrCode;
-  @BindView(R.id.export_private_key_text)
+  @BindView(R.id.export_text)
   TextView textPrivate;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_export);
+    setToolbarTitle(R.string.export_title);
   }
 
   @Override
@@ -48,7 +47,7 @@ public class ExportActivity extends BaseActivity implements ExportView {
 
   @Override
   public boolean useToolbar() {
-    return false;
+    return true;
   }
 
   @Override
@@ -58,7 +57,7 @@ public class ExportActivity extends BaseActivity implements ExportView {
 
   @Override
   public boolean useToolbarActionHome() {
-    return false;
+    return true;
   }
 
   @Override
@@ -89,11 +88,6 @@ public class ExportActivity extends BaseActivity implements ExportView {
   @Override
   public void setPrivateKey(String privateKey) {
     textPrivate.setText(privateKey);
-  }
-
-  @OnClick(R.id.bt_close)
-  public void onClick() {
-    finish();
   }
 
 }

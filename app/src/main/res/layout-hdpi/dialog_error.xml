@@ -2,76 +2,93 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/colorWindow"
-  android:orientation="vertical">
+  android:gravity="center">
 
   <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:background="@drawable/dialog_border">
 
-      <LinearLayout
+      <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/dialog_message"
-        android:gravity="center_horizontal|bottom"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ImageView
-          android:id="@+id/dialog_icon"
-          android:layout_width="72dp"
-          android:layout_height="72dp"
-          android:contentDescription="@string/system_image"
-          android:src="@drawable/ic_dialog_error"/>
-
-        <TextView
-          android:id="@+id/dialog_title"
+        <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/activity_vertical_margin"
-          android:gravity="center"
-          android:text="@string/system_error"
-          android:textColor="@color/colorPrimaryText"
-          android:textSize="@dimen/text_size_24"/>
+          android:layout_marginBottom="@dimen/activity_vertical_margin"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginRight="@dimen/activity_horizontal_margin"
+          android:gravity="center_horizontal"
+          android:orientation="vertical">
 
-      </LinearLayout>
+          <ImageView
+            android:id="@+id/dialog_icon"
+            android:layout_width="98dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin2x"
+            android:contentDescription="@string/system_image"
+            android:src="@drawable/ic_dialog_error"/>
 
-      <TextView
-        android:id="@+id/dialog_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="@string/send_no_money"
-        android:textColor="@color/colorSecondaryText"/>
+          <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin2x"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:text="@string/system_error"
+            android:textColor="@color/dialog_title"
+            android:textSize="@dimen/text_size_24"/>
+
+          <TextView
+            android:id="@+id/dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin2x"
+            android:layout_marginBottom="@dimen/activity_vertical_margin2x"
+            android:gravity="center_horizontal"
+            android:text="@string/send_error_send"
+            android:textColor="@color/dialog_message"
+            android:textSize="@dimen/text_size_14"/>
+
+        </LinearLayout>
+
+      </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin"
+      android:gravity="center">
 
       <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom">
+        android:id="@+id/dialog_bt"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:background="@drawable/dialog_error_bt"
+        android:gravity="center">
 
-        <Button
-          android:id="@+id/dialog_bt"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@drawable/highlight_bt_blue"
-          android:text="@string/bt_dialog_ok"/>
+        <ImageView
+          android:id="@+id/imageView"
+          android:layout_width="42dp"
+          android:layout_height="42dp"
+          android:contentDescription="@string/system_image"
+          android:src="@mipmap/ic_keyboard_delete"
+          android:textAppearance="?android:attr/textAppearanceMedium"/>
+
       </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
   </LinearLayout>
 

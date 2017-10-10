@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/keyboard"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/md_white_1000"
-  android:orientation="vertical"
-  android:showDividers="beginning|middle|end">
+  android:orientation="vertical">
 
-  <TableRow style="@style/LoginKeyboard">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
     <TextView
       android:id="@+id/login_keyboard_key_1"
@@ -23,9 +24,13 @@
       android:id="@+id/login_keyboard_key_3"
       style="@style/LoginKeyboardButton"
       android:text="@string/keyboard_number_three"/>
-  </TableRow>
 
-  <TableRow style="@style/LoginKeyboard">
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
     <TextView
       android:id="@+id/login_keyboard_key_4"
@@ -41,9 +46,13 @@
       android:id="@+id/login_keyboard_key_6"
       style="@style/LoginKeyboardButton"
       android:text="@string/keyboard_number_six"/>
-  </TableRow>
 
-  <TableRow style="@style/LoginKeyboard">
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
     <TextView
       android:id="@+id/login_keyboard_key_7"
@@ -59,25 +68,40 @@
       android:id="@+id/login_keyboard_key_9"
       style="@style/LoginKeyboardButton"
       android:text="@string/keyboard_number_nine"/>
-  </TableRow>
 
-  <TableRow style="@style/LoginKeyboard">
+  </LinearLayout>
 
-    <TextView
-      android:id="@+id/login_keyboard_key_clear"
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <Button
+      android:id="@+id/login_keyboard_key_sos"
       style="@style/LoginKeyboardButton"
-      android:enabled="false"
-      android:text=""/>
+      android:padding="0dp"
+      android:background="@drawable/highlight_circle"
+      android:text="@string/keyboard_sos"
+      android:textSize="@dimen/text_size_18"/>
 
     <TextView
       android:id="@+id/login_keyboard_key_0"
       style="@style/LoginKeyboardButton"
       android:text="@string/keyboard_number_zero"/>
 
-    <ImageView
+    <RelativeLayout
       android:id="@+id/login_keyboard_key_backspace"
-      style="@style/LoginKeyboardButton"
-      android:contentDescription="@string/system_image"
-      android:textAppearance="?android:attr/textAppearanceMedium"/>
-  </TableRow>
-</TableLayout>
+      style="@style/LoginKeyboardButton">
+
+      <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="@string/system_image"
+        android:src="@mipmap/ic_keyboard_delete"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    </RelativeLayout>
+
+  </LinearLayout>
+
+</LinearLayout>

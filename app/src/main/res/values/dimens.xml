@@ -9,17 +9,28 @@
 
   <!--login-->
   <dimen name="logo_image_in_login_size">96dp</dimen>
-  <dimen name="password_item_size">20dp</dimen>
+  <dimen name="password_item_size">25dp</dimen>
   <dimen name="password_item_margin">6dp</dimen>
+  <dimen name="keyboard_radius">70dp</dimen>
+  <dimen name="keyboard_width">0.5dp</dimen>
 
   <!--button-->
   <dimen name="button_corners_radius">5dp</dimen>
+  <dimen name="button_padding_left_right">50dp</dimen>
+
+  <!--dialog-->
+  <dimen name="dialog_error_width_bt">2dp</dimen>
+  <dimen name="dialog_error_background_radius">5dp</dimen>
+  <dimen name="dialog_error_background_width_border">7dp</dimen>
 
   <!--text size-->
+  <dimen name="text_size_10">10sp</dimen>
   <dimen name="text_size_12">12sp</dimen>
   <dimen name="text_size_14">14sp</dimen>
   <dimen name="text_size_18">18sp</dimen>
   <dimen name="text_size_24">24sp</dimen>
+
+  <item format="float" name="text_letter_spacing" type="dimen">0.3</item>
 
   <!--system-->
   <item format="float" name="system_bt_disable_opacity" type="dimen">0.3</item>

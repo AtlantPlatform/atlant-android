@@ -4,16 +4,13 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:scrollbarThumbVertical">@drawable/scrollbar</item>
     <item name="android:windowBackground">@color/colorWindow</item>
     <item name="android:listViewStyle">@style/AppTheme.ListView</item>
     <item name="android:buttonStyle">@style/AppTheme.Button</item>
     <item name="android:selectableItemBackground">@drawable/highlight</item>
-    <item name="android:textColor">@color/colorPrimaryText</item>
+    <item name="android:textColor">#000</item>
     <item name="buttonStyle">@style/AppTheme.Button</item>
-  </style>
-
-  <style name="AppTheme.NoActionBar.Dark">
-    <item name="android:windowBackground">@color/colorPrimary</item>
   </style>
 
   <style name="AppTheme.NoActionBar">
@@ -21,16 +18,19 @@
     <item name="windowNoTitle">true</item>
   </style>
 
-  <style name="AppTheme.NoActionBar.SettingsStyle">
-    <item name="windowActionBar">false</item>
+  <style name="AppTheme.NoActionBar.Image">
+    <item name="android:windowBackground">@drawable/atl_fon</item>
+  </style>
+
+  <style name="AppTheme.NoActionBar.Settings">
+    <item name="colorAccent">@color/colorPrimaryTextAlpha</item>
     <item name="android:textColor">@color/colorPrimaryText</item>
-    <item name="colorAccent">@color/colorSecondaryText</item>
+    <item name="android:windowBackground">@drawable/menu_gradient</item>
   </style>
 
   <style name="AppTheme.NoActionBar.SplashScreen">
     <item name="android:windowBackground">@drawable/splash_screen</item>
   </style>
-
 
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
@@ -43,43 +43,59 @@
 
   <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
     <item name="android:height">48dp</item>
-    <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
-    <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+    <item name="android:paddingLeft">@dimen/button_padding_left_right</item>
+    <item name="android:paddingRight">@dimen/button_padding_left_right</item>
     <item name="android:text">@string/bt_next</item>
-    <item name="android:textAllCaps">false</item>
-    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/button_text</item>
     <item name="android:textSize">@dimen/text_size_18</item>
     <item name="android:gravity">center</item>
-    <item name="android:background">@drawable/highlight_bt_blue</item>
+    <item name="android:background">@drawable/highlight_bt</item>
   </style>
 
   //Dialog
 
   <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
     <item name="colorAccent">@color/dialog_accent</item>
+    <item name="android:textColor">@color/dialog_title</item>
     <item name="android:textColorPrimary">@color/dialog_message</item>
     <item name="android:background">@color/dialog_fon</item>
   </style>
 
   //Login screen
 
-  <style name="LoginKeyboard">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
+  <style name="LoginKeyboardButton">
+    <item name="android:layout_width">@dimen/keyboard_radius</item>
+    <item name="android:layout_height">@dimen/keyboard_radius</item>
+    <item name="android:clickable">true</item>
+    <item name="android:layout_margin">10dp</item>
     <item name="android:gravity">center</item>
+    <item name="android:fontFamily">sans-serif-thin</item>
+    <item name="android:background">@drawable/login_keyboard</item>
+    <item name="android:scaleType">centerInside</item>
+    <item name="android:textColor">@color/md_white_1000</item>
+    <item name="android:textSize">36sp</item>
+    <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
   </style>
 
-  <style name="LoginKeyboardButton">
-    <item name="android:layout_width">0dp</item>
-    <item name="android:layout_height">50dp</item>
-    <item name="android:layout_weight">1</item>
-    <item name="android:clickable">true</item>
-    <item name="android:gravity">center</item>
-    <item name="android:background">@drawable/highlight</item>
-    <item name="android:scaleType">centerInside</item>
-    <item name="android:textColor">@color/accent</item>
-    <item name="android:textSize">26sp</item>
-    <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+  //Tabs
+
+  <style name="TabLayout" parent="Widget.Design.TabLayout">
+    <item name="tabTextAppearance">@style/TabLayoutText</item>
+    <item name="tabIndicatorColor">?attr/colorAccent</item>
+    <item name="tabIndicatorHeight">4dp</item>
+    <item name="tabPaddingStart">1dp</item>
+    <item name="tabPaddingEnd">1dp</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="tabGravity">fill</item>
+    <item name="tabMode">scrollable</item>
+    <item name="tabSelectedTextColor">@color/colorPrimaryText</item>
+  </style>
+
+  <style name="TabLayoutText" parent="TextAppearance.AppCompat.Button">
+    <item name="android:textSize">@dimen/text_size_18</item>
+    <item name="android:textColor">@color/colorPrimaryTextAlpha</item>
   </style>
 
 </resources>

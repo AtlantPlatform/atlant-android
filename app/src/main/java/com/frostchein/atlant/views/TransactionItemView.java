@@ -4,6 +4,8 @@ package com.frostchein.atlant.views;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.frostchein.atlant.Config;
@@ -17,6 +19,10 @@ import java.math.BigInteger;
 
 public class TransactionItemView extends BaseCustomView {
 
+  @BindView(R.id.liner)
+  LinearLayout linearLayout;
+  @BindView(R.id.view_transaction_image)
+  ImageView imStatus;
   @BindView(R.id.view_transaction_date_text)
   TextView dateTextView;
   @BindView(R.id.view_transaction_status_text)
@@ -66,6 +72,10 @@ public class TransactionItemView extends BaseCustomView {
           } else {
             setSent();
           }
+
+          if (transactionsItem.getFrom().equalsIgnoreCase(transactionsItem.getTo())) {
+            setSelf();
+          }
         }
 
         if (objects[0] instanceof TransactionsTokensItem) {
@@ -93,14 +103,25 @@ public class TransactionItemView extends BaseCustomView {
   }
 
   private void setReceived() {
-    statusTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.transactions_received));
+    //  statusTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.transactions_received));
+    linearLayout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transactions_received_bg));
+    imStatus.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_transactions_received));
     statusTextView.setText(getResources().getString(R.string.transaction_status_received));
   }
 
   private void setSent() {
-    statusTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.transactions_send));
+    // statusTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.transactions_send));
+    linearLayout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transactions_send_bg));
+    imStatus.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_transactions_send));
     statusTextView.setText(getResources().getString(R.string.transaction_status_send));
   }
+
+  private void setSelf() {
+    linearLayout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transactions_self_bg));
+    imStatus.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_transactions_self));
+    statusTextView.setText(getResources().getString(R.string.transaction_status_self));
+  }
+
 
   private void setDate(BigInteger date) {
     dateTextView.setText(DateUtils.getFormattedFullDate(date.longValue()));

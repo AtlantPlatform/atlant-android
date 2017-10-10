@@ -6,7 +6,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public final class DateUtils {
 
-  private static DateTimeFormatter dateFormatFull = DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss");
+  private static DateTimeFormatter dateFormatFull = DateTimeFormat.forPattern("dd-MM-yyyy / HH:mm:ss");
 
   public static String getFormattedFullDate(long timestamp) {
     DateTime time = new DateTime(timestamp * 1000L);

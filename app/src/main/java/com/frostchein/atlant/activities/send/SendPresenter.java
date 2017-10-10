@@ -6,6 +6,10 @@ public interface SendPresenter extends BasePresenter {
 
   void onCreate(String line);
 
+  void onChangeValue(int pos);
+
+  void refreshContent();
+
   void onValidate();
 
   void onSendTransaction();

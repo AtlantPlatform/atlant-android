@@ -5,6 +5,7 @@
     android:key="@string/pref_security_title"
     android:title="@string/pref_security_title">
     <Preference
+      android:icon="@mipmap/ic_change_password"
       android:key="@string/pref_security_pin"
       android:title="@string/pref_security_pin"/>
   </PreferenceCategory>
@@ -13,12 +14,15 @@
     android:key="@string/pref_control_title"
     android:title="@string/pref_control_title">
     <Preference
+      android:icon="@mipmap/ic_export"
       android:key="@string/pref_control_export"
       android:title="@string/pref_control_export"/>
     <Preference
+      android:icon="@mipmap/ic_import"
       android:key="@string/pref_control_import"
       android:title="@string/pref_control_import"/>
     <Preference
+      android:icon="@mipmap/ic_remove"
       android:key="@string/pref_control_delete"
       android:title="@string/pref_control_delete"/>
   </PreferenceCategory>
