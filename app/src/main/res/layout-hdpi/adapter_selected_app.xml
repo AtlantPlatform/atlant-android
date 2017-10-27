@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="470dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/login_selected_app_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/login_selected_app_invest_title"
+      android:textColor="@color/colorPrimaryText"
+      android:textSize="@dimen/text_size_18"/>
+
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_marginTop="@dimen/activity_vertical_margin"
+      android:orientation="vertical">
+
+      <RelativeLayout
+        android:id="@+id/login_selected_app_relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+          android:id="@+id/relativeLayout"
+          android:layout_width="275dp"
+          android:layout_height="430dp"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true">
+
+          <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shadow"/>
+
+          <TextView
+            android:id="@+id/login_selected_app_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_32"
+            tools:text="Invest"/>
+
+        </RelativeLayout>
+
+        <com.frostchein.atlant.views.ImageViewRound
+          android:id="@+id/login_selected_app_image"
+          android:layout_width="275dp"
+          android:layout_height="365dp"
+          android:foreground="@drawable/highlight"
+          app:color="#fff"
+          app:radius="9"/>
+
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+          android:id="@+id/progress_bar"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="150dp"
+          android:layout_centerHorizontal="true"
+          android:visibility="visible"/>
+
+      </RelativeLayout>
+
+    </RelativeLayout>
+
+  </LinearLayout>
+
+</LinearLayout>

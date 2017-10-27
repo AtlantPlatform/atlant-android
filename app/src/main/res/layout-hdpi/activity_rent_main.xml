@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fillViewport="true"
+  android:scrollbars="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_title_margin"
+    android:focusableInTouchMode="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="sans-serif-thin"
+      android:gravity="center"
+      android:text="@string/rent_main_title_choose_category"
+      android:textColor="@color/colorPrimaryText"
+      android:textSize="@dimen/text_size_18"/>
+
+    <HorizontalScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_horizontal_margin_small"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <Button
+          android:id="@+id/rate_bt_filter1"
+          style="@style/RateCategoryButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/rent_main_category_traditions"/>
+
+        <Button
+          android:id="@+id/rate_bt_filter2"
+          style="@style/RateCategoryButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/rent_main_category_most_exotic"/>
+
+        <Button
+          android:id="@+id/rate_bt_filter3"
+          style="@style/RateCategoryButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/rent_main_category_architecture"/>
+
+        <Button
+          android:id="@+id/rate_bt_filter4"
+          style="@style/RateCategoryButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/rent_main_category_hot"/>
+
+        <Button
+          android:id="@+id/rate_bt_filter5"
+          style="@style/RateCategoryButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/rent_main_category_weekend"/>
+
+      </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scrollbars="vertical"/>
+
+  </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

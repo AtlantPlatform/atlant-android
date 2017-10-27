@@ -19,7 +19,7 @@ import com.frostchein.atlant.utils.tokens.Token;
 import com.squareup.picasso.Picasso;
 import java.math.BigInteger;
 
-public class ToolbarView extends BaseCustomView {
+public class ToolbarWalletView extends BaseCustomView {
 
   @BindView(R.id.toolbar_tabs)
   TabLayout tabLayout;
@@ -44,11 +44,11 @@ public class ToolbarView extends BaseCustomView {
     this.callback = callback;
   }
 
-  public ToolbarView(Context context) {
+  public ToolbarWalletView(Context context) {
     super(context);
   }
 
-  public ToolbarView(Context context, AttributeSet attrs) {
+  public ToolbarWalletView(Context context, AttributeSet attrs) {
     super(context, attrs);
   }
 

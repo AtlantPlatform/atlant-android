@@ -33,6 +33,11 @@ public class MainActivity extends BaseActivity implements MainView {
   }
 
   @Override
+  public void onStartSelectedApp() {
+    goToLoginSelectedAppActivity(true);
+  }
+
+  @Override
   public void onStartAuthorisation() {
     goToLoginActivity(true, LoginActivity.TYPE_AUTHORISATION);
   }

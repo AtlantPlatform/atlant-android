@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.frostchein.atlant.R;
 import com.frostchein.atlant.activities.base.BaseActivity;
 import com.frostchein.atlant.views.DialogError;
+import com.frostchein.atlant.views.DialogRentBookIt;
 
 public final class DialogUtils {
 
@@ -109,7 +110,27 @@ public final class DialogUtils {
           }
         });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        showDialogFullSize(context);
+        showDialogFullSize(context, 0.8f);
+      }
+    });
+  }
+
+  public static void openDialogRentBookIt(final Context context, final String message,
+      final View.OnClickListener listener) {
+    new Handler().post(new Runnable() {
+      @Override
+      public void run() {
+        dialog = new DialogRentBookIt(context, message, listener);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+          @Override
+          public void onDismiss(DialogInterface dialog) {
+            DialogUtils.dialog = null;
+          }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        showDialogFullSize(context, 1.0f);
       }
     });
   }
@@ -121,10 +142,11 @@ public final class DialogUtils {
       }
     } catch (Exception e) {
       dialog = null;
+      e.printStackTrace();
     }
   }
 
-  private static void showDialogFullSize(Context context) {
+  private static void showDialogFullSize(Context context, float scale) {
     Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
     Point size = new Point();
     display.getSize(size);
@@ -137,11 +159,11 @@ public final class DialogUtils {
       Window window = dialog.getWindow();
       assert window != null;
       lp.copyFrom(window.getAttributes());
-      lp.width = (int) (width * 0.8f);
-      lp.height = (int) (height * 0.8f);
+      lp.width = (int) (width * scale);
+      lp.height = (int) (height * scale);
       window.setAttributes(lp);
     } catch (Exception e) {
-
+      e.printStackTrace();
     }
   }
 }

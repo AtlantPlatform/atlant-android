@@ -97,7 +97,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:contentDescription="@string/system_image"
-        android:src="@mipmap/ic_keyboard_delete"
+        android:src="@mipmap/ic_arrows_left"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     </RelativeLayout>

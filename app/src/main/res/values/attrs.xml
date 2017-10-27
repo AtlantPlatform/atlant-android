@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <declare-styleable name="PasswordView">
-        <attr name="max" format="integer"/>
-    </declare-styleable>
+
+  <declare-styleable name="PasswordView">
+    <attr format="integer" name="max"/>
+  </declare-styleable>
+
+  <declare-styleable name="ImageViewRound">
+    <attr format="float" name="radius"/>
+    <attr format="color" name="color"/>
+  </declare-styleable>
+
+  <declare-styleable name="IndicatorCircleView">
+    <attr format="dimension" name="icv_radius"/>
+    <attr format="dimension" name="icv_margin"/>
+    <attr format="integer" name="icv_max"/>
+    <attr format="integer" name="icv_current"/>
+    <attr format="color" name="icv_color_normal"/>
+    <attr format="color" name="icv_color_selected"/>
+  </declare-styleable>
+
+  <attr format="enum" name="lv_orientation">
+    <enum name="vertical" value="0"/>
+    <enum name="horizontal" value="1"/>
+  </attr>
+
+  <declare-styleable name="LikeView">
+    <attr format="integer" name="lv_number"/>
+    <attr format="boolean" name="lv_shadows"/>
+    <attr name="lv_orientation"/>
+  </declare-styleable>
+
+  <declare-styleable name="MapView">
+    <attr format="float" name="mv_var1"/>
+    <attr format="float" name="mv_var2"/>
+    <attr format="float" name="mv_zoom"/>
+    <attr format="reference" name="mv_icon"/>
+  </declare-styleable>
+
+
 </resources>

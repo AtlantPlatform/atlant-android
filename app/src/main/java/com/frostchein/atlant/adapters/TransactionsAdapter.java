@@ -17,7 +17,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
   class MyViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.liner)
+    @BindView(R.id.linear)
     LinearLayout linearLayout;
     @BindView(R.id.transaction_item_view)
     TransactionItemView transactionItemView;
@@ -40,9 +40,9 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
   public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View itemView;
     if (viewType == 1) {
-      itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_transaction, parent, false);
+      itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_transaction, parent, false);
     } else {
-      itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_transaction_emptu, parent, false);
+      itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_transaction_emptu, parent, false);
     }
     return new MyViewHolder(itemView);
   }

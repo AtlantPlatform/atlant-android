@@ -3,7 +3,7 @@ package com.frostchein.atlant.dagger2.modules;
 import com.frostchein.atlant.activities.home.HomePresenter;
 import com.frostchein.atlant.activities.home.HomePresenterImpl;
 import com.frostchein.atlant.activities.home.HomeView;
-import com.frostchein.atlant.views.ToolbarView;
+import com.frostchein.atlant.views.ToolbarWalletView;
 import dagger.Module;
 import dagger.Provides;
 
@@ -27,8 +27,8 @@ public class HomeActivityModule {
   }
 
   @Provides
-  ToolbarView provideToolbar() {
-    return new ToolbarView(view.getContext());
+  ToolbarWalletView provideToolbar() {
+    return new ToolbarWalletView(view.getContext());
   }
 
 }

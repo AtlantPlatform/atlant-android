@@ -3,7 +3,7 @@ package com.frostchein.atlant.dagger2.modules;
 import com.frostchein.atlant.activities.send.SendPresenter;
 import com.frostchein.atlant.activities.send.SendPresenterImpl;
 import com.frostchein.atlant.activities.send.SendView;
-import com.frostchein.atlant.views.ToolbarView;
+import com.frostchein.atlant.views.ToolbarWalletView;
 import dagger.Module;
 import dagger.Provides;
 
@@ -27,8 +27,8 @@ public class SendActivityModule {
   }
 
   @Provides
-  ToolbarView provideToolbar() {
-    return new ToolbarView(view.getContext());
+  ToolbarWalletView provideToolbar() {
+    return new ToolbarWalletView(view.getContext());
   }
 
 }

@@ -6,6 +6,8 @@ public interface MainView extends BaseView {
 
   void onStartSelected();
 
+  void onStartSelectedApp();
+
   void onStartAuthorisation();
 
   void onStartHome();

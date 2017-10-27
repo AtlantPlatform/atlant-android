@@ -1,5 +1,6 @@
 package com.frostchein.atlant.activities.send;
 
+import android.os.Handler;
 import com.frostchein.atlant.Config;
 import com.frostchein.atlant.R;
 import com.frostchein.atlant.activities.base.BaseActivity;
@@ -120,7 +121,7 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
   }
 
   @Subscribe(threadMode = ThreadMode.MAIN)
-  public void onError(OnStatusError onStatusError) {
+  public void onError(final OnStatusError onStatusError) {
     if (view != null) {
       if (onStatusError.getRequest() != BaseActivity.REQUEST_CODE_SEND) {
         return;
@@ -130,11 +131,19 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
         return;
       }
       view.hideProgressDialog();
-      if (onStatusError.getMessage() == null) {
-        view.onError(view.getContext().getString(R.string.send_error_send));
-      } else {
-        view.onError(onStatusError.getMessage());
-      }
+
+      Handler handler = new Handler();
+      handler.postDelayed(new Runnable() {
+        @Override
+        public void run() {
+          if (onStatusError.getMessage() == null) {
+            view.onError(view.getContext().getString(R.string.send_error_send));
+          } else {
+            view.onError(onStatusError.getMessage());
+          }
+        }
+      }, 500);
+
     }
   }
 
@@ -167,12 +176,11 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
       view.hideProgressDialog();
 
       if (isPrepare) {
-        android.os.Handler handler = new android.os.Handler();
+        final android.os.Handler handler = new android.os.Handler();
         handler.postDelayed(new Runnable() {
           @Override
           public void run() {
             isPrepare = false;
-            view.showProgressDialog(view.getContext().getString(R.string.send_process));
 
             try {
               Token token = CredentialHolder.getCurrentToken();
@@ -190,10 +198,18 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
                     view.getAddress(), view.getValue(),
                     CredentialHolder.getCredentials(), Config.GAS_LIMIT);
               }
+              view.showProgressDialog(view.getContext().getString(R.string.send_process));
             } catch (Exception e) {
               e.printStackTrace();
               view.hideProgressDialog();
-              view.onError(view.getContext().getString(R.string.send_error_send));
+
+              Handler handler1 = new Handler();
+              handler1.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                  view.onError(view.getContext().getString(R.string.send_error_send));
+                }
+              }, 500);
             }
 
           }

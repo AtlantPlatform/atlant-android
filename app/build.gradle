@@ -10,8 +10,8 @@ android {
         applicationId "com.frostchein.atlant"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 1
-        versionName "0.1 alpha"
+        versionCode 6
+        versionName "0.5"
         multiDexEnabled release
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -57,7 +57,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-
     //Design
     compile 'com.android.support:appcompat-v7:26.0.0-beta1'
     compile 'com.android.support:recyclerview-v7:26.0.0-beta1'
@@ -69,7 +68,8 @@ dependencies {
         transitive = true
     }
     compile 'me.zhanghai.android.materialprogressbar:library:1.4.1'
-
+    //MAP
+    compile 'com.google.android.gms:play-services-maps:11.0.2'
     //Architecture
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.jakewharton:butterknife:8.2.1'
@@ -77,18 +77,14 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     apt 'com.google.dagger:dagger-compiler:2.8'
     compile 'com.google.dagger:dagger:2.8'
-
     //Network
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-
     //QR
     compile 'com.google.zxing:core:3.2.1'
     compile 'me.dm7.barcodescanner:zxing:1.9'
-
     //Ethereum
-    compile('org.web3j:core-android:2.2.1')
-
+    compile 'org.web3j:core-android:2.2.1'
 }

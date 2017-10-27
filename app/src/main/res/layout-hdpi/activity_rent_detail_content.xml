@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin"
+      android:orientation="horizontal">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.frostchein.atlant.views.LikeView
+          android:id="@+id/rent_detail_content_like_view"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:lv_number="3"
+          app:lv_orientation="vertical"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_title_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:text="@string/rent_do_you_like_it"
+          android:textColor="@color/colorPrimaryText"/>
+
+        <com.frostchein.atlant.views.IndicatorCircleView
+          android:id="@+id/rent_detail_content_indicator"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:icv_color_normal="@color/colorPrimaryText"
+          app:icv_color_selected="@color/colorAccent"
+          app:icv_current="3"
+          app:icv_margin="3dp"
+          app:icv_max="6"
+          app:icv_radius="10dp"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/rent_detail_content_name"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin"
+      android:textColor="@color/colorPrimaryText"
+      android:textSize="@dimen/text_size_32"
+      tools:text="Name"/>
+
+    <TextView
+      android:id="@+id/rent_detail_content_address"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin"
+      android:textColor="@color/colorPrimaryText"
+      android:textSize="@dimen/text_size_12"
+      tools:text="address"/>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="@dimen/activity_vertical_margin2x"
+      android:orientation="vertical">
+
+      <include layout="@layout/view_divide"/>
+
+      <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/activity_vertical_margin"
+          android:layout_marginBottom="@dimen/activity_vertical_margin"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+          <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/ic_rent_rooms"/>
+
+          <TextView
+            android:id="@+id/rent_detail_content_rooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin_small"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+            android:text="@string/rent_main_rooms"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+          <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/ic_rent_guests"/>
+
+          <TextView
+            android:id="@+id/rent_detail_content_guests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin_small"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+            android:text="@string/rent_main_guests"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+          <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/ic_rent_beds"/>
+
+          <TextView
+            android:id="@+id/rent_detail_content_beds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin_small"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+            android:text="@string/rent_main_beds"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+          <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/ic_rent_bath"/>
+
+          <TextView
+            android:id="@+id/rent_detail_content_bath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin_small"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/rent_main_bath"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+        </LinearLayout>
+
+      </HorizontalScrollView>
+
+      <include layout="@layout/view_divide"/>
+
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/rent_detail_content_description_title"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin2x"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin"
+      android:text="@string/rent_description"
+      android:textColor="@color/colorPrimaryText"
+      android:textSize="@dimen/text_size_18"/>
+
+    <TextView
+      android:id="@+id/rent_detail_content_description"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin"
+      android:textColor="@color/colorPrimaryText"
+      android:textSize="@dimen/text_size_18"
+      tools:text="@string/rent_description"/>
+
+    <TextView
+      android:id="@+id/rent_detail_content_amenities_title"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin2x"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin"
+      android:text="@string/rent_amenities"
+      android:textColor="@color/colorPrimaryText"
+      android:textSize="@dimen/text_size_18"/>
+
+    <HorizontalScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+          android:id="@+id/rent_detail_content_amenities_tv_linear"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:gravity="center_horizontal"
+          android:orientation="vertical">
+
+          <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/ic_rent_tv"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rent_amenities_tv"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/rent_detail_content_amenities_elevator_linear"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:gravity="center_horizontal"
+          android:orientation="vertical">
+
+          <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/ic_rent_elevator"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rent_amenities_elevator"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/rent_detail_content_amenities_wifi_linear"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:gravity="center_horizontal"
+          android:orientation="vertical">
+
+          <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/ic_rent_wifi"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rent_amenities_wifi"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/rent_detail_content_amenities_kitchen_linear"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:gravity="center_horizontal"
+          android:orientation="vertical">
+
+          <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/ic_rent_kitchen"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rent_amenities_kitchen"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_vertical_margin2x"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:layout_marginRight="@dimen/activity_horizontal_margin"
+      android:gravity="center_vertical"
+      android:orientation="horizontal">
+
+      <TextView
+        android:id="@+id/rent_detail_content_location_title"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rent_location"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="@dimen/text_size_18"/>
+
+      <TextView
+        android:id="@+id/rent_detail_content_location_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="@dimen/text_size_14"
+        tools:text="address"/>
+
+    </LinearLayout>
+
+    <com.frostchein.atlant.views.MapView
+      android:id="@+id/rent_detail_content_map_view"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:layout_marginTop="@dimen/activity_vertical_title_margin"
+      app:mv_icon="@mipmap/ic_rent_map_marker"
+      app:mv_var1="0"
+      app:mv_var2="0"/>
+
+  </LinearLayout>
+
+</LinearLayout>

@@ -53,7 +53,7 @@ public class LoginSelectedActivity extends BaseActivity implements LoginSelected
   @Override
   public void onBackPressed() {
     super.onBackPressed();
-    ActivityCompat.finishAffinity(this);
+    //ActivityCompat.finishAffinity(this);
   }
 
   @Override

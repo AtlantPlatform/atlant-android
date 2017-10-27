@@ -15,10 +15,19 @@
   <string name="material_drawer_receive">Receive</string>
   <string name="material_drawer_settings">Settings</string>
   <string name="material_drawer_general">General</string>
+  <string name="material_drawer_app">App</string>
 
   <!--login selected-->
   <string name="login_selected_create_wallet">Create new wallet</string>
   <string name="login_selected_wallet">Import wallet</string>
+
+  <!--login selected app-->
+  <string name="login_selected_app_invest_title">Wallet</string>
+  <string name="login_selected_app_invest_title2">Invest</string>
+  <string name="login_selected_app_rent_title">P2P Rentals</string>
+  <string name="login_selected_app_rent_title2">Rent</string>
+  <string name="login_selected_app_trade_title">Exchange</string>
+  <string name="login_selected_app_trade_title2">Trade</string>
 
   <!--login-->
   <string name="login_create_password_text">Create PIN code</string>
@@ -97,10 +106,46 @@
   <!--transactions no-->
   <string name="no_transactions_messages">Transactions will be displayed \nwhen you receive or send\nan %1$s</string>
 
+  <!--rent-->
+  <string name="rent_title">Rent</string>
+  <string name="rent_welcome_text">Welcome to the first Blockchain-based P2P Rental Platform</string>
+  <string name="rent_welcome_text2">Available as a demo version of ATLANT Rentals scheduled for a future release</string>
+  <string name="rent_main_title_choose_city">Most loved places</string>
+  <string name="rent_main_title_choose_category">Choose yours</string>
+  <string name="rent_main_category_traditions">Traditions</string>
+  <string name="rent_main_category_most_exotic">The most exotic</string>
+  <string name="rent_main_category_architecture">The most architecture</string>
+  <string name="rent_main_category_hot">Hot</string>
+  <string name="rent_main_category_weekend">Weekend</string>
+  <string name="rent_main_per_night">Per night</string>
+  <string name="rent_main_rooms">rooms</string>
+  <string name="rent_main_beds">beds</string>
+  <string name="rent_main_guests">guests</string>
+  <string name="rent_main_bath">bath</string>
+  <string name="rent_detail_bt_book_it">Book it now</string>
+  <string name="rent_detail_dialog_message">Stay tuned with Twitter, Facebook, Medium or visit very special website\n…</string>
+  <string name="rent_detail_dialog_bt">Continue in web</string>
+  <string name="rent_description">Description</string>
+  <string name="rent_amenities">Amenities</string>
+  <string name="rent_amenities_tv">TV</string>
+  <string name="rent_amenities_elevator">Elevator</string>
+  <string name="rent_amenities_wifi">Wi-fi</string>
+  <string name="rent_amenities_kitchen">Kitchen</string>
+  <string name="rent_location">Location</string>
+  <string name="rent_do_you_like_it">Do you like it?</string>
+
+  <!--trade-->
+  <string name="trade_title">Trade</string>
+  <string name="trade_start_title">Welcome\nto the trade section</string>
+  <string name="trade_start_message">This section is under development</string>
+  <string name="trade_start_bt_close">OK, got it</string>
+
+
   <!--button-->
   <string name="bt_done">Done</string>
   <string name="bt_send">Send</string>
   <string name="bt_next">Next</string>
+  <string name="bt_lets_start">Let\'s Start</string>
   <string name="bt_dialog_continue">Continue</string>
   <string name="bt_dialog_back">Close</string>
   <string name="bt_dialog_ok">OK</string>
@@ -109,6 +154,7 @@
   <string name="system_key_copied">Address copied to clipboard</string>
   <string name="system_error">Something went wrong\n...\nPerhaps because</string>
   <string name="system_text">Text</string>
+  <string name="system_section_in_development">Section in development</string>
   <string name="system_no_internet_connection">No internet connection</string>
   <string name="system_wallet_loading_error">Error loading data</string>
   <string name="system_timeout">Could not connect to the server, please try again later.</string>

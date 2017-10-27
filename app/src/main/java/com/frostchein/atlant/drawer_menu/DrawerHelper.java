@@ -27,7 +27,7 @@ public final class DrawerHelper {
 
     drawer = new DrawerBuilder()
         .withActivity(activity)
-        .withSliderBackgroundDrawableRes(R.drawable.menu_gradient)
+        .withSliderBackgroundDrawableRes(R.drawable.fon_gradient)
         .withHeader(R.layout.view_menu_header)
         .withHeader(view)
         .withActionBarDrawerToggle(true)

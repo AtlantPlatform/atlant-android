@@ -83,7 +83,7 @@
           android:layout_width="42dp"
           android:layout_height="42dp"
           android:contentDescription="@string/system_image"
-          android:src="@mipmap/ic_keyboard_delete"
+          android:src="@mipmap/ic_arrows_left"
           android:textAppearance="?android:attr/textAppearanceMedium"/>
 
       </LinearLayout>

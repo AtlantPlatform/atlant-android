@@ -13,6 +13,8 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.AppBarLayout.LayoutParams;
+import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,7 +24,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -38,18 +39,25 @@ import com.frostchein.atlant.activities.home.HomeActivity;
 import com.frostchein.atlant.activities.import_wallet.ImportActivity;
 import com.frostchein.atlant.activities.login.LoginActivity;
 import com.frostchein.atlant.activities.login_selected.LoginSelectedActivity;
+import com.frostchein.atlant.activities.login_selected_app.LoginSelectedAppActivity;
 import com.frostchein.atlant.activities.main.MainActivity;
 import com.frostchein.atlant.activities.receive.ReceiveActivity;
+import com.frostchein.atlant.activities.rent_details.RentDetailsActivity;
+import com.frostchein.atlant.activities.rent_main.RentMainActivity;
+import com.frostchein.atlant.activities.rent_start.RentStartActivity;
 import com.frostchein.atlant.activities.send.SendActivity;
 import com.frostchein.atlant.activities.settings.SettingsActivity;
+import com.frostchein.atlant.activities.trade_start.TradeStartActivity;
 import com.frostchein.atlant.dagger2.component.AppComponent;
 import com.frostchein.atlant.drawer_menu.DrawerContent;
 import com.frostchein.atlant.drawer_menu.DrawerHelper;
 import com.frostchein.atlant.events.login.CredentialsCleared;
+import com.frostchein.atlant.model.rent.Rent;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DialogUtils;
 import com.frostchein.atlant.utils.FontsUtils;
 import com.frostchein.atlant.utils.IntentUtils;
+import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
 import com.frostchein.atlant.views.BaseCustomView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -62,13 +70,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   public static final long DISCONNECT_TIMEOUT = 60 * 1000; // 1 min = 1 * 60 * 1000 ms
   public static final int REQUEST_CODE_LOGIN = 1;
   public static final int REQUEST_CODE_LOGIN_SElECT = 2;
-  public static final int REQUEST_CODE_HOME = 3;
-  public static final int REQUEST_CODE_CAMERA = 4;
-  public static final int REQUEST_CODE_RECEIVE = 5;
-  public static final int REQUEST_CODE_SEND = 6;
-  public static final int REQUEST_CODE_SETTING = 7;
-  public static final int REQUEST_CODE_IMPORT_WALLET = 8;
-  public static final int REQUEST_CODE_EXPORT = 9;
+  public static final int REQUEST_CODE_LOGIN_SElECT_APP = 3;
+  public static final int REQUEST_CODE_HOME = 4;
+  public static final int REQUEST_CODE_CAMERA = 5;
+  public static final int REQUEST_CODE_RECEIVE = 6;
+  public static final int REQUEST_CODE_SEND = 7;
+  public static final int REQUEST_CODE_SETTING = 8;
+  public static final int REQUEST_CODE_IMPORT_WALLET = 9;
+  public static final int REQUEST_CODE_EXPORT = 10;
+  public static final int REQUEST_CODE_RENT_START = 11;
+  public static final int REQUEST_CODE_RENT_MAIN = 12;
+  public static final int REQUEST_CODE_RENT_DETAILS = 13;
+  public static final int REQUEST_CODE_TRADE_START = 14;
 
   private static final int PERMISSION_REQUEST_CAMERA = 1;
   private static int typeResult;
@@ -76,6 +89,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   protected DrawerHelper drawerHelper;
   @BindView(R.id.appbar)
   protected AppBarLayout appBarLayout;
+  @BindView(R.id.coordinator)
+  protected CoordinatorLayout coordinatorLayout;
   @BindView(R.id.toolbar)
   protected Toolbar toolbar;
   @BindView(R.id.toolbar_title_text)
@@ -121,13 +136,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     if (useSwipeRefresh()) {
-      swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.primary));
       swipeRefreshLayout.setEnabled(true);
+      swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.accent));
       swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
         @Override
         public void onRefresh() {
           if (useSwipeRefresh()) {
-            onRefreshAction();
+            onRefreshSwipe();
           }
         }
       });
@@ -141,11 +156,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     } else {
       baseCustomViewToolbar.setVisibility(View.GONE);
     }
-
-    if (!(this instanceof HomeActivity)) {
-      disableScrollToolbar();
-    }
-
     setDrawerMenu();
     initUI();
   }
@@ -153,12 +163,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   @Override
   public void onUserInteraction() {
     eventsOnScreen();
-  }
-
-  @Override
-  public boolean dispatchTouchEvent(MotionEvent ev) {
-    eventsOnScreen();
-    return super.dispatchTouchEvent(ev);
   }
 
   private void eventsOnScreen() {
@@ -260,6 +264,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     toolbar.setLayoutParams(p);
   }
 
+  public void enableScrollToolbar(@ScrollFlags int flags) {
+    LayoutParams p = (LayoutParams) toolbar.getLayoutParams();
+    p.setScrollFlags(flags);
+    toolbar.setLayoutParams(p);
+  }
+
   private void updateDrawerMenu() {
     drawerHelper.setDrawerContent(DrawerContent.getDrawerContent());
   }
@@ -283,6 +293,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
       case DrawerContent.ITEM_SETTINGS: {
         goToSettingsActivity(false);
+        break;
+      }
+
+      case DrawerContent.ITEM_RENT: {
+        goToRentStartActivity(false);
+        break;
+      }
+
+      case DrawerContent.ITEM_WALLET: {
+        break;
+      }
+
+      case DrawerContent.ITEM_TRADE: {
+        goToTradeStartActivity(false);
         break;
       }
     }
@@ -329,6 +353,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     startActivity(REQUEST_CODE_LOGIN_SElECT, withFinish);
   }
 
+  protected void goToLoginSelectedAppActivity(boolean withFinish) {
+    createIntentWithFlags(LoginSelectedAppActivity.class);
+    startActivity(REQUEST_CODE_LOGIN_SElECT_APP, withFinish);
+  }
+
   protected void goToImportWalletActivity(boolean withFinish) {
     createIntentWithoutFlags(ImportActivity.class);
     startActivity(REQUEST_CODE_IMPORT_WALLET, withFinish);
@@ -353,6 +382,27 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   protected void goToExportActivity(boolean withFinish) {
     createIntentWithoutFlags(ExportActivity.class);
     startActivity(REQUEST_CODE_EXPORT, withFinish);
+  }
+
+  protected void goToRentStartActivity(boolean withFinish) {
+    createIntentWithoutFlags(RentStartActivity.class);
+    startActivity(REQUEST_CODE_RENT_START, withFinish);
+  }
+
+  protected void goToRentMainActivity(boolean withFinish) {
+    createIntentWithoutFlags(RentMainActivity.class);
+    startActivity(REQUEST_CODE_RENT_MAIN, withFinish);
+  }
+
+  protected void goToRentDetailsActivity(boolean withFinish, Rent rent) {
+    createIntentWithoutFlags(RentDetailsActivity.class);
+    intent.putExtra(EXTRA_STRING.RENT, rent);
+    startActivity(REQUEST_CODE_RENT_DETAILS, withFinish);
+  }
+
+  protected void goToTradeStartActivity(boolean withFinish) {
+    createIntentWithoutFlags(TradeStartActivity.class);
+    startActivity(REQUEST_CODE_TRADE_START, withFinish);
   }
 
   private void createIntentWithoutFlags(Class<?> activityClass) {
@@ -425,7 +475,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   protected void onToolbarQR() {
   }
 
-  protected void onRefreshAction() {
+  protected void onRefreshSwipe() {
   }
 
   protected BaseCustomView getCustomToolbar() {

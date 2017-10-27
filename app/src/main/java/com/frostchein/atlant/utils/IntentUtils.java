@@ -7,5 +7,6 @@ public final class IntentUtils {
     public static final String ADDRESS = "address";
     public static final String PRIVATE_KEY = "private key";
     public static final String TYPE_RESULT = "typeResult";
+    public static final String RENT = "rent";
   }
 }

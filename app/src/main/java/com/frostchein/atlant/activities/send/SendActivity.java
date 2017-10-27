@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.widget.EditText;
 import butterknife.BindView;
@@ -24,16 +23,16 @@ import com.frostchein.atlant.utils.DialogUtils;
 import com.frostchein.atlant.utils.IntentUtils;
 import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
 import com.frostchein.atlant.views.BaseCustomView;
-import com.frostchein.atlant.views.ToolbarView;
+import com.frostchein.atlant.views.ToolbarWalletView;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
 
-public class SendActivity extends BaseActivity implements SendView, ToolbarView.CallBack {
+public class SendActivity extends BaseActivity implements SendView, ToolbarWalletView.CallBack {
 
   @Inject
   SendPresenter presenter;
   @Inject
-  ToolbarView toolbarView;
+  ToolbarWalletView toolbarWalletView;
 
   @BindView(R.id.send_address_edit)
   EditText editAddress;
@@ -47,25 +46,25 @@ public class SendActivity extends BaseActivity implements SendView, ToolbarView.
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_send);
     setToolbarTitle(R.string.send_title);
-    toolbarView.deleteChart();
+    toolbarWalletView.deleteChart();
     presenter.onCreate(getIntent().getStringExtra(EXTRA_STRING.ADDRESS));
     EventBus.getDefault().register(presenter);
   }
 
   @Override
   public void onPause() {
-    toolbarView.setCallback(null);
+    toolbarWalletView.setCallback(null);
     super.onPause();
   }
 
   @Override
   public void onResume() {
     super.onResume();
-    toolbarView.setCallback(this);
+    toolbarWalletView.setCallback(this);
   }
+
   @Override
   public void initUI() {
-    swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.accent));
     editValue.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(100, 18)});
   }
 
@@ -77,7 +76,7 @@ public class SendActivity extends BaseActivity implements SendView, ToolbarView.
 
   @Override
   protected BaseCustomView getCustomToolbar() {
-    return toolbarView;
+    return toolbarWalletView;
   }
 
   @Override
@@ -125,7 +124,7 @@ public class SendActivity extends BaseActivity implements SendView, ToolbarView.
   }
 
   @Override
-  protected void onRefreshAction() {
+  protected void onRefreshSwipe() {
     presenter.refreshContent();
   }
 
@@ -160,7 +159,7 @@ public class SendActivity extends BaseActivity implements SendView, ToolbarView.
 
   @Override
   public void setBalance(Balance balance) {
-    toolbarView.setContent(balance);
+    toolbarWalletView.setContent(balance);
   }
 
   @Override
@@ -191,7 +190,7 @@ public class SendActivity extends BaseActivity implements SendView, ToolbarView.
   @Override
   public void setContentOnToolbar(Balance balance) {
     setResult(RESULT_OK);
-    toolbarView.setContent(balance);
+    toolbarWalletView.setContent(balance);
   }
 
   @Override

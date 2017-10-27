@@ -19,7 +19,7 @@ import java.math.BigInteger;
 
 public class TransactionItemView extends BaseCustomView {
 
-  @BindView(R.id.liner)
+  @BindView(R.id.linear)
   LinearLayout linearLayout;
   @BindView(R.id.view_transaction_image)
   ImageView imStatus;

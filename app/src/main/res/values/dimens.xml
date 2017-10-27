@@ -16,6 +16,7 @@
 
   <!--button-->
   <dimen name="button_corners_radius">5dp</dimen>
+  <dimen name="button_corners_radius2">20dp</dimen>
   <dimen name="button_padding_left_right">50dp</dimen>
 
   <!--dialog-->
@@ -29,6 +30,7 @@
   <dimen name="text_size_14">14sp</dimen>
   <dimen name="text_size_18">18sp</dimen>
   <dimen name="text_size_24">24sp</dimen>
+  <dimen name="text_size_32">32sp</dimen>
 
   <item format="float" name="text_letter_spacing" type="dimen">0.3</item>
 

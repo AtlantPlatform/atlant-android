@@ -23,7 +23,8 @@ public class MainPresenterImpl implements MainPresenter, BasePresenter {
           view.onStartAuthorisation();
         }
       } else {
-        view.onStartSelected();
+        //view.onStartSelected();
+        view.onStartSelectedApp();
       }
     }
   }

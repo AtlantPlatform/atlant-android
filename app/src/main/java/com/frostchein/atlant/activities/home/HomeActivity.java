@@ -19,17 +19,17 @@ import com.frostchein.atlant.fragments.transactions.TransactionsFragment;
 import com.frostchein.atlant.model.Balance;
 import com.frostchein.atlant.views.BaseCustomView;
 import com.frostchein.atlant.views.NoTransactionView;
-import com.frostchein.atlant.views.ToolbarView;
+import com.frostchein.atlant.views.ToolbarWalletView;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
 
-public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.CallBack {
+public class HomeActivity extends BaseActivity implements HomeView, ToolbarWalletView.CallBack {
 
   @Inject
   HomePresenter presenter;
   @Inject
-  ToolbarView toolbarView;
+  ToolbarWalletView toolbarWalletView;
 
   private TransactionsFragment transactionsFragment;
 
@@ -45,7 +45,7 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_homescreen);
     setToolbarTitle(R.string.menu_balance);
-    toolbarView.deleteTitle();
+    toolbarWalletView.deleteTitle();
 
     transactionsFragment = TransactionsFragment.newInstance();
     getSupportFragmentManager().beginTransaction()
@@ -58,14 +58,14 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
 
   @Override
   public void onPause() {
-    toolbarView.setCallback(null);
+    toolbarWalletView.setCallback(null);
     super.onPause();
   }
 
   @Override
   public void onResume() {
     super.onResume();
-    toolbarView.setCallback(this);
+    toolbarWalletView.setCallback(this);
   }
 
   @Override
@@ -86,13 +86,12 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
   @Override
   public void initUI() {
     screenOverlayView.setVisibility(View.GONE);
-    swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.accent));
   }
 
   @Override
   public void setTransactionsOnFragment(ArrayList<Object> arrayList) {
     enableScrollToolbar();
-    toolbarView.updateChart(true);
+    toolbarWalletView.updateChart(true);
     fragmentContentFrame.setVisibility(View.VISIBLE);
     noTransactionView.setVisibility(View.GONE);
     transactionsFragment.update(arrayList);
@@ -101,7 +100,7 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
   @Override
   public void setNoTransactionsOnView() {
     disableScrollToolbar();
-    toolbarView.updateChart(false);
+    toolbarWalletView.updateChart(false);
     fragmentContentFrame.setVisibility(View.GONE);
     noTransactionView.setVisibility(View.VISIBLE);
     noTransactionView.invalidate();
@@ -169,16 +168,16 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarView.
 
   @Override
   protected BaseCustomView getCustomToolbar() {
-    return toolbarView;
+    return toolbarWalletView;
   }
 
   @Override
   public void setContentOnToolbar(Balance balance) {
-    toolbarView.setContent(balance);
+    toolbarWalletView.setContent(balance);
   }
 
   @Override
-  protected void onRefreshAction() {
+  protected void onRefreshSwipe() {
     presenter.refreshContent();
   }
 

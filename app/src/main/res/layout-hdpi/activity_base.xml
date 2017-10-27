@@ -5,14 +5,31 @@
   android:layout_height="match_parent">
 
   <ImageView
+    android:id="@+id/image_fon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:contentDescription="@string/system_image"/>
+    android:contentDescription="@string/system_image"
+    android:scaleType="centerCrop"/>
 
   <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+      android:id="@+id/refresh"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+      <FrameLayout
+        android:id="@+id/base_activity_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.AppBarLayout
       android:id="@+id/appbar"
@@ -28,7 +45,6 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         app:elevation="0dp"
-        app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
@@ -53,20 +69,6 @@
         app:layout_scrollFlags="scroll|enterAlways"/>
 
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-      android:id="@+id/refresh"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-      <FrameLayout
-        android:id="@+id/base_activity_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    </android.support.v4.widget.SwipeRefreshLayout>
 
   </android.support.design.widget.CoordinatorLayout>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/liner"
+  android:id="@+id/linear"
   android:layout_width="match_parent"
   android:layout_height="72dp"
   android:background="@color/transactions_received_bg"

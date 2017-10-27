@@ -29,6 +29,7 @@
   <color name="dialog_message">@color/colorSecondaryText</color>
   <color name="dialog_fon">@color/md_white_1000</color>
   <color name="dialog_border">#d32121</color>
+  <color name="dialog_rent_book_it_fon">#c8011929</color>
 
   <!--transactions-->
   <color name="transactions_received">#7ed31e</color>
@@ -39,6 +40,9 @@
   <color name="transactions_send_bg">#4cd02020</color>
   <color name="transactions_text">@color/colorPrimaryText</color>
 
+  <!--rent-->
+  <color name="rent_image_background">#313B51</color>
+
   <!--camera-->
   <color name="viewfinder_mask" tools:ignore="UnusedResources">#3c182235</color>
   <color name="viewfinder_laser" tools:ignore="UnusedResources">@color/accent</color>
@@ -46,6 +50,8 @@
 
   <!-- MaterialDrawer DEFAULT colors -->
   <color name="material_drawer_primary_text">@color/colorPrimaryText</color>
+  <color name="material_drawer_hint_text">#3fffffff</color>
+  <color name="material_drawer_hint_icon">#3fffe100</color>
   <color name="material_drawer_primary_icon">@color/accent</color>
   <color name="material_drawer_secondary_text">@color/colorPrimaryTextAlpha</color>
   <color name="material_drawer_divider">#032537</color>
