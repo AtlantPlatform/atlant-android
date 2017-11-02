@@ -13,7 +13,7 @@ public class DimensUtils {
     return tempVal.getFloat();
   }
 
-  public static int dpToPx(Context context, int dp) {
+  public static int dpToPx(Context context, float dp) {
     Resources r = context.getResources();
     return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
   }

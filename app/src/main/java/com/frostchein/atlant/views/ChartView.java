@@ -3,8 +3,10 @@ package com.frostchein.atlant.views;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Shader;
@@ -16,12 +18,18 @@ import com.frostchein.atlant.utils.DimensUtils;
 public class ChartView extends View {
 
   private float dx, dy;
-  private int[] pointGraph = {0, 0, 0, 100, 0, 0};
-  private Paint paintGraph;
+  private int[] pointChart = {0, 0, 0, 0, 30, 14, 100};
+  private String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+  private Paint paintChart;
+  private int marginBottomChart = DimensUtils.dpToPx(getContext(), 16);
+  private int marginBottomText = DimensUtils.dpToPx(getContext(), 26);
   private int colorStart = Color.parseColor("#8FA359");
   private int colorEnd = Color.parseColor("#31EDD7");
-  private int paddingTopBottom = DimensUtils.dpToPx(getContext(), 10);
-  private int radius = DimensUtils.dpToPx(getContext(), 8);
+  private int lineDash = DimensUtils.dpToPx(getContext(), 2);
+  private int sizeText = DimensUtils.dpToPx(getContext(), 10);
+  private int radius = DimensUtils.dpToPx(getContext(), 7);
+  private int maxWidth = DimensUtils.dpToPx(getContext(), 500);
+  private int maxHeight = DimensUtils.dpToPx(getContext(), 200);
 
   public ChartView(Context context) {
     super(context);
@@ -33,10 +41,26 @@ public class ChartView extends View {
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
     int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
+
+    int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+    int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+
+    if (widthMode == MeasureSpec.AT_MOST) {
+      if (parentWidth > maxWidth) {
+        parentWidth = maxWidth;
+      }
+    }
+
+    if (heightMode == MeasureSpec.AT_MOST) {
+      if (parentHeight > maxHeight) {
+        parentHeight = maxHeight;
+      }
+    }
+
     this.setMeasuredDimension(parentWidth, parentHeight);
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
   }
 
   @Override
@@ -45,30 +69,36 @@ public class ChartView extends View {
     onInit();
 
     Path path = new Path();
-    int size = pointGraph.length;
+    int size = pointChart.length;
 
     for (int i = 0; i < size; i++) {
-      drawLine(path, i, pointGraph[i]);
+      drawLine(path, i, pointChart[i]);
     }
-    canvas.drawPath(path, paintGraph);
-    drawCircle(canvas, size - 1, pointGraph[size - 1]);
+
+    for (int i = 0; i < days.length; i++) {
+      drawText(canvas, days[i], i);
+    }
+
+    canvas.drawPath(path, paintChart);
+    drawCircle(canvas, size - 1, pointChart[size - 1]);
+    drawVerticalLine(canvas, size - 1, pointChart[size - 1]);
   }
 
   private void onInit() {
-    paintGraph = new Paint();
-    paintGraph.setAntiAlias(true);
-    paintGraph.setStrokeWidth(DimensUtils.dpToPx(getContext(), 3));
-    paintGraph.setStyle(Style.STROKE);
-    paintGraph
+    paintChart = new Paint();
+    paintChart.setAntiAlias(true);
+    paintChart.setStrokeWidth(DimensUtils.dpToPx(getContext(), 3));
+    paintChart.setStyle(Style.STROKE);
+    paintChart
         .setShader(new LinearGradient(0, 0, getWidth(), getHeight(), colorStart, colorEnd, Shader.TileMode.MIRROR));
-    dx = getWidth() / (float) 6;
-    dy = (getHeight()-radius) / (float) 100;
-
+    dx = (getWidth() - radius * 4) / (float) 6;
+    dy = (getHeight() - radius * 2 - marginBottomChart - marginBottomText) / (float) 100;
+    this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
   }
 
   private void drawLine(Path path, int position, int percent) {
-    float x = position * dx;
-    float y = getHeight() - percent * dy - radius*2;
+    float x = getX(position);
+    float y = getY(percent);
 
     if (position == 0) {
       path.moveTo(x, y);
@@ -78,15 +108,50 @@ public class ChartView extends View {
   }
 
   private void drawCircle(Canvas canvas, int position, int percent) {
-    float x = position * dx;
-    float y = getHeight() - percent * dy - radius*2;
+    float x = getX(position);
+    float y = getY(percent);
     Paint paint = new Paint();
     paint.setColor(colorEnd);
+    paint.setAntiAlias(true);
     canvas.drawCircle(x, y, radius, paint);
   }
 
-  public void setPointGraph(int[] pointGraph) {
-    this.pointGraph = pointGraph;
+  private void drawVerticalLine(Canvas canvas, int position, int percent) {
+    float x = getX(position);
+    float y = getY(percent);
+
+    Paint paint = new Paint();
+    paint.setColor(colorEnd);
+    paint.setStrokeWidth(DimensUtils.dpToPx(getContext(), 0.5f));
+    paint.setStyle(Style.STROKE);
+    paint.setAntiAlias(true);
+    paint.setPathEffect(new DashPathEffect(new float[]{lineDash, lineDash}, 0));
+    canvas.drawLine(x, y + radius * 2, x, getY(0), paint);
+  }
+
+  private void drawText(Canvas canvas, String text, int position) {
+    float x = getX(position);
+    Paint paint = new Paint();
+    paint.setColor(Color.WHITE);
+    paint.setAlpha(100);
+    paint.setStrokeWidth(DimensUtils.dpToPx(getContext(), 1));
+    paint.setTextAlign(Align.CENTER);
+    paint.setTextSize(sizeText);
+
+    canvas.drawText(text, x, getHeight() - marginBottomText, paint);
+    canvas.drawLine(0, getHeight(), getWidth(), getHeight(), paint);
+  }
+
+  private float getX(int position) {
+    return position * dx + radius * 2;
+  }
+
+  private float getY(int percent) {
+    return getHeight() - percent * dy - radius - marginBottomChart - marginBottomText;
+  }
+
+  public void setPointChart(int[] pointChart) {
+    this.pointChart = pointChart;
     invalidate();
   }
 }
