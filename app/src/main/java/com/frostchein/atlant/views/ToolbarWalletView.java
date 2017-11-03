@@ -1,7 +1,6 @@
 package com.frostchein.atlant.views;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TabLayout.OnTabSelectedListener;
 import android.support.design.widget.TabLayout.Tab;
@@ -145,13 +144,15 @@ public class ToolbarWalletView extends BaseCustomView {
     }
   }
 
-  public void updateChart(boolean isTransactionsShow) {
+  public void updateChart(boolean isTransactionsShow, int[] points) {
+    ViewGroup.LayoutParams layoutParams = chartView.getLayoutParams();
     if (isTransactionsShow) {
-      int[] points = {0, 0, 50, 10};
-      chartView.setPointChart(points);
+       chartView.setPointChart(points, true);
+      layoutParams.height = DimensUtils.dpToPx(getContext(), 150);
     } else {
-      int[] points = {0, 0, 0, 0};
-      chartView.setPointChart(points);
+       chartView.setPointChart(points, true);
+      layoutParams.height = DimensUtils.dpToPx(getContext(), 80);
     }
+    chartView.setLayoutParams(layoutParams);
   }
 }

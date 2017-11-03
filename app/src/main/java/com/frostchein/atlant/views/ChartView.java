@@ -18,7 +18,9 @@ import com.frostchein.atlant.utils.DimensUtils;
 public class ChartView extends View {
 
   private float dx, dy;
-  private int[] pointChart = {0, 0, 0, 0, 30, 14, 100};
+  private int[] pointChart = {0, 0, 0, 0};
+  private int maxValue = 100;
+  private boolean isScale = true;
   private String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
   private Paint paintChart;
   private int marginBottomChart = DimensUtils.dpToPx(getContext(), 16);
@@ -59,7 +61,6 @@ public class ChartView extends View {
         parentHeight = maxHeight;
       }
     }
-
     this.setMeasuredDimension(parentWidth, parentHeight);
   }
 
@@ -85,6 +86,9 @@ public class ChartView extends View {
   }
 
   private void onInit() {
+    if (isScale) {
+      getMaxValue(pointChart);
+    }
     paintChart = new Paint();
     paintChart.setAntiAlias(true);
     paintChart.setStrokeWidth(DimensUtils.dpToPx(getContext(), 3));
@@ -92,7 +96,7 @@ public class ChartView extends View {
     paintChart
         .setShader(new LinearGradient(0, 0, getWidth(), getHeight(), colorStart, colorEnd, Shader.TileMode.MIRROR));
     dx = (getWidth() - radius * 4) / (float) 6;
-    dy = (getHeight() - radius * 2 - marginBottomChart - marginBottomText) / (float) 100;
+    dy = (getHeight() - radius * 2 - marginBottomChart - marginBottomText) / (float) maxValue;
     this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
   }
 
@@ -139,7 +143,6 @@ public class ChartView extends View {
     paint.setTextSize(sizeText);
 
     canvas.drawText(text, x, getHeight() - marginBottomText, paint);
-    canvas.drawLine(0, getHeight(), getWidth(), getHeight(), paint);
   }
 
   private float getX(int position) {
@@ -150,8 +153,25 @@ public class ChartView extends View {
     return getHeight() - percent * dy - radius - marginBottomChart - marginBottomText;
   }
 
-  public void setPointChart(int[] pointChart) {
+  private int getMaxValue(int[] pointChart) {
+    maxValue = 0;
+    for (int aPointChart : pointChart) {
+      if (maxValue < aPointChart) {
+        maxValue = aPointChart;
+      }
+    }
+    if (maxValue == 0) {
+      maxValue = 1;
+    }
+    return maxValue;
+  }
+
+  public void setPointChart(int[] pointChart, boolean isScale) {
     this.pointChart = pointChart;
+    this.isScale = isScale;
+    if (isScale) {
+      getMaxValue(pointChart);
+    }
     invalidate();
   }
 }

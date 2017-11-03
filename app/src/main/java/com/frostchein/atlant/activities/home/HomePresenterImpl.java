@@ -10,11 +10,15 @@ import com.frostchein.atlant.events.network.OnStatusSuccess;
 import com.frostchein.atlant.events.network.OnStatusTimeOut;
 import com.frostchein.atlant.model.Balance;
 import com.frostchein.atlant.model.Transactions;
+import com.frostchein.atlant.model.TransactionsItem;
 import com.frostchein.atlant.model.TransactionsTokens;
+import com.frostchein.atlant.model.TransactionsTokensItem;
 import com.frostchein.atlant.rest.AtlantApi;
 import com.frostchein.atlant.rest.AtlantClient;
 import com.frostchein.atlant.rest.NetModule;
+import com.frostchein.atlant.utils.DigitsUtils;
 import com.frostchein.atlant.utils.WalletLoading;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.Subscribe;
@@ -24,6 +28,8 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
 
   private HomeView view;
   private WalletLoading walletLoading;
+  private int[] pointChartNoTransactions = {0, 0, 0, 0};
+  private int[] pointChart = {0, 0, 5, 3, 120};
 
   @Inject
   HomePresenterImpl(HomeView view) {
@@ -82,6 +88,34 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
     return arrayList;
   }
 
+  private int[] getPointChart(ArrayList<Object> arrayList) {
+    BigInteger time = null;
+    BigInteger value = null;
+
+    long currentTime = System.currentTimeMillis() / 1000L;
+
+    for (int i = 0; i < arrayList.size(); i++) {
+      Object object = arrayList.get(i);
+
+      if (object instanceof TransactionsItem) {
+        time = DigitsUtils.getBase10FromString(((TransactionsItem) object).getTimeStamp());
+        value = DigitsUtils.getBase10FromString(((TransactionsItem) object).getValue());
+      }
+
+      if (object instanceof TransactionsTokensItem) {
+        time = DigitsUtils.getBase10from16(((TransactionsTokensItem) object).getTimeStamp());
+        value = DigitsUtils.getBase10from16(((TransactionsTokensItem) object).getData());
+      }
+
+      long l=currentTime-time.longValue();
+      System.out.println(l);
+      System.out.println(l/3600/12);
+
+    }
+
+    return pointChart;
+  }
+
   @Subscribe(threadMode = ThreadMode.MAIN)
   public void onSuccess(OnStatusSuccess onStatusSuccess) {
     if (onStatusSuccess.getRequest() != BaseActivity.REQUEST_CODE_HOME) {
@@ -117,16 +151,24 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
       if (transactions instanceof Transactions
           && ((Transactions) transactions).getTransactionsItem() != null
           && ((Transactions) transactions).getTransactionsItem().size() > 0) {
-        view.setTransactionsOnFragment(convertArrayListToObject((transactions)));
+
+        ArrayList<Object> list = convertArrayListToObject((transactions));
+        pointChart = getPointChart(list);
+        view.setTransactionsOnFragment(list, pointChart);
+
       } else if (transactions instanceof TransactionsTokens
           && ((TransactionsTokens) transactions).getTransactionsTokensItems() != null
           && ((TransactionsTokens) transactions).getTransactionsTokensItems().size() > 0) {
-        view.setTransactionsOnFragment(convertArrayListToObject((transactions)));
+
+        ArrayList<Object> list = convertArrayListToObject((transactions));
+        pointChart = getPointChart(list);
+        view.setTransactionsOnFragment(list, pointChart);
+
       } else {
-        view.setNoTransactionsOnView();
+        view.setNoTransactionsOnView(pointChartNoTransactions);
       }
     } else {
-      view.setNoTransactionsOnView();
+      view.setNoTransactionsOnView(pointChartNoTransactions);
     }
   }
 
