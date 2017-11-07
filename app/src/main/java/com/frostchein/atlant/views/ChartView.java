@@ -24,7 +24,7 @@ public class ChartView extends View {
   private String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
   private Paint paintChart;
   private int marginBottomChart = DimensUtils.dpToPx(getContext(), 16);
-  private int marginBottomText = DimensUtils.dpToPx(getContext(), 26);
+  private int marginBottomText = DimensUtils.dpToPx(getContext(), 16);
   private int colorStart = Color.parseColor("#8FA359");
   private int colorEnd = Color.parseColor("#31EDD7");
   private int lineDash = DimensUtils.dpToPx(getContext(), 2);
@@ -138,7 +138,6 @@ public class ChartView extends View {
     Paint paint = new Paint();
     paint.setColor(Color.WHITE);
     paint.setAlpha(100);
-    paint.setStrokeWidth(DimensUtils.dpToPx(getContext(), 1));
     paint.setTextAlign(Align.CENTER);
     paint.setTextSize(sizeText);
 

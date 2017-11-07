@@ -124,7 +124,6 @@ public class TransactionItemView extends BaseCustomView {
 
 
   private void setDate(BigInteger date) {
-    System.out.println("time    " + date);
     dateTextView.setText(DateUtils.getFormattedFullDate(date.longValue()));
   }
 

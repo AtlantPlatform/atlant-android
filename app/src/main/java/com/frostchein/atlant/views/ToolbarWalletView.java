@@ -144,14 +144,14 @@ public class ToolbarWalletView extends BaseCustomView {
     }
   }
 
-  public void updateChart(boolean isTransactionsShow, int[] points) {
+  public void updateChart(int[] points) {
     ViewGroup.LayoutParams layoutParams = chartView.getLayoutParams();
-    if (isTransactionsShow) {
-       chartView.setPointChart(points, true);
-      layoutParams.height = DimensUtils.dpToPx(getContext(), 150);
-    } else {
-       chartView.setPointChart(points, true);
-      layoutParams.height = DimensUtils.dpToPx(getContext(), 80);
+    chartView.setPointChart(points, true);
+    layoutParams.height = DimensUtils.dpToPx(getContext(), 80);
+    for (int point : points) {
+      if (points[0] != point) {
+        layoutParams.height = DimensUtils.dpToPx(getContext(), 150);
+      }
     }
     chartView.setLayoutParams(layoutParams);
   }

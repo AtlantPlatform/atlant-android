@@ -90,7 +90,7 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarWalle
   @Override
   public void setTransactionsOnFragment(ArrayList<Object> arrayList, int[] pointChart) {
     enableScrollToolbar();
-    toolbarWalletView.updateChart(true, pointChart);
+    toolbarWalletView.updateChart(pointChart);
     fragmentContentFrame.setVisibility(View.VISIBLE);
     noTransactionView.setVisibility(View.GONE);
     transactionsFragment.update(arrayList);
@@ -99,7 +99,7 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarWalle
   @Override
   public void setNoTransactionsOnView(int[] pointChart) {
     enableScrollToolbar();
-    toolbarWalletView.updateChart(false, pointChart);
+    toolbarWalletView.updateChart(pointChart);
     fragmentContentFrame.setVisibility(View.GONE);
     noTransactionView.setVisibility(View.VISIBLE);
     noTransactionView.invalidate();
