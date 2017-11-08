@@ -8,9 +8,9 @@ public interface HomeView extends BaseView {
 
   void setContentOnToolbar(Balance balance);
 
-  void setTransactionsOnFragment(ArrayList<Object> arrayList);
+  void setTransactionsOnFragment(ArrayList<Object> arrayList, int[] pointChart);
 
-  void setNoTransactionsOnView();
+  void setNoTransactionsOnView(int[] pointChart);
 
   void onLoadingError();
 

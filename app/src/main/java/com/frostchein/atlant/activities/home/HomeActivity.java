@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 import butterknife.BindView;
@@ -89,18 +88,18 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarWalle
   }
 
   @Override
-  public void setTransactionsOnFragment(ArrayList<Object> arrayList) {
+  public void setTransactionsOnFragment(ArrayList<Object> arrayList, int[] pointChart) {
     enableScrollToolbar();
-    toolbarWalletView.updateChart(true);
+    toolbarWalletView.updateChart(pointChart);
     fragmentContentFrame.setVisibility(View.VISIBLE);
     noTransactionView.setVisibility(View.GONE);
     transactionsFragment.update(arrayList);
   }
 
   @Override
-  public void setNoTransactionsOnView() {
-    disableScrollToolbar();
-    toolbarWalletView.updateChart(false);
+  public void setNoTransactionsOnView(int[] pointChart) {
+    enableScrollToolbar();
+    toolbarWalletView.updateChart(pointChart);
     fragmentContentFrame.setVisibility(View.GONE);
     noTransactionView.setVisibility(View.VISIBLE);
     noTransactionView.invalidate();

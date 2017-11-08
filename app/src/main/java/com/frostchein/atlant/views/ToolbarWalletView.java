@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout.Tab;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.frostchein.atlant.Config;
@@ -15,8 +14,8 @@ import com.frostchein.atlant.R;
 import com.frostchein.atlant.model.Balance;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
+import com.frostchein.atlant.utils.DimensUtils;
 import com.frostchein.atlant.utils.tokens.Token;
-import com.squareup.picasso.Picasso;
 import java.math.BigInteger;
 
 public class ToolbarWalletView extends BaseCustomView {
@@ -30,7 +29,8 @@ public class ToolbarWalletView extends BaseCustomView {
   @BindView(R.id.toolbar_value)
   TextView textValue;
   @BindView(R.id.toolbar_chart)
-  ImageView imChart;
+  ChartView chartView;
+
 
   private CallBack callback;
 
@@ -139,16 +139,20 @@ public class ToolbarWalletView extends BaseCustomView {
   }
 
   public void deleteChart() {
-    if (imChart != null) {
-      ((ViewGroup) imChart.getParent()).removeView(imChart);
+    if (chartView != null) {
+      ((ViewGroup) chartView.getParent()).removeView(chartView);
     }
   }
 
-  public void updateChart(boolean isTransactionsShow) {
-    if (isTransactionsShow) {
-      Picasso.with(getContext()).load(R.drawable.home_chart_1).into(imChart);
-    } else {
-      Picasso.with(getContext()).load(R.drawable.home_chart_0).into(imChart);
+  public void updateChart(int[] points) {
+    ViewGroup.LayoutParams layoutParams = chartView.getLayoutParams();
+    chartView.setPointChart(points, true);
+    layoutParams.height = DimensUtils.dpToPx(getContext(), 80);
+    for (int point : points) {
+      if (points[0] != point) {
+        layoutParams.height = DimensUtils.dpToPx(getContext(), 150);
+      }
     }
+    chartView.setLayoutParams(layoutParams);
   }
 }

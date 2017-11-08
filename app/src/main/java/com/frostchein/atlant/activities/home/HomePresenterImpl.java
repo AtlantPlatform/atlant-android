@@ -10,12 +10,17 @@ import com.frostchein.atlant.events.network.OnStatusSuccess;
 import com.frostchein.atlant.events.network.OnStatusTimeOut;
 import com.frostchein.atlant.model.Balance;
 import com.frostchein.atlant.model.Transactions;
+import com.frostchein.atlant.model.TransactionsItem;
 import com.frostchein.atlant.model.TransactionsTokens;
+import com.frostchein.atlant.model.TransactionsTokensItem;
 import com.frostchein.atlant.rest.AtlantApi;
 import com.frostchein.atlant.rest.AtlantClient;
 import com.frostchein.atlant.rest.NetModule;
+import com.frostchein.atlant.utils.DigitsUtils;
 import com.frostchein.atlant.utils.WalletLoading;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -64,7 +69,6 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
     walletLoading.refreshContent();
   }
 
-
   private ArrayList<Object> convertArrayListToObject(Object object) {
     ArrayList<Object> arrayList = new ArrayList<>();
 
@@ -80,6 +84,77 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
       }
     }
     return arrayList;
+  }
+
+  private int[] getPointChart(ArrayList<Object> arrayListTransactions, int currentDay) {
+    BigInteger time = null;
+    BigInteger value = null;
+
+    //init
+    Calendar cal = Calendar.getInstance();
+    BigInteger[] bigIntegers = new BigInteger[7];
+    for (int i = 0; i < bigIntegers.length; i++) {
+      bigIntegers[i] = BigInteger.ZERO;
+    }
+
+    for (int i = 0; i < arrayListTransactions.size(); i++) {
+      Object object = arrayListTransactions.get(i);
+
+      //get time & value
+      if (object instanceof TransactionsItem) {
+        time = DigitsUtils.getBase10FromString(((TransactionsItem) object).getTimeStamp());
+        value = DigitsUtils.getBase10FromString(((TransactionsItem) object).getValue());
+      }
+
+      if (object instanceof TransactionsTokensItem) {
+        time = DigitsUtils.getBase10from16(((TransactionsTokensItem) object).getTimeStamp());
+        value = DigitsUtils.getBase10from16(((TransactionsTokensItem) object).getData());
+      }
+
+      //day since the beginning of the week
+      cal.setTimeInMillis(time.longValue() * 1000);
+      int numberDay = cal.get(Calendar.DAY_OF_WEEK);
+
+      //current week
+      if (numberDay > currentDay) {
+        break;
+      }
+
+      //sum of all values
+      bigIntegers[numberDay - 1] = bigIntegers[numberDay - 1].add(value);
+    }
+
+    //find max value
+    BigInteger maxBigInteger = new BigInteger(String.valueOf(bigIntegers[0]));
+    for (int i = 0; i < bigIntegers.length; i++) {
+      if (bigIntegers[i].compareTo(maxBigInteger) == 1) {
+        maxBigInteger = bigIntegers[i];
+      }
+    }
+
+    //range from 0 to 100
+    int[] point = new int[currentDay];
+    for (int i = 0; i < currentDay; i++) {
+      if (maxBigInteger.intValue() != 0) {
+        bigIntegers[i] = bigIntegers[i].multiply(BigInteger.valueOf(100)).divide(maxBigInteger);
+      }
+      point[i] = bigIntegers[i].intValue();
+    }
+    return point;
+  }
+
+  private int[] getPointChartNoTransactions(int currentDay) {
+    int[] point = new int[currentDay];
+    for (int i = 0; i < point.length; i++) {
+      point[i] = 0;
+    }
+    return point;
+  }
+
+  private int getCurrentDay() {
+    Calendar cal = Calendar.getInstance();
+    cal.setTimeInMillis(System.currentTimeMillis());
+    return cal.get(Calendar.DAY_OF_WEEK);
   }
 
   @Subscribe(threadMode = ThreadMode.MAIN)
@@ -113,20 +188,30 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
 
   @Override
   public void responseTransactions(Object transactions) {
+    int currentDay = getCurrentDay();
     if (transactions != null) {
+      int[] pointChart;
       if (transactions instanceof Transactions
           && ((Transactions) transactions).getTransactionsItem() != null
           && ((Transactions) transactions).getTransactionsItem().size() > 0) {
-        view.setTransactionsOnFragment(convertArrayListToObject((transactions)));
+
+        ArrayList<Object> list = convertArrayListToObject((transactions));
+        pointChart = getPointChart(list, currentDay);
+        view.setTransactionsOnFragment(list, pointChart);
+
       } else if (transactions instanceof TransactionsTokens
           && ((TransactionsTokens) transactions).getTransactionsTokensItems() != null
           && ((TransactionsTokens) transactions).getTransactionsTokensItems().size() > 0) {
-        view.setTransactionsOnFragment(convertArrayListToObject((transactions)));
+
+        ArrayList<Object> list = convertArrayListToObject((transactions));
+        pointChart = getPointChart(list, currentDay);
+        view.setTransactionsOnFragment(list, pointChart);
+
       } else {
-        view.setNoTransactionsOnView();
+        view.setNoTransactionsOnView(getPointChartNoTransactions(currentDay));
       }
     } else {
-      view.setNoTransactionsOnView();
+      view.setNoTransactionsOnView(getPointChartNoTransactions(currentDay));
     }
   }
 
