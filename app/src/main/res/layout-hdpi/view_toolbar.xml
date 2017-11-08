@@ -58,8 +58,8 @@
     <com.frostchein.atlant.views.ChartView
       android:id="@+id/toolbar_chart"
       android:layout_width="wrap_content"
-      android:layout_height="150dp"
-      android:layout_marginTop="@dimen/activity_vertical_title_margin"/>
+      android:layout_height="80dp"
+      android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
   </LinearLayout>
 
