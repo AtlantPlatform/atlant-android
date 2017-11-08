@@ -121,7 +121,7 @@ public final class WalletRestHandler {
                   TransactionsTokens transactionsTokens = response.body();
                   transactionsTokens.setTransactionsTokensItems(transactionsTokensItems);
                   EventBus.getDefault()
-                      .post(new OnStatusSuccess(requestCode, balance, transactionsTokens));
+                      .post(new OnStatusSuccess(requestCode, balance, transactionsTokens, token));
                 }
               });
               thread.start();
@@ -142,7 +142,7 @@ public final class WalletRestHandler {
     BaseRequest<Transactions> callback = new BaseRequest<>(new BaseRequest.Callback<Transactions>() {
       @Override
       public void onResponse(Response<Transactions> response) {
-        EventBus.getDefault().post(new OnStatusSuccess(baseCode, balance, response.body()));
+        EventBus.getDefault().post(new OnStatusSuccess(baseCode, balance, response.body(),null));
       }
     }, baseCode);
 

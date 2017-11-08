@@ -12,6 +12,8 @@ import com.frostchein.atlant.utils.tokens.Token;
 
 public class WalletLoading {
 
+  private boolean isUpdateLocal = false;
+
   public interface OnCallBack {
 
     void responseBalance(Balance balance);
@@ -68,11 +70,22 @@ public class WalletLoading {
     }
   }
 
-  public void onChangeValue(int pos) {
-    CredentialHolder.setNumberToken(view.getContext(), pos);
-    onUpdateLocal();
+  public void onChangeValue(final int pos) {
+    Thread thread = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        while (true) {
+          if (!isUpdateLocal) {
+            break;
+          }
+        }
+        CredentialHolder.setNumberToken(view.getContext(), pos);
+        onUpdateLocal();
+        refreshContent();
+      }
+    });
+    thread.start();
     view.onRefreshStart();
-    refreshContent();
   }
 
   public void onUpdateLocal() {
@@ -86,6 +99,7 @@ public class WalletLoading {
 
     @Override
     protected Void doInBackground(BaseView... baseView) {
+      isUpdateLocal = true;
       if (CredentialHolder.getCurrentToken() == null) {
         transactions = CredentialHolder.getTransaction(baseView[0].getContext());
         balance = CredentialHolder.getBalance(baseView[0].getContext());
@@ -93,6 +107,35 @@ public class WalletLoading {
         transactions = CredentialHolder.getTransaction(baseView[0].getContext(), CredentialHolder.getCurrentToken());
         balance = CredentialHolder.getBalance(baseView[0].getContext(), CredentialHolder.getCurrentToken());
       }
+      isUpdateLocal = false;
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+      super.onPostExecute(aVoid);
+      if (callBack != null) {
+        callBack.responseBalance(balance);
+        callBack.responseTransactions(transactions);
+      }
+    }
+  }
+
+  private class AsyncTaskSaveLocal extends AsyncTask<BaseView, Void, Void> {
+
+    private Balance balance;
+    private Object transactions;
+    private Token token;
+
+    AsyncTaskSaveLocal(Balance balance, Object transactions, Token token) {
+      this.balance = balance;
+      this.transactions = transactions;
+      this.token = token;
+    }
+
+    @Override
+    protected Void doInBackground(BaseView... baseView) {
+      CredentialHolder.saveWalletInfo(view.getContext(), balance, transactions, token);
       return null;
     }
 
@@ -108,22 +151,8 @@ public class WalletLoading {
 
   public void onSuccess(OnStatusSuccess onStatusSuccess) {
     if (view != null) {
-      final Balance balance = onStatusSuccess.getBalance();
-      final Object transactions = onStatusSuccess.getTransactions();
-      final Token token = CredentialHolder.getCurrentToken();
-
-      Thread thread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-          CredentialHolder.saveWalletInfo(view.getContext(), balance, transactions, token);
-        }
-      });
-      thread.start();
-
-      if (callBack != null) {
-        callBack.responseBalance(balance);
-        callBack.responseTransactions(transactions);
-      }
+      new AsyncTaskSaveLocal(onStatusSuccess.getBalance(), onStatusSuccess.getTransactions(),
+          onStatusSuccess.getToken()).execute();
       view.onRefreshComplete();
     }
   }
