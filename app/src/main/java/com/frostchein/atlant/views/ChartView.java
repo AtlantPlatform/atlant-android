@@ -14,14 +14,23 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import com.frostchein.atlant.utils.DimensUtils;
+import java.util.Calendar;
 
 public class ChartView extends View {
 
   private float dx, dy;
-  private int[] pointChart = {0, 0, 0, 0};
+  private int[] pointChart = {0, 0, 0, 0, 0, 0, 0};
   private int maxValue = 100;
   private boolean isScale = true;
-  private String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+  private String daySun = "Sun";
+  private String dayMon = "Mon";
+  private String dayTue = "Tue";
+  private String dayWed = "Wed";
+  private String dayThu = "Thu";
+  private String dayFri = "Fri";
+  private String daySat = "Sat";
+  private String[] days = {daySun, dayMon, dayTue, dayWed, dayThu, dayFri, daySat};
+  private int indexCurrentDay = 6;
   private Paint paintChart;
   private int marginBottomChart = DimensUtils.dpToPx(getContext(), 16);
   private int marginBottomText = DimensUtils.dpToPx(getContext(), 16);
@@ -89,6 +98,9 @@ public class ChartView extends View {
     if (isScale) {
       getMaxValue(pointChart);
     }
+    initCurrentDay();
+    initDate();
+
     paintChart = new Paint();
     paintChart.setAntiAlias(true);
     paintChart.setStrokeWidth(DimensUtils.dpToPx(getContext(), 3));
@@ -98,6 +110,38 @@ public class ChartView extends View {
     dx = (getWidth() - radius * 4) / (float) 6;
     dy = (getHeight() - radius * 2 - marginBottomChart - marginBottomText) / (float) maxValue;
     this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+  }
+
+  private void initCurrentDay() {
+    Calendar cal = Calendar.getInstance();
+    cal.setTimeInMillis(System.currentTimeMillis());
+    indexCurrentDay = cal.get(Calendar.DAY_OF_WEEK) - 1;
+  }
+
+  private void initDate() {
+    switch (indexCurrentDay) {
+      case 0:
+        days = new String[]{dayMon, dayTue, dayWed, dayThu, dayFri, daySat, daySun};
+        break;
+      case 1:
+        days = new String[]{dayTue, dayWed, dayThu, dayFri, daySat, daySun, dayMon};
+        break;
+      case 2:
+        days = new String[]{dayWed, dayThu, dayFri, daySat, daySun, dayMon, dayTue};
+        break;
+      case 3:
+        days = new String[]{dayThu, dayFri, daySat, daySun, dayMon, dayTue, dayWed};
+        break;
+      case 4:
+        days = new String[]{dayFri, daySat, daySun, dayMon, dayTue, dayWed, dayThu};
+        break;
+      case 5:
+        days = new String[]{daySat, daySun, dayMon, dayTue, dayWed, dayThu, dayFri};
+        break;
+      case 6:
+        days = new String[]{daySun, dayMon, dayTue, dayWed, dayThu, dayFri, daySat};
+        break;
+    }
   }
 
   private void drawLine(Path path, int position, int percent) {
