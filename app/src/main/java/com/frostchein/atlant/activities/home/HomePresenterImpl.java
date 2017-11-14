@@ -16,11 +16,13 @@ import com.frostchein.atlant.model.TransactionsTokensItem;
 import com.frostchein.atlant.rest.AtlantApi;
 import com.frostchein.atlant.rest.AtlantClient;
 import com.frostchein.atlant.rest.NetModule;
+import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
 import com.frostchein.atlant.utils.WalletLoading;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -29,6 +31,7 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
 
   private HomeView view;
   private WalletLoading walletLoading;
+  private Balance balance;
 
   @Inject
   HomePresenterImpl(HomeView view) {
@@ -86,12 +89,21 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
     return arrayList;
   }
 
-  private int[] getPointChart(ArrayList<Object> arrayListTransactions, int currentDay) {
+  private int[] getPointChart(Balance balance, ArrayList<Object> arrayListTransactions) {
     BigInteger time = null;
     BigInteger value = null;
+    BigInteger currentBalance = DigitsUtils.getBase10FromString(balance.getResult());
 
     //init
     Calendar cal = Calendar.getInstance();
+    cal.setTimeInMillis(System.currentTimeMillis());
+
+    Calendar calCurrentDay = Calendar.getInstance();
+    calCurrentDay.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+
+    long timeCurrentDay = calCurrentDay.getTimeInMillis() / 1000;
+    long timeTransactions;
+
     BigInteger[] bigIntegers = new BigInteger[7];
     for (int i = 0; i < bigIntegers.length; i++) {
       bigIntegers[i] = BigInteger.ZERO;
@@ -100,61 +112,82 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
     for (int i = 0; i < arrayListTransactions.size(); i++) {
       Object object = arrayListTransactions.get(i);
 
-      //get time & value
       if (object instanceof TransactionsItem) {
         time = DigitsUtils.getBase10FromString(((TransactionsItem) object).getTimeStamp());
         value = DigitsUtils.getBase10FromString(((TransactionsItem) object).getValue());
+
+        BigInteger gas = DigitsUtils.getBase10FromString(((TransactionsItem) object).getGas());
+        BigInteger price = DigitsUtils.getBase10FromString(((TransactionsItem) object).getGasPrice());
+        BigInteger commission = gas.multiply(price);
+
+        if (((TransactionsItem) object).getFrom().equalsIgnoreCase(CredentialHolder.getAddress())) {
+          if (((TransactionsItem) object).getFrom().equalsIgnoreCase(((TransactionsItem) object).getTo())) {
+            value = BigInteger.ZERO;
+          }
+          value = value.add(commission);
+        } else {
+          value = value.multiply(new BigInteger("-1"));
+        }
       }
 
       if (object instanceof TransactionsTokensItem) {
         time = DigitsUtils.getBase10from16(((TransactionsTokensItem) object).getTimeStamp());
         value = DigitsUtils.getBase10from16(((TransactionsTokensItem) object).getData());
+
+        if (((TransactionsTokensItem) object).isTransactionsIn()) {
+          value = value.multiply(new BigInteger("-1"));
+        }
       }
+      timeTransactions = time.longValue();
 
-      //day since the beginning of the week
-      cal.setTimeInMillis(time.longValue() * 1000);
-      int numberDay = cal.get(Calendar.DAY_OF_WEEK);
+      if (timeCurrentDay - timeTransactions >= 0) {
+        long days = TimeUnit.SECONDS.toDays(timeCurrentDay - timeTransactions) + 1;
 
-      //current week
-      if (numberDay > currentDay) {
-        break;
+        //only weeks (first 7 days)
+        if (days >= 6) {
+          break;
+        }
+        bigIntegers[(int) days] = bigIntegers[(int) days].add(value);
+      } else {
+        bigIntegers[0] = bigIntegers[0].add(value);
       }
+    }
 
-      //sum of all values
-      bigIntegers[numberDay - 1] = bigIntegers[numberDay - 1].add(value);
+    //add balance
+    BigInteger[] arrayBalanceWeek = new BigInteger[7];
+    arrayBalanceWeek[6] = currentBalance;
+    for (int i = 0; i < bigIntegers.length; i++) {
+      if (6 - i - 1 > -1) {
+        arrayBalanceWeek[6 - i - 1] = arrayBalanceWeek[6 - i].add(bigIntegers[i]);
+      }
     }
 
     //find max value
     BigInteger maxBigInteger = new BigInteger(String.valueOf(bigIntegers[0]));
-    for (int i = 0; i < bigIntegers.length; i++) {
-      if (bigIntegers[i].compareTo(maxBigInteger) == 1) {
-        maxBigInteger = bigIntegers[i];
+    for (int i = 0; i < arrayBalanceWeek.length; i++) {
+      if (arrayBalanceWeek[i].compareTo(maxBigInteger) == 1) {
+        maxBigInteger = arrayBalanceWeek[i];
       }
     }
 
     //range from 0 to 100
-    int[] point = new int[currentDay];
-    for (int i = 0; i < currentDay; i++) {
+    int[] point = new int[bigIntegers.length];
+    for (int i = 0; i < bigIntegers.length; i++) {
       if (maxBigInteger.intValue() != 0) {
-        bigIntegers[i] = bigIntegers[i].multiply(BigInteger.valueOf(100)).divide(maxBigInteger);
+        arrayBalanceWeek[i] = arrayBalanceWeek[i].multiply(BigInteger.valueOf(100)).divide(maxBigInteger);
       }
-      point[i] = bigIntegers[i].intValue();
+      point[i] = arrayBalanceWeek[i].intValue();
+      System.out.println(point[i]);
     }
     return point;
   }
 
-  private int[] getPointChartNoTransactions(int currentDay) {
-    int[] point = new int[currentDay];
+  private int[] getPointChartNoTransactions() {
+    int[] point = new int[7];
     for (int i = 0; i < point.length; i++) {
       point[i] = 0;
     }
     return point;
-  }
-
-  private int getCurrentDay() {
-    Calendar cal = Calendar.getInstance();
-    cal.setTimeInMillis(System.currentTimeMillis());
-    return cal.get(Calendar.DAY_OF_WEEK);
   }
 
   @Subscribe(threadMode = ThreadMode.MAIN)
@@ -183,12 +216,13 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
 
   @Override
   public void responseBalance(Balance balance) {
+    this.balance = balance;
     view.setContentOnToolbar(balance);
   }
 
   @Override
   public void responseTransactions(Object transactions) {
-    int currentDay = getCurrentDay();
+    // try {
     if (transactions != null) {
       int[] pointChart;
       if (transactions instanceof Transactions
@@ -196,7 +230,7 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
           && ((Transactions) transactions).getTransactionsItem().size() > 0) {
 
         ArrayList<Object> list = convertArrayListToObject((transactions));
-        pointChart = getPointChart(list, currentDay);
+        pointChart = getPointChart(balance, list);
         view.setTransactionsOnFragment(list, pointChart);
 
       } else if (transactions instanceof TransactionsTokens
@@ -204,15 +238,18 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
           && ((TransactionsTokens) transactions).getTransactionsTokensItems().size() > 0) {
 
         ArrayList<Object> list = convertArrayListToObject((transactions));
-        pointChart = getPointChart(list, currentDay);
+        pointChart = getPointChart(balance, list);
         view.setTransactionsOnFragment(list, pointChart);
 
       } else {
-        view.setNoTransactionsOnView(getPointChartNoTransactions(currentDay));
+        view.setNoTransactionsOnView(getPointChartNoTransactions());
       }
     } else {
-      view.setNoTransactionsOnView(getPointChartNoTransactions(currentDay));
+      view.setNoTransactionsOnView(getPointChartNoTransactions());
     }
+ /*   } catch (Exception e) {
+      view.onLoadingError();
+    }*/
   }
 
   @Override
