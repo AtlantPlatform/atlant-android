@@ -71,57 +71,85 @@ public class WalletLoading {
   }
 
   public void onChangeValue(final int pos) {
-    Thread thread = new Thread(new Runnable() {
-      @Override
-      public void run() {
-        while (true) {
-          if (!isUpdateLocal) {
-            break;
-          }
-        }
-        CredentialHolder.setNumberToken(view.getContext(), pos);
-        onUpdateLocal();
-        refreshContent();
-      }
-    });
-    thread.start();
-    view.onRefreshStart();
+    if (!isUpdateLocal) {
+      new AsyncTaskWait(pos).execute();
+    }
   }
 
   public void onUpdateLocal() {
     new AsyncTaskLoadLocal().execute(view);
   }
 
-  private class AsyncTaskLoadLocal extends AsyncTask<BaseView, Void, Void> {
+  private class AsyncTaskWait extends AsyncTask<Void, Void, Void> {
 
-    Object transactions;
-    Balance balance;
+    private int pos;
+
+    AsyncTaskWait(int pos) {
+      this.pos = pos;
+    }
 
     @Override
-    protected Void doInBackground(BaseView... baseView) {
-      isUpdateLocal = true;
-      if (CredentialHolder.getCurrentToken() == null) {
-        transactions = CredentialHolder.getTransaction(baseView[0].getContext());
-        balance = CredentialHolder.getBalance(baseView[0].getContext());
-      } else {
-        transactions = CredentialHolder.getTransaction(baseView[0].getContext(), CredentialHolder.getCurrentToken());
-        balance = CredentialHolder.getBalance(baseView[0].getContext(), CredentialHolder.getCurrentToken());
+    protected Void doInBackground(Void... voids) {
+      while (true) {
+        if (!isUpdateLocal) {
+          break;
+        }
       }
-      isUpdateLocal = false;
       return null;
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
       super.onPostExecute(aVoid);
-      if (callBack != null) {
-        callBack.responseBalance(balance);
-        callBack.responseTransactions(transactions);
+      view.onRefreshStart();
+      CredentialHolder.setNumberToken(view.getContext(), pos);
+      onUpdateLocal();
+      refreshContent();
+    }
+  }
+
+  private class AsyncTaskLoadLocal extends AsyncTask<BaseView, Void, Boolean> {
+
+    private Object transactions;
+    private Balance balance;
+
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+      isUpdateLocal = true;
+    }
+
+    @Override
+    protected Boolean doInBackground(BaseView... baseView) {
+      try {
+        if (CredentialHolder.getCurrentToken() == null) {
+          transactions = CredentialHolder.getTransaction(baseView[0].getContext());
+          balance = CredentialHolder.getBalance(baseView[0].getContext());
+        } else {
+          transactions = CredentialHolder.getTransaction(baseView[0].getContext(), CredentialHolder.getCurrentToken());
+          balance = CredentialHolder.getBalance(baseView[0].getContext(), CredentialHolder.getCurrentToken());
+        }
+        return true;
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      return false;
+    }
+
+    @Override
+    protected void onPostExecute(Boolean bol) {
+      super.onPostExecute(bol);
+      isUpdateLocal = false;
+      if (bol) {
+        if (callBack != null) {
+          callBack.responseBalance(balance);
+          callBack.responseTransactions(transactions);
+        }
       }
     }
   }
 
-  private class AsyncTaskSaveLocal extends AsyncTask<BaseView, Void, Void> {
+  private class AsyncTaskSaveLocal extends AsyncTask<Void, Void, Void> {
 
     private Balance balance;
     private Object transactions;
@@ -134,7 +162,7 @@ public class WalletLoading {
     }
 
     @Override
-    protected Void doInBackground(BaseView... baseView) {
+    protected Void doInBackground(Void... voids) {
       CredentialHolder.saveWalletInfo(view.getContext(), balance, transactions, token);
       return null;
     }
