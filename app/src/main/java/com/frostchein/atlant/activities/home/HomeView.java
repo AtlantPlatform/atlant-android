@@ -18,4 +18,6 @@ public interface HomeView extends BaseView {
 
   void onNoInternetConnection();
 
+  void onStartActivityBackup();
+
 }

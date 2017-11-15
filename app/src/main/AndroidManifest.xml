@@ -28,6 +28,7 @@
     <activity android:name="com.frostchein.atlant.activities.login_selected_app.LoginSelectedAppActivity"/>
     <activity android:name="com.frostchein.atlant.activities.export_wallet.ExportActivity"/>
     <activity android:name="com.frostchein.atlant.activities.receive.ReceiveActivity"/>
+    <activity android:name="com.frostchein.atlant.activities.backup.BackupActivity"/>
     <activity android:name="com.frostchein.atlant.activities.camera.CameraActivity"/>
 
     <activity

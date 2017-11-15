@@ -110,6 +110,7 @@ public class LoginPresenterImpl implements LoginPresenter, BasePresenter {
                 CredentialHolder.changePasswordWallet(view.getContext(), password);
               } else {
                 CredentialHolder.createWallet(view.getContext(), password);
+                CredentialHolder.saveSetting(view.getContext(), SharedPreferencesUtils.TAG_NEW_PRIVATE_KEY, true);
               }
             } else {
               view.requestPasswordState(false);

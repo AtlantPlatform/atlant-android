@@ -38,5 +38,6 @@
   <item format="float" name="system_bt_disable_opacity" type="dimen">0.3</item>
   <item format="float" name="system_bt_normal_opacity" type="dimen">1.0</item>
   <dimen name="system_qr_size">200dp</dimen>
+  <dimen name="system_qr_size2">150dp</dimen>
 
 </resources>

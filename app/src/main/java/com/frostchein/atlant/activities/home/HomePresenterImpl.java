@@ -1,5 +1,6 @@
 package com.frostchein.atlant.activities.home;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import com.frostchein.atlant.Config;
@@ -18,6 +19,7 @@ import com.frostchein.atlant.rest.AtlantClient;
 import com.frostchein.atlant.rest.NetModule;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
+import com.frostchein.atlant.utils.SharedPreferencesUtils;
 import com.frostchein.atlant.utils.WalletLoading;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -54,6 +56,11 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
           walletLoading.refreshContent();
         }
       }, 10);
+
+      SharedPreferences preferences = CredentialHolder.loadSetting(view.getContext());
+      if (preferences.getBoolean(SharedPreferencesUtils.TAG_NEW_PRIVATE_KEY, false)) {
+        view.onStartActivityBackup();
+      }
     }
   }
 

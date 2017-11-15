@@ -116,6 +116,11 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarWalle
   }
 
   @Override
+  public void onStartActivityBackup() {
+    goToBackupActivity(false);
+  }
+
+  @Override
   protected void setupComponent(AppComponent appComponent) {
     HomeActivityComponent component = DaggerHomeActivityComponent.builder()
         .appComponent(appComponent)

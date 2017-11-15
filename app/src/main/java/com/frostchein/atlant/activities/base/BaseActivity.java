@@ -33,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.frostchein.atlant.MyApplication;
 import com.frostchein.atlant.R;
+import com.frostchein.atlant.activities.backup.BackupActivity;
 import com.frostchein.atlant.activities.camera.CameraActivity;
 import com.frostchein.atlant.activities.export_wallet.ExportActivity;
 import com.frostchein.atlant.activities.home.HomeActivity;
@@ -82,6 +83,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   public static final int REQUEST_CODE_RENT_MAIN = 12;
   public static final int REQUEST_CODE_RENT_DETAILS = 13;
   public static final int REQUEST_CODE_TRADE_START = 14;
+  public static final int REQUEST_CODE_BACKUP = 15;
 
   private static final int PERMISSION_REQUEST_CAMERA = 1;
   private static int typeResult;
@@ -403,6 +405,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   protected void goToTradeStartActivity(boolean withFinish) {
     createIntentWithoutFlags(TradeStartActivity.class);
     startActivity(REQUEST_CODE_TRADE_START, withFinish);
+  }
+
+  protected void goToBackupActivity(boolean withFinish) {
+    createIntentWithoutFlags(BackupActivity.class);
+    startActivity(REQUEST_CODE_BACKUP, withFinish);
   }
 
   private void createIntentWithoutFlags(Class<?> activityClass) {

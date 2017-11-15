@@ -63,6 +63,11 @@
   <string name="export_title">Export</string>
   <string name="export_private_key_text">Your private key</string>
 
+  <!--backup-->
+  <string name="backup_title">Backup</string>
+  <string name="backup_text">Don’t forget to save your private key</string>
+  <string name="backup_text2">Yes, I made a backup of this key</string>
+
   <!--send-->
   <string name="send_title">Send</string>
   <string name="send_you_have">You have</string>
