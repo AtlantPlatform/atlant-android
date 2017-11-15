@@ -242,19 +242,30 @@ public final class CredentialHolder {
 
   public static void setNumberToken(Context context, int numberToken) {
     CredentialHolder.numberToken = numberToken;
-    SharedPreferences.Editor editor = context
-        .getSharedPreferences(SharedPreferencesUtils.TAG_SHARED_PREFERENCES, Context.MODE_PRIVATE).edit();
-    editor.putInt(SharedPreferencesUtils.TAG_CURRENT_VALUE, numberToken);
-    editor.apply();
+    saveSetting(context, SharedPreferencesUtils.TAG_CURRENT_VALUE, numberToken);
   }
 
   public static int getNumberToken() {
     return numberToken;
   }
 
-  public static void loadSetting(Context context) {
+  public static SharedPreferences loadSetting(Context context) {
     SharedPreferences prefs = context
         .getSharedPreferences(SharedPreferencesUtils.TAG_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-    numberToken = prefs.getInt(SharedPreferencesUtils.TAG_CURRENT_VALUE, -1);
+    return prefs;
+  }
+
+  public static void saveSetting(Context context, String tag, int value) {
+    SharedPreferences.Editor editor = context
+        .getSharedPreferences(SharedPreferencesUtils.TAG_SHARED_PREFERENCES, Context.MODE_PRIVATE).edit();
+    editor.putInt(tag, value);
+    editor.apply();
+  }
+
+  public static void saveSetting(Context context, String tag, boolean value) {
+    SharedPreferences.Editor editor = context
+        .getSharedPreferences(SharedPreferencesUtils.TAG_SHARED_PREFERENCES, Context.MODE_PRIVATE).edit();
+    editor.putBoolean(tag, value);
+    editor.apply();
   }
 }

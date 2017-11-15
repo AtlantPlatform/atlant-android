@@ -1,5 +1,6 @@
 package com.frostchein.atlant.activities.login;
 
+import android.content.SharedPreferences;
 import com.frostchein.atlant.R;
 import com.frostchein.atlant.activities.base.BasePresenter;
 import com.frostchein.atlant.events.login.SuccessfulAuthorisation;
@@ -7,6 +8,7 @@ import com.frostchein.atlant.events.login.SuccessfulChangePassword;
 import com.frostchein.atlant.events.login.WrongPassword;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DialogUtils;
+import com.frostchein.atlant.utils.SharedPreferencesUtils;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -142,7 +144,8 @@ public class LoginPresenterImpl implements LoginPresenter, BasePresenter {
         CredentialHolder.createPublicKeyByPrivateKey();
       } else {
         isSuccessCurrentPassword = true;
-        CredentialHolder.loadSetting(view.getContext());
+        SharedPreferences prefs = CredentialHolder.loadSetting(view.getContext());
+        CredentialHolder.setNumberToken(view.getContext(), prefs.getInt(SharedPreferencesUtils.TAG_CURRENT_VALUE, -1));
         view.onSuccessfulAuthorisation(password);
       }
     }
