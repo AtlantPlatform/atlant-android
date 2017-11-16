@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:layout_marginTop="@dimen/activity_vertical_title_margin"
   android:orientation="vertical">
 
   <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:fillViewport="true">
 
     <LinearLayout
@@ -18,90 +17,101 @@
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:padding="10dp"
-        android:background="@color/colorAccentLight"
-        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <EditText
-          android:id="@+id/send_address_edit"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:background="@android:color/transparent"
-          android:fontFamily="sans-serif-thin"
-          android:hint="@string/send_address_hint"
-          android:inputType="textMultiLine"
-          android:maxLength="42"
-          android:maxLines="2"
-          android:textColor="@color/colorPrimaryText"
-          android:textColorHint="@color/colorPrimaryTextAlpha"
-          android:textSize="@dimen/text_size_18"/>
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="64dp"
+          android:layout_marginTop="@dimen/activity_vertical_margin"
+          android:layout_marginBottom="@dimen/activity_vertical_margin"
+          android:padding="10dp"
+          android:background="@color/colorAccentLight"
+          android:gravity="center"
+          android:orientation="vertical">
 
-      </LinearLayout>
+          <EditText
+            android:id="@+id/send_address_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="sans-serif-thin"
+            android:hint="@string/send_address_hint"
+            android:inputType="textMultiLine"
+            android:maxLength="42"
+            android:maxLines="2"
+            android:textColor="@color/colorPrimaryText"
+            android:textColorHint="@color/colorPrimaryTextAlpha"
+            android:textSize="@dimen/text_size_18"/>
 
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:gravity="center"
-        android:orientation="vertical">
+        </LinearLayout>
 
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/send_text"
-          android:textColor="@color/colorPrimaryText"
-          android:textSize="@dimen/text_size_14"/>
-
-        <EditText
-          android:id="@+id/send_value"
+        <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/activity_vertical_margin"
-          android:background="@android:color/transparent"
-          android:fontFamily="sans-serif-thin"
+          android:layout_marginBottom="@dimen/activity_vertical_margin"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginRight="@dimen/activity_horizontal_margin"
           android:gravity="center"
-          android:hint="@string/send_value_hint"
-          android:inputType="numberDecimal"
-          android:lines="1"
-          android:textColor="@color/colorPrimaryText"
-          android:textColorHint="@color/colorPrimaryTextAlpha"
-          android:textSize="30sp"/>
+          android:orientation="vertical">
 
-        <TextView
-          android:layout_width="wrap_content"
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_text"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_14"/>
+
+          <EditText
+            android:id="@+id/send_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@android:color/transparent"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:hint="@string/send_value_hint"
+            android:inputType="numberDecimal"
+            android:lines="1"
+            android:textColor="@color/colorPrimaryText"
+            android:textColorHint="@color/colorPrimaryTextAlpha"
+            android:textSize="30sp"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/system_dash"
+            android:textColor="@color/colorPrimaryText"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:fontFamily="sans-serif-thin"
-          android:text="@string/system_dash"
-          android:textColor="@color/colorPrimaryText"/>
+          android:layout_marginTop="@dimen/activity_vertical_margin"
+          android:gravity="center">
+
+          <Button
+            android:id="@+id/bt_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bt_send"/>
+
+        </LinearLayout>
 
       </LinearLayout>
 
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:gravity="center">
-
-        <Button
-          android:id="@+id/bt_close"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/bt_send"/>
-
-      </LinearLayout>
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/activity_vertical_margin2x"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="bottom|center_horizontal">
 
         <include layout="@layout/view_copyright"/>
 
