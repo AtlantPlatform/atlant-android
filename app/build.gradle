@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    compileSdkVersion 27
+    buildToolsVersion "26.0.2"
     defaultConfig {
         def release = (project.gradle.startParameter.taskNames.any { it.toLowerCase().contains('release') })
         applicationId "com.frostchein.atlant"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 7
         versionName "0.5.1"
         multiDexEnabled release
@@ -21,24 +20,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+    }
     applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            output.outputFile = new File(
-                    output.outputFile.parent,
-                    output.outputFile.name.replace(".apk", "_" + "atlant" + "_" + versionName + ".apk"))
+        variant.outputs.all {
+            outputFileName = "atlant-${variant.name}-v${variant.versionName}.apk"
         }
     }
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-        }
-    }
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86'
-            universalApk true
         }
     }
     packagingOptions {
@@ -58,10 +50,10 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     //Design
-    compile 'com.android.support:appcompat-v7:26.0.0-beta1'
-    compile 'com.android.support:recyclerview-v7:26.0.0-beta1'
-    compile 'com.android.support:cardview-v7:26.0.0-beta1'
-    compile 'com.android.support:design:26.0.0-beta1'
+    compile 'com.android.support:appcompat-v7:27.0.1'
+    compile 'com.android.support:recyclerview-v7:27.0.1'
+    compile 'com.android.support:cardview-v7:27.0.1'
+    compile 'com.android.support:design:27.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'net.danlew:android.joda:2.9.4.1'
     compile('com.mikepenz:materialdrawer:5.9.2@aar') {
@@ -69,21 +61,21 @@ dependencies {
     }
     compile 'me.zhanghai.android.materialprogressbar:library:1.4.1'
     //MAP
-    compile 'com.google.android.gms:play-services-maps:11.0.2'
+    compile 'com.google.android.gms:play-services-maps:11.6.0'
     //Architecture
-    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:multidex:1.0.2'
     compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'org.greenrobot:eventbus:3.0.0'
-    apt 'com.google.dagger:dagger-compiler:2.8'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
     compile 'com.google.dagger:dagger:2.8'
     //Network
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     //QR
-    compile 'com.google.zxing:core:3.2.1'
+    compile 'com.google.zxing:core:3.3.0'
     compile 'me.dm7.barcodescanner:zxing:1.9'
     //Ethereum
     compile 'org.web3j:core-android:2.2.1'
