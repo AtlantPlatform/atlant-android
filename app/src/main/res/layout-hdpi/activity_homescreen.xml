@@ -14,9 +14,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 
-  <com.frostchein.atlant.views.NoTransactionView
-    android:id="@+id/no_transactions_view"
+  <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <com.frostchein.atlant.views.NoTransactionView
+      android:id="@+id/no_transactions_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+  </ScrollView>
 
 </RelativeLayout>

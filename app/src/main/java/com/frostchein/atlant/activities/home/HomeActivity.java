@@ -98,7 +98,7 @@ public class HomeActivity extends BaseActivity implements HomeView, ToolbarWalle
 
   @Override
   public void setNoTransactionsOnView(int[] pointChart) {
-    enableScrollToolbar();
+    disableScrollToolbar();
     toolbarWalletView.updateChart(pointChart);
     fragmentContentFrame.setVisibility(View.GONE);
     noTransactionView.setVisibility(View.VISIBLE);
