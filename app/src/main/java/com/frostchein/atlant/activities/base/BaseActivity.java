@@ -43,22 +43,16 @@ import com.frostchein.atlant.activities.login_selected.LoginSelectedActivity;
 import com.frostchein.atlant.activities.login_selected_app.LoginSelectedAppActivity;
 import com.frostchein.atlant.activities.main.MainActivity;
 import com.frostchein.atlant.activities.receive.ReceiveActivity;
-import com.frostchein.atlant.activities.rent_details.RentDetailsActivity;
-import com.frostchein.atlant.activities.rent_main.RentMainActivity;
-import com.frostchein.atlant.activities.rent_start.RentStartActivity;
 import com.frostchein.atlant.activities.send.SendActivity;
 import com.frostchein.atlant.activities.settings.SettingsActivity;
-import com.frostchein.atlant.activities.trade_start.TradeStartActivity;
 import com.frostchein.atlant.dagger2.component.AppComponent;
 import com.frostchein.atlant.drawer_menu.DrawerContent;
 import com.frostchein.atlant.drawer_menu.DrawerHelper;
 import com.frostchein.atlant.events.login.CredentialsCleared;
-import com.frostchein.atlant.model.rent.Rent;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DialogUtils;
 import com.frostchein.atlant.utils.FontsUtils;
 import com.frostchein.atlant.utils.IntentUtils;
-import com.frostchein.atlant.utils.IntentUtils.EXTRA_STRING;
 import com.frostchein.atlant.views.BaseCustomView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -79,11 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   public static final int REQUEST_CODE_SETTING = 8;
   public static final int REQUEST_CODE_IMPORT_WALLET = 9;
   public static final int REQUEST_CODE_EXPORT = 10;
-  public static final int REQUEST_CODE_RENT_START = 11;
-  public static final int REQUEST_CODE_RENT_MAIN = 12;
-  public static final int REQUEST_CODE_RENT_DETAILS = 13;
-  public static final int REQUEST_CODE_TRADE_START = 14;
-  public static final int REQUEST_CODE_BACKUP = 15;
+  public static final int REQUEST_CODE_BACKUP = 11;
 
   private static final int PERMISSION_REQUEST_CAMERA = 1;
   private static int typeResult;
@@ -297,20 +287,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         goToSettingsActivity(false);
         break;
       }
-
-      case DrawerContent.ITEM_RENT: {
-        goToRentStartActivity(false);
-        break;
-      }
-
-      case DrawerContent.ITEM_WALLET: {
-        break;
-      }
-
-      case DrawerContent.ITEM_TRADE: {
-        goToTradeStartActivity(false);
-        break;
-      }
     }
 
     if (drawerHelper.isDrawerOpen()) {
@@ -384,27 +360,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
   protected void goToExportActivity(boolean withFinish) {
     createIntentWithoutFlags(ExportActivity.class);
     startActivity(REQUEST_CODE_EXPORT, withFinish);
-  }
-
-  protected void goToRentStartActivity(boolean withFinish) {
-    createIntentWithoutFlags(RentStartActivity.class);
-    startActivity(REQUEST_CODE_RENT_START, withFinish);
-  }
-
-  protected void goToRentMainActivity(boolean withFinish) {
-    createIntentWithoutFlags(RentMainActivity.class);
-    startActivity(REQUEST_CODE_RENT_MAIN, withFinish);
-  }
-
-  protected void goToRentDetailsActivity(boolean withFinish, Rent rent) {
-    createIntentWithoutFlags(RentDetailsActivity.class);
-    intent.putExtra(EXTRA_STRING.RENT, rent);
-    startActivity(REQUEST_CODE_RENT_DETAILS, withFinish);
-  }
-
-  protected void goToTradeStartActivity(boolean withFinish) {
-    createIntentWithoutFlags(TradeStartActivity.class);
-    startActivity(REQUEST_CODE_TRADE_START, withFinish);
   }
 
   protected void goToBackupActivity(boolean withFinish) {

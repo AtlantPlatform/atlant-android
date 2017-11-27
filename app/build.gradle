@@ -9,8 +9,8 @@ android {
         applicationId "com.frostchein.atlant"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 8
-        versionName "0.5.2"
+        versionCode 9
+        versionName "0.5.3"
         multiDexEnabled release
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -74,8 +74,6 @@ dependencies {
         transitive = true
     }
     compile 'me.zhanghai.android.materialprogressbar:library:1.4.1'
-    //MAP
-    compile 'com.google.android.gms:play-services-maps:11.6.0'
     //Architecture
     compile 'com.android.support:multidex:1.0.2'
     compile 'com.jakewharton:butterknife:8.2.1'

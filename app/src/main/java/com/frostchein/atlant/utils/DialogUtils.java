@@ -21,7 +21,6 @@ import android.widget.TextView;
 import com.frostchein.atlant.R;
 import com.frostchein.atlant.activities.base.BaseActivity;
 import com.frostchein.atlant.views.DialogError;
-import com.frostchein.atlant.views.DialogRentBookIt;
 
 public final class DialogUtils {
 
@@ -111,26 +110,6 @@ public final class DialogUtils {
         });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         showDialogFullSize(context, 0.8f);
-      }
-    });
-  }
-
-  public static void openDialogRentBookIt(final Context context, final String message,
-      final View.OnClickListener listener) {
-    new Handler().post(new Runnable() {
-      @Override
-      public void run() {
-        dialog = new DialogRentBookIt(context, message, listener);
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-          @Override
-          public void onDismiss(DialogInterface dialog) {
-            DialogUtils.dialog = null;
-          }
-        });
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        showDialogFullSize(context, 1.0f);
       }
     });
   }

@@ -107,12 +107,12 @@ public class LoginSelectedAppActivity extends BaseActivity implements LoginSelec
 
   @Override
   public void startRentals() {
-    goToRentStartActivity(false);
+    showMessage(getString(R.string.system_section_in_development));
   }
 
   @Override
   public void startTrade() {
-    goToTradeStartActivity(false);
+    showMessage(getString(R.string.system_section_in_development));
   }
 
 }

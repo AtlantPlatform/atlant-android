@@ -171,9 +171,9 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
 
     //find max value
     BigInteger maxBigInteger = new BigInteger(String.valueOf(bigIntegers[0]));
-    for (int i = 0; i < arrayBalanceWeek.length; i++) {
-      if (arrayBalanceWeek[i].compareTo(maxBigInteger) == 1) {
-        maxBigInteger = arrayBalanceWeek[i];
+    for (BigInteger anArrayBalanceWeek : arrayBalanceWeek) {
+      if (anArrayBalanceWeek.compareTo(maxBigInteger) == 1) {
+        maxBigInteger = anArrayBalanceWeek;
       }
     }
 

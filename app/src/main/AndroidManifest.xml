@@ -47,26 +47,6 @@
       android:name="com.frostchein.atlant.activities.import_wallet.ImportActivity"
       android:windowSoftInputMode="stateAlwaysHidden"/>
 
-    <activity
-      android:name="com.frostchein.atlant.activities.rent_start.RentStartActivity"
-      android:theme="@style/AppTheme.NoActionBar.Gradient"/>
-
-    <activity
-      android:name="com.frostchein.atlant.activities.rent_main.RentMainActivity"
-      android:theme="@style/AppTheme.NoActionBar.Gradient"/>
-
-    <activity
-      android:name="com.frostchein.atlant.activities.rent_details.RentDetailsActivity"
-      android:theme="@style/AppTheme.NoActionBar.Gradient"/>
-
-    <activity
-      android:name="com.frostchein.atlant.activities.trade_start.TradeStartActivity"
-      android:theme="@style/AppTheme.NoActionBar.Gradient"/>
-
-    <meta-data
-      android:name="com.google.android.geo.API_KEY"
-      android:value="@string/google_maps_key"/>
-
   </application>
 
 </manifest>

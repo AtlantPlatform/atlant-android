@@ -1,10 +1,8 @@
 package com.frostchein.atlant.dagger2.component;
 
 import com.frostchein.atlant.activities.backup.BackupActivity;
-import com.frostchein.atlant.activities.main.MainActivity;
 import com.frostchein.atlant.dagger2.ActivityScope;
 import com.frostchein.atlant.dagger2.modules.BackupActivityModule;
-import com.frostchein.atlant.dagger2.modules.MainActivityModule;
 import dagger.Component;
 
 @ActivityScope

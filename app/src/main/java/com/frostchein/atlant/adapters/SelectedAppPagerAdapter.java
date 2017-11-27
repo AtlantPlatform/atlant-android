@@ -77,26 +77,33 @@ public class SelectedAppPagerAdapter extends BaseAdapterScrollCircular {
           @Override
           public void run() {
             Picasso.with(context).load(arrayList.get(position).getUrl()).resize(ScreenUtils.getWidth(context), 0)
-                .error(R.drawable.rent_warning).into(picassoTargetUtils.getTarget());
+                .error(R.drawable.warning).into(picassoTargetUtils.getTarget());
           }
         }, 10);
       }
     });
 
     Picasso.with(context).load(arrayList.get(position).getUrl()).resize(ScreenUtils.getWidth(context), 0)
-        .error(R.drawable.rent_warning).into(picassoTargetUtils.getTarget());
+        .error(R.drawable.warning).into(picassoTargetUtils.getTarget());
 
     relativeLayout.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
         if (callBack != null) {
-          callBack.onClickItems(position-1);
+          callBack.onClickItems(position - 1);
         }
       }
     });
 
     textTitle1.setText(arrayList.get(position).getTitle1());
     textTitle2.setText(arrayList.get(position).getTitle2());
+
+    float alpha = 0.3f;
+    if (position != 1 && position != 4) {
+      textTitle1.setAlpha(alpha);
+      textTitle2.setAlpha(alpha);
+    }
+
     container.addView(view);
     return view;
   }
