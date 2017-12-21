@@ -99,7 +99,7 @@ public class SelectedAppPagerAdapter extends BaseAdapterScrollCircular {
     textTitle2.setText(arrayList.get(position).getTitle2());
 
     float alpha = 0.3f;
-    if (position != 1 && position != 4) {
+    if (position != 1 && position != 2 && position != 4) {
       textTitle1.setAlpha(alpha);
       textTitle2.setAlpha(alpha);
     }

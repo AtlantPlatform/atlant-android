@@ -1,5 +1,7 @@
 package com.frostchein.atlant.activities.login_selected_app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
@@ -107,7 +109,14 @@ public class LoginSelectedAppActivity extends BaseActivity implements LoginSelec
 
   @Override
   public void startRentals() {
-    showMessage(getString(R.string.system_section_in_development));
+    String appPackageName = "io.atlant.rent";
+    Intent launchIntent = getPackageManager().getLaunchIntentForPackage(appPackageName);
+    if (launchIntent != null) {
+      startActivity(launchIntent);
+    } else {
+      String url = "https://play.google.com/store/apps/details?id=" + appPackageName;
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+    }
   }
 
   @Override
