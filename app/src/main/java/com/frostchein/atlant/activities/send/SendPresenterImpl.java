@@ -13,9 +13,9 @@ import com.frostchein.atlant.rest.AtlantApi;
 import com.frostchein.atlant.rest.AtlantClient;
 import com.frostchein.atlant.rest.NetModule;
 import com.frostchein.atlant.rest.TransactionRestHandler;
+import com.frostchein.atlant.rest.WalletLoading;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
-import com.frostchein.atlant.utils.WalletLoading;
 import com.frostchein.atlant.utils.tokens.Token;
 import java.math.BigInteger;
 import javax.inject.Inject;
@@ -32,6 +32,8 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
   private boolean isUpdate = false;
   private Balance balance;
 
+  private TransactionRestHandler transactionRestHandler;
+
   @Inject
   SendPresenterImpl(SendView view) {
     this.view = view;
@@ -39,6 +41,7 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
     atlantClient = new AtlantClient(atlantApi);
     walletLoading = new WalletLoading(atlantClient, view, BaseActivity.REQUEST_CODE_SEND);
     walletLoading.setCallBack(this);
+    transactionRestHandler = new TransactionRestHandler();
   }
 
   @Override
@@ -116,7 +119,7 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
       isPrepare = true;
       isUpdate = false;
       view.showProgressDialog(view.getContext().getString(R.string.send_preparing));
-      TransactionRestHandler.preparationTransaction(atlantClient, CredentialHolder.getAddress());
+      transactionRestHandler.preparationTransaction(atlantClient, CredentialHolder.getAddress());
     }
   }
 
@@ -185,7 +188,7 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
             try {
               Token token = CredentialHolder.getCurrentToken();
               if (token != null) {
-                TransactionRestHandler.sendTransactionToken(
+                transactionRestHandler.sendTransactionToken(
                     atlantClient,
                     onStatusSuccess.getNonce(), onStatusSuccess.getGasPrice(),
                     view.getAddress(), view.getValue(),
@@ -193,7 +196,7 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
                     token.getContractAddress(),
                     token.getContractId());
               } else {
-                TransactionRestHandler.sendTransaction(atlantClient,
+                transactionRestHandler.sendTransaction(atlantClient,
                     onStatusSuccess.getNonce(), onStatusSuccess.getGasPrice(),
                     view.getAddress(), view.getValue(),
                     CredentialHolder.getCredentials(), Config.GAS_LIMIT);

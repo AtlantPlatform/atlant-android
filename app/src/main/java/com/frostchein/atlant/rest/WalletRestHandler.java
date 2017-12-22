@@ -15,21 +15,25 @@ import org.greenrobot.eventbus.EventBus;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public final class WalletRestHandler {
+final class WalletRestHandler {
 
-  private static Call<Balance> callBalance;
-  private static Call<Transactions> callTransactions;
-  private static Call<TransactionsTokens> callTransactionsTokens;
+  private Call<Balance> callBalance;
+  private Call<Transactions> callTransactions;
+  private Call<TransactionsTokens> callTransactionsTokens;
 
-  public static void requestWalletInfo(AtlantClient atlantClient, String address, Token token, int requestCode) {
+  private Balance balance;
+  private Transactions transactions;
+  private TransactionsTokens transactionsTokens;
+
+  void requestWalletInfo(AtlantClient atlantClient, String address, Token token, int requestCode) {
     requestBalance(atlantClient, address, token, requestCode);
   }
 
-  public static void requestWalletInfo(AtlantClient atlantClient, String address, int requestCode) {
+  void requestWalletInfo(AtlantClient atlantClient, String address, int requestCode) {
     requestBalance(atlantClient, address, null, requestCode);
   }
 
-  public static void cancel() {
+  void cancel() {
     if (callBalance != null) {
       callBalance.cancel();
     }
@@ -43,9 +47,12 @@ public final class WalletRestHandler {
     callBalance = null;
     callTransactions = null;
     callTransactionsTokens = null;
+    balance = null;
+    transactions = null;
+    transactionsTokens = null;
   }
 
-  private static void requestBalance(
+  private void requestBalance(
       final AtlantClient atlantClient,
       final String address,
       final Token token,
@@ -54,11 +61,16 @@ public final class WalletRestHandler {
     BaseRequest<Balance> callback = new BaseRequest<>(new BaseRequest.Callback<Balance>() {
       @Override
       public void onResponse(Response<Balance> response) {
-        if (token == null) {
-          requestTransactions(atlantClient, address, response.body(), requestCode);
-        } else {
-          requestTokenTransactions(atlantClient, address, token, response.body(), true, null, requestCode);
+        balance = response.body();
+
+        if (balance != null && (transactionsTokens != null || transactions != null)) {
+          if (token == null) {
+            EventBus.getDefault().post(new OnStatusSuccess(requestCode, balance, transactions, null));
+          } else {
+            EventBus.getDefault().post(new OnStatusSuccess(requestCode, balance, transactionsTokens, token));
+          }
         }
+
       }
     }, requestCode);
 
@@ -69,11 +81,10 @@ public final class WalletRestHandler {
     }
   }
 
-  private static void requestTokenTransactions(
+  void requestTokenTransactions(
       final AtlantClient atlantClient,
       final String address,
       final Token token,
-      final Balance balance,
       final boolean transactionIn,
       final ArrayList<TransactionsTokensItem> transactionsTokensItems,
       final int requestCode) {
@@ -91,7 +102,7 @@ public final class WalletRestHandler {
                   for (int i = 0; i < listIn.size(); i++) {
                     listIn.get(i).setTransactionsIn(true);
                   }
-                  requestTokenTransactions(atlantClient, address, token, balance, false, listIn, requestCode);
+                  requestTokenTransactions(atlantClient, address, token, false, listIn, requestCode);
                 }
               });
               thread.start();
@@ -118,10 +129,13 @@ public final class WalletRestHandler {
                     }
                   });
 
-                  TransactionsTokens transactionsTokens = response.body();
+                  transactionsTokens = response.body();
                   transactionsTokens.setTransactionsTokensItems(transactionsTokensItems);
-                  EventBus.getDefault()
-                      .post(new OnStatusSuccess(requestCode, balance, transactionsTokens, token));
+
+                  if (transactionsTokens != null && balance != null) {
+                    EventBus.getDefault()
+                        .post(new OnStatusSuccess(requestCode, balance, transactionsTokens, token));
+                  }
                 }
               });
               thread.start();
@@ -133,18 +147,20 @@ public final class WalletRestHandler {
         .getTokenTransactions(callback, token.getContractAddress(), address, transactionIn);
   }
 
-  private static void requestTransactions(
+  void requestTransactions(
       final AtlantClient atlantClient,
       final String address,
-      final Balance balance,
-      final int baseCode) {
+      final int requestCode) {
 
     BaseRequest<Transactions> callback = new BaseRequest<>(new BaseRequest.Callback<Transactions>() {
       @Override
       public void onResponse(Response<Transactions> response) {
-        EventBus.getDefault().post(new OnStatusSuccess(baseCode, balance, response.body(),null));
+        transactions = response.body();
+        if (transactions != null && balance != null) {
+          EventBus.getDefault().post(new OnStatusSuccess(requestCode, balance, response.body(), null));
+        }
       }
-    }, baseCode);
+    }, requestCode);
 
     callTransactions = atlantClient.getTransactions(callback, address);
   }

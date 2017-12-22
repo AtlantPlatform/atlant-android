@@ -21,15 +21,19 @@ import retrofit2.Response;
 
 public final class TransactionRestHandler {
 
-  private static Call<Nonce> callNonce;
-  private static Call<GasPrice> callGasPrice;
-  private static Call<SendTransactions> callSendTransactions;
+  private Call<Nonce> callNonce;
+  private Call<GasPrice> callGasPrice;
+  private Call<SendTransactions> callSendTransactions;
 
-  public static void preparationTransaction(AtlantClient atlantClient, String address) {
-    getNonce(atlantClient, address);
+  private Nonce nonce;
+  private GasPrice gasPrice;
+
+  public void preparationTransaction(AtlantClient atlantClient, String address) {
+    requestNonce(atlantClient, address);
+    requestGasPrice(atlantClient);
   }
 
-  public static void cancel() {
+  public void cancel() {
     if (callNonce != null) {
       callNonce.cancel();
     }
@@ -42,30 +46,38 @@ public final class TransactionRestHandler {
     callNonce = null;
     callGasPrice = null;
     callSendTransactions = null;
+    nonce = null;
+    gasPrice = null;
   }
 
-  private static void getNonce(final AtlantClient atlantClient, final String address) {
+  private void requestNonce(final AtlantClient atlantClient, final String address) {
     BaseRequest<Nonce> callback = new BaseRequest<>(new BaseRequest.Callback<Nonce>() {
       @Override
       public void onResponse(Response<Nonce> response) {
-        getGasPrice(atlantClient, response.body());
+        nonce = response.body();
+        if (nonce != null && gasPrice != null) {
+          EventBus.getDefault().post(new OnStatusSuccess(BaseActivity.REQUEST_CODE_SEND, nonce, gasPrice));
+        }
       }
     }, BaseActivity.REQUEST_CODE_SEND);
     callNonce = atlantClient.getNonce(callback, address);
   }
 
-  private static void getGasPrice(final AtlantClient atlantClient, final Nonce nonce) {
+  private void requestGasPrice(final AtlantClient atlantClient) {
     BaseRequest<GasPrice> callback = new BaseRequest<>(new BaseRequest.Callback<GasPrice>() {
       @Override
       public void onResponse(Response<GasPrice> response) {
-        EventBus.getDefault().post(new OnStatusSuccess(BaseActivity.REQUEST_CODE_SEND, nonce, response.body()));
+        gasPrice = response.body();
+        if (nonce != null && gasPrice != null) {
+          EventBus.getDefault().post(new OnStatusSuccess(BaseActivity.REQUEST_CODE_SEND, nonce, gasPrice));
+        }
       }
     }, BaseActivity.REQUEST_CODE_SEND);
 
     callGasPrice = atlantClient.getGasPrice(callback);
   }
 
-  public static void sendTransactionToken(
+  public void sendTransactionToken(
       AtlantClient atlantClient,
       Nonce nonce,
       GasPrice gasPrice,
@@ -90,7 +102,7 @@ public final class TransactionRestHandler {
     callSendTransactions = atlantClient.sendTransaction(callbackSendTransactions, hexValue);
   }
 
-  public static void sendTransaction(
+  public void sendTransaction(
       AtlantClient atlantClient,
       Nonce nonce,
       GasPrice gasPrice,

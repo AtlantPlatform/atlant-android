@@ -20,7 +20,7 @@ import com.frostchein.atlant.rest.NetModule;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
 import com.frostchein.atlant.utils.SharedPreferencesUtils;
-import com.frostchein.atlant.utils.WalletLoading;
+import com.frostchein.atlant.rest.WalletLoading;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -184,7 +184,6 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
         arrayBalanceWeek[i] = arrayBalanceWeek[i].multiply(BigInteger.valueOf(100)).divide(maxBigInteger);
       }
       point[i] = arrayBalanceWeek[i].intValue();
-      System.out.println(point[i]);
     }
     return point;
   }

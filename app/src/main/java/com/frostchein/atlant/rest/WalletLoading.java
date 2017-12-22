@@ -1,4 +1,4 @@
-package com.frostchein.atlant.utils;
+package com.frostchein.atlant.rest;
 
 import android.os.AsyncTask;
 import com.frostchein.atlant.activities.base.BaseView;
@@ -6,8 +6,8 @@ import com.frostchein.atlant.events.network.OnStatusError;
 import com.frostchein.atlant.events.network.OnStatusSuccess;
 import com.frostchein.atlant.events.network.OnStatusTimeOut;
 import com.frostchein.atlant.model.Balance;
-import com.frostchein.atlant.rest.AtlantClient;
-import com.frostchein.atlant.rest.WalletRestHandler;
+import com.frostchein.atlant.utils.ConnectivityUtils;
+import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.tokens.Token;
 
 public class WalletLoading {
@@ -25,7 +25,7 @@ public class WalletLoading {
     void onTimeOut();
   }
 
-
+  private WalletRestHandler walletRestHandler;
   private AtlantClient atlantClient;
   private OnCallBack callBack;
   private int requestCode;
@@ -39,6 +39,7 @@ public class WalletLoading {
     this.atlantClient = atlantClient;
     this.view = view;
     this.requestCode = requestCode;
+    this.walletRestHandler = new WalletRestHandler();
   }
 
   public void refreshContent() {
@@ -48,12 +49,14 @@ public class WalletLoading {
 
           String address = CredentialHolder.getAddress();
 
-          WalletRestHandler.cancel();
+          walletRestHandler.cancel();
           if (CredentialHolder.getCurrentToken() == null) {
-            WalletRestHandler.requestWalletInfo(atlantClient, address, requestCode);
+            walletRestHandler.requestWalletInfo(atlantClient, address, requestCode);
+            walletRestHandler.requestTransactions(atlantClient,address,requestCode);
           } else {
             Token token = CredentialHolder.getCurrentToken();
-            WalletRestHandler.requestWalletInfo(atlantClient, address, token, requestCode);
+            walletRestHandler.requestWalletInfo(atlantClient, address, token, requestCode);
+            walletRestHandler.requestTokenTransactions(atlantClient, address, token,true,null,requestCode);
           }
 
         } catch (Exception e) {
