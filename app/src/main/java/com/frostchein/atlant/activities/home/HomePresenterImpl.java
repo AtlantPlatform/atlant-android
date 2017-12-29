@@ -17,10 +17,10 @@ import com.frostchein.atlant.model.TransactionsTokensItem;
 import com.frostchein.atlant.rest.AtlantApi;
 import com.frostchein.atlant.rest.AtlantClient;
 import com.frostchein.atlant.rest.NetModule;
+import com.frostchein.atlant.rest.WalletLoading;
 import com.frostchein.atlant.utils.CredentialHolder;
 import com.frostchein.atlant.utils.DigitsUtils;
 import com.frostchein.atlant.utils.SharedPreferencesUtils;
-import com.frostchein.atlant.rest.WalletLoading;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -228,7 +228,6 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
 
   @Override
   public void responseTransactions(Object transactions) {
-    // try {
     if (transactions != null) {
       int[] pointChart;
       if (transactions instanceof Transactions
@@ -236,7 +235,13 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
           && ((Transactions) transactions).getTransactionsItem().size() > 0) {
 
         ArrayList<Object> list = convertArrayListToObject((transactions));
-        pointChart = getPointChart(balance, list);
+        try {
+          pointChart = getPointChart(balance, list);
+        } catch (Exception e) {
+          e.printStackTrace();
+          view.onLoadingError();
+          pointChart = getPointChartNoTransactions();
+        }
         view.setTransactionsOnFragment(list, pointChart);
 
       } else if (transactions instanceof TransactionsTokens
@@ -244,7 +249,13 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
           && ((TransactionsTokens) transactions).getTransactionsTokensItems().size() > 0) {
 
         ArrayList<Object> list = convertArrayListToObject((transactions));
-        pointChart = getPointChart(balance, list);
+        try {
+          pointChart = getPointChart(balance, list);
+        } catch (Exception e) {
+          e.printStackTrace();
+          view.onLoadingError();
+          pointChart = getPointChartNoTransactions();
+        }
         view.setTransactionsOnFragment(list, pointChart);
 
       } else {
@@ -253,9 +264,6 @@ public class HomePresenterImpl implements HomePresenter, WalletLoading.OnCallBac
     } else {
       view.setNoTransactionsOnView(getPointChartNoTransactions());
     }
- /*   } catch (Exception e) {
-      view.onLoadingError();
-    }*/
   }
 
   @Override

@@ -108,27 +108,31 @@ public class ToolbarWalletView extends BaseCustomView {
   @SuppressWarnings("unchecked")
   @Override
   public void setContent(Object... objects) {
-    try {
-      if (objects != null && objects.length > 0) {
-        Balance balance = (Balance) objects[0];
 
-        String value = null;
-        if (balance != null) {
-          value = balance.getResult();
-        }
+    if (objects != null && objects.length > 0) {
+      Balance balance = (Balance) objects[0];
 
-        if (value == null || value.isEmpty()) {
-          value = "0";
-        }
+      String value = null;
+      if (balance != null) {
+        value = balance.getResult();
+      }
 
-        selectTab();
+      if (value == null || value.isEmpty()) {
+        value = "0";
+      }
 
-        String s = DigitsUtils.valueToString(new BigInteger(value));
-        textValue.setText(s);
+      selectTab();
+
+      String strBalance;
+      try {
+        strBalance = DigitsUtils.valueToString(new BigInteger(value));
+        textValue.setText(strBalance);
+      } catch (Exception e) {
+        strBalance = "0";
+        e.printStackTrace();
 
       }
-    } catch (Exception e) {
-      e.printStackTrace();
+      textValue.setText(strBalance);
     }
   }
 

@@ -55,7 +55,6 @@ public class TransactionItemView extends BaseCustomView {
    */
   @Override
   public void setContent(Object... objects) {
-    try {
       if (objects != null) {
 
         BigInteger bigIntegerData = null;
@@ -95,11 +94,7 @@ public class TransactionItemView extends BaseCustomView {
           setDate(bigIntegerData);
           setValue(bigIntegerValue);
         }
-
       }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
   }
 
   private void setReceived() {

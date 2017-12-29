@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/linear"
   android:layout_width="match_parent"
   android:layout_height="72dp"
-  android:background="@color/transactions_received_bg"
   android:gravity="center_vertical"
-  android:orientation="horizontal">
+  android:orientation="horizontal"
+  tools:background="@color/transactions_self_bg">
 
   <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:gravity="center">
 
@@ -17,14 +19,16 @@
       android:id="@+id/view_transaction_image"
       android:layout_width="16dp"
       android:layout_height="16dp"
+      android:contentDescription="@string/system_image"
       android:scaleType="centerCrop"
-      android:src="@mipmap/ic_transactions_received"/>
+      tools:src="@mipmap/ic_transactions_self"/>
 
   </LinearLayout>
 
   <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:gravity="center_vertical"
     android:orientation="vertical">
@@ -33,7 +37,7 @@
       android:id="@+id/view_transaction_status_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/transaction_status_received"
+      android:text="@string/system_wallet_loading_error"
       android:textColor="@color/transactions_text"
       android:textSize="@dimen/text_size_18"/>
 
@@ -42,9 +46,9 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/activity_vertical_title_margin"
-      android:text="data"
       android:textColor="@color/transactions_text"
-      android:textSize="@dimen/text_size_12"/>
+      android:textSize="@dimen/text_size_12"
+      tools:text="data"/>
 
   </LinearLayout>
 
@@ -57,11 +61,12 @@
       android:id="@+id/view_transaction_value_text"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_horizontal_margin"
       android:layout_marginRight="@dimen/activity_horizontal_margin"
       android:gravity="end"
-      android:text="0"
       android:textColor="@color/transactions_text"
-      android:textSize="@dimen/text_size_18"/>
+      android:textSize="@dimen/text_size_18"
+      tools:text="0"/>
 
   </LinearLayout>
 

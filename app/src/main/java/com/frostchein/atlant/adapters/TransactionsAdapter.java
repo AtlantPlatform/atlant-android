@@ -50,7 +50,11 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
   @Override
   public void onBindViewHolder(MyViewHolder holder, int position) {
     if (position != getItemCount() - 1) {
-      holder.transactionItemView.setContent(arrayItems.get(position));
+      try {
+        holder.transactionItemView.setContent(arrayItems.get(position));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
   }
 
