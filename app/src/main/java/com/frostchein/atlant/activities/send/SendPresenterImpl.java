@@ -104,7 +104,13 @@ public class SendPresenterImpl implements SendPresenter, WalletLoading.OnCallBac
         return;
       }
 
-      if (value > Double.parseDouble(DigitsUtils.valueToString(new BigInteger(balance.getResult())))) {
+      try {
+        if (value > Double.parseDouble(DigitsUtils.valueToString(new BigInteger(balance.getResult())))) {
+          view.onNoMoney();
+          return;
+        }
+      } catch (NumberFormatException e) {
+        e.printStackTrace();
         view.onNoMoney();
         return;
       }
