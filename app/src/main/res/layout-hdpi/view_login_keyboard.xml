@@ -115,7 +115,8 @@
       style="@style/LoginKeyboardButton"
       android:padding="0dp"
       android:background="@drawable/highlight_circle"
-      android:text="@string/keyboard_sos"
+      android:text="@string/keyboard_sos" 
+      android:visibility="invisible"
       android:textSize="@dimen/text_size_18"/>
 
     <TextView
