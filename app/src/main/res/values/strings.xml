@@ -34,7 +34,7 @@
 
 <resources>
   <!--app-->
-  <string name="app_name">Atlant</string>
+  <string name="app_name">ATLANT Wallet</string>
   <string name="app_prefix_coin">ATL</string>
 
   <!--menu & toolbar-->
