@@ -163,7 +163,7 @@
   <string name="system_wallet_loading_error">Error loading data</string>
   <string name="system_timeout">Could not connect to the server, please try again later.</string>
   <string name="system_image">Image</string>
-  <string name="system_copyright">Copyright © Atlant.io, 2017</string>
+  <string name="system_copyright">Copyright © Atlant.io, 2019</string>
   <string name="system_value_default">0</string>
   <string name="system_dash">- - - - - - - - - - - - - - - - - -</string>
 
