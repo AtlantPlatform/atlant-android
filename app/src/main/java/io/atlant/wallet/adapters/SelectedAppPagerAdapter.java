@@ -42,9 +42,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import atlant.wallet.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import atlant.wallet.R;
+
 import io.atlant.wallet.model.SelectedApp;
 import io.atlant.wallet.utils.PicassoTargetUtils;
 import io.atlant.wallet.utils.ScreenUtils;
@@ -110,14 +112,14 @@ public class SelectedAppPagerAdapter extends BaseAdapterScrollCircular {
         handler.postDelayed(new Runnable() {
           @Override
           public void run() {
-            Picasso.with(context).load(arrayList.get(position).getUrl()).resize(ScreenUtils.getWidth(context), 0)
+            Picasso.with(context).load(arrayList.get(position).getResDrawable()).resize(ScreenUtils.getWidth(context), 0)
                 .error(R.drawable.warning).into(picassoTargetUtils.getTarget());
           }
         }, 10);
       }
     });
 
-    Picasso.with(context).load(arrayList.get(position).getUrl()).resize(ScreenUtils.getWidth(context), 0)
+    Picasso.with(context).load(arrayList.get(position).getResDrawable())
         .error(R.drawable.warning).into(picassoTargetUtils.getTarget());
 
     relativeLayout.setOnClickListener(new OnClickListener() {

@@ -55,9 +55,9 @@ public class LoginSelectedAppPresenterImpl implements LoginSelectedAppPresenter,
   @Override
   public void onCreate() {
     Context context = view.getContext();
-    String url1 = "https://atlant.io/promo/android/1.png";
-    String url2 = "https://atlant.io/promo/android/3.png";
-    String url3 = "https://atlant.io/promo/android/2.png";
+    int url1 = R.drawable.start_wallet;
+    int url2 = R.drawable.start_rent;
+    int url3 = R.drawable.start_exchange;
 
     ArrayList<SelectedApp> arrayListTitle = new ArrayList<>();
 
