@@ -91,7 +91,7 @@
 
         </RelativeLayout>
 
-        <com.frostchein.atlant.views.ImageViewRound
+        <io.atlant.wallet.views.ImageViewRound
           android:id="@+id/login_selected_app_image"
           android:layout_width="275dp"
           android:layout_height="365dp"

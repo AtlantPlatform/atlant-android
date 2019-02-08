@@ -34,7 +34,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.frostchein.atlant">
+  package="atlant.wallet">
 
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -45,40 +45,40 @@
     android:hardwareAccelerated="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
-    android:name="com.frostchein.atlant.MyApplication"
+    android:name="io.atlant.wallet.MyApplication"
     android:supportsRtl="true"
     android:theme="@style/AppTheme.NoActionBar.Image">
 
     <activity
-      android:name="com.frostchein.atlant.activities.main.MainActivity"
+      android:name="io.atlant.wallet.activities.main.MainActivity"
       android:theme="@style/AppTheme.NoActionBar.SplashScreen">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name="com.frostchein.atlant.activities.home.HomeActivity"/>
-    <activity android:name="com.frostchein.atlant.activities.login_selected.LoginSelectedActivity"/>
-    <activity android:name="com.frostchein.atlant.activities.login_selected_app.LoginSelectedAppActivity"/>
-    <activity android:name="com.frostchein.atlant.activities.export_wallet.ExportActivity"/>
-    <activity android:name="com.frostchein.atlant.activities.receive.ReceiveActivity"/>
-    <activity android:name="com.frostchein.atlant.activities.backup.BackupActivity"/>
-    <activity android:name="com.frostchein.atlant.activities.camera.CameraActivity"/>
+    <activity android:name="io.atlant.wallet.activities.home.HomeActivity"/>
+    <activity android:name="io.atlant.wallet.activities.login_selected.LoginSelectedActivity"/>
+    <activity android:name="io.atlant.wallet.activities.login_selected_app.LoginSelectedAppActivity"/>
+    <activity android:name="io.atlant.wallet.activities.export_wallet.ExportActivity"/>
+    <activity android:name="io.atlant.wallet.activities.receive.ReceiveActivity"/>
+    <activity android:name="io.atlant.wallet.activities.backup.BackupActivity"/>
+    <activity android:name="io.atlant.wallet.activities.camera.CameraActivity"/>
 
     <activity
-      android:name="com.frostchein.atlant.activities.settings.SettingsActivity"
+      android:name="io.atlant.wallet.activities.settings.SettingsActivity"
       android:theme="@style/AppTheme.NoActionBar.Settings"/>
 
     <activity
-      android:name="com.frostchein.atlant.activities.login.LoginActivity"
+      android:name="io.atlant.wallet.activities.login.LoginActivity"
       android:windowSoftInputMode="stateAlwaysHidden"/>
 
     <activity
-      android:name="com.frostchein.atlant.activities.send.SendActivity"
+      android:name="io.atlant.wallet.activities.send.SendActivity"
       android:windowSoftInputMode="stateAlwaysHidden"/>
 
     <activity
-      android:name="com.frostchein.atlant.activities.import_wallet.ImportActivity"
+      android:name="io.atlant.wallet.activities.import_wallet.ImportActivity"
       android:windowSoftInputMode="stateAlwaysHidden"/>
 
   </application>

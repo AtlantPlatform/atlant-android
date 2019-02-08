@@ -6,11 +6,11 @@ android {
     buildToolsVersion "26.0.2"
     defaultConfig {
         def release = (project.gradle.startParameter.taskNames.any { it.toLowerCase().contains('release') })
-        applicationId "com.frostchein.atlant"
+        applicationId "io.atlant.wallet"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 11
-        versionName "0.6.1"
+        versionCode 12
+        versionName "0.6.2"
         multiDexEnabled release
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

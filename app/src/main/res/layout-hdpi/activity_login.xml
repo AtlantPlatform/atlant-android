@@ -73,7 +73,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.frostchein.atlant.views.PasswordView
+        <io.atlant.wallet.views.PasswordView
           android:id="@+id/login_password_view"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
@@ -96,7 +96,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="bottom">
 
-        <com.frostchein.atlant.views.LoginKeyboardView
+        <io.atlant.wallet.views.LoginKeyboardView
           android:id="@+id/login_keyboard"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             android:textColor="@color/primary"
             android:visibility="invisible"
             tools:ignore="TextFields"/>
-        </com.frostchein.atlant.views.LoginKeyboardView>
+        </io.atlant.wallet.views.LoginKeyboardView>
 
       </RelativeLayout>
 
