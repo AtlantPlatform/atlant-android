@@ -43,6 +43,7 @@
   <color name="colorAccentLight">#3231edd7</color>
   <color name="colorWindow">#ffffff</color>
   <color name="alpha">#00000000</color>
+  <color name="colorBackgroundIcon">#001CA2</color>
 
   <!--button-->
   <color name="button_gradient1_normal">#f6aa2b</color>
