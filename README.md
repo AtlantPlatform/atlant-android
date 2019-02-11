@@ -1,41 +1,30 @@
 # atlant-android
-## ATLANT Wallet for Android
+## Atlant Wallet for Android
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/12106540/29994000-3d005684-8fce-11e7-97ea-a16a6c607a3f.png" />
+<img src="https://avatars3.githubusercontent.com/u/30299272?s=400&u=b11d6a41091e04d7e133a758e6efb917371b981d&v=4" width="175">
 </p>
 
-Discover the ATLANT Platform with our brand new Android app!
-
-ATLANT app includes a multi-coin ATLANT Wallet, P2P Rentals and Token Exchange.
-ATLANT Wallet currently supports Ether and ATLANT platform tokens (ATL), giving you full control over your money and privacy.
-
-Access your Ethereum wallet on your Android phone or create a new wallet. It's free and takes just a few seconds.
-
-ATLANT Wallet gives you full control over your money and privacy, allowing private key management.
+- Wallet for Ethereum (ETH) and Atlant (ATL) tokens
+- Access your Ethereum wallet or create a new wallet on any Android device
+- Full control over your money with private key management
+- Note: Small amount of ETH is required to send tokens due to network fees
 
 
 ## KEY FEATURES
 
 • **Multi-Currency** 
 
-Native support for Ether and ATLANT tokens. Continuous integration of Property Tokens listed on the ATLANT Platform.
+Native support for Ethereum and Atlant tokens. Continuous support for Property Tokens listed on Atlant.
 
 • **Strong Security**
 
-Your private keys never leave your device. Strong wallet encryption and cryptography guarantee that your funds will remain safe.
+Your private keys never leave your device. Strong wallet encryption and cryptography guarantees that your funds are safe.
 
 • **Secure Backup**
 
-ATLANT Wallet allows for a simple and quick private key export with a possibility to import later using any Ethereum wallet.
+Atlant Wallet allows for a simple and quick private key export with possibility to import the keys later using any Ethereum wallet.
 
-• **Token Exchange**
-
-Ability to swap Ether and ATLANT tokens is scheduled for future releases.
-
-• **Peer-to-Peer Property Rentals**
-
-P2P Rentals Demo already available in the app, live implementation is scheduled for future releases.
 
 
 ## List of supported features 
@@ -48,10 +37,6 @@ P2P Rentals Demo already available in the app, live implementation is scheduled 
 * Wallet settings management
 * PIN management
 * Full control over private keys
-* P2P Rentals (DEMO)
-* Token Exchange (mockup)
-
-**ATTENTION Platform tokens (ATL) sending is disabled until the end of the ATLANT ICO**
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/12106540/32139739-4b66a818-bc5b-11e7-9bd4-646929ac78b7.png" width="320" />
@@ -60,16 +45,6 @@ P2P Rentals Demo already available in the app, live implementation is scheduled 
 <img src="https://user-images.githubusercontent.com/12106540/32139768-e83c2ffa-bc5b-11e7-93bd-8d737ba85ec6.png" width="320" />
 </p>
 
-## List of features scheduled for future releases
-* Property tokens fetch balance and tx history
-* Property tokens send and receive tokens
-* Token swap (ETH / ATL / Property) via ADEX contracts
-* Token trading via ADEX exchange
-* Peer-to-peer property rentals (live)
-* Rental contracts management
-* Property Token Offerings (PTOs)
-* Opt-in identity management
+App binaries available on the Releases page.
 
-Binary & signatures available on the Releases page.
-
-**Latest release**: https://github.com/AtlantPlatform/atlant-android/releases
+**Latest release**: https://github.com/AtlantPlatform/atlant-android/releases/latest
