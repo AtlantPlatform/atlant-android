@@ -26,9 +26,8 @@ Your private keys never leave your device. Strong wallet encryption and cryptogr
 Atlant Wallet allows for a simple and quick private key export with possibility to import the keys later using any Ethereum wallet.
 
 
-
 ## List of supported features 
-* ETH wallet creation & encryption
+* Ethereum wallet creation & encryption
 * ATL fetch balance and tx history
 * ATL send and receive tokens
 * ETH fetch balance and tx history
@@ -38,13 +37,8 @@ Atlant Wallet allows for a simple and quick private key export with possibility 
 * PIN management
 * Full control over private keys
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/12106540/32139739-4b66a818-bc5b-11e7-9bd4-646929ac78b7.png" width="320" />
-<img src="https://user-images.githubusercontent.com/12106540/32139762-cc4fbb9a-bc5b-11e7-9822-cd8a1cc184de.png" width="320" />
-<img src="https://user-images.githubusercontent.com/12106540/32139756-94d6dce8-bc5b-11e7-843f-572655662af9.png" width="320" />
-<img src="https://user-images.githubusercontent.com/12106540/32139768-e83c2ffa-bc5b-11e7-93bd-8d737ba85ec6.png" width="320" />
-</p>
 
+## App binaries (apk) 
 App binaries available on the Releases page.
 
 **Latest release**: https://github.com/AtlantPlatform/atlant-android/releases/latest
