@@ -9,9 +9,9 @@ android {
         applicationId "io.atlant.wallet"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 12
-        versionName "0.6.2"
-        multiDexEnabled release
+        versionCode 13
+        versionName "0.6.3"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -142,7 +142,7 @@ public final class TransactionRestHandler {
         @Override
         public void onResponse(Response<SendTransactions> response) {
           //ok
-          if (response.body().getResult() != null) {
+          if (response.body().getResult() != null && response.body().getStatus() !=0) {
             EventBus.getDefault().post(new OnStatusSuccess(BaseActivity.REQUEST_CODE_SEND));
           } else {
             //fail
@@ -150,7 +150,8 @@ public final class TransactionRestHandler {
               EventBus.getDefault()
                   .post(new OnStatusError(BaseActivity.REQUEST_CODE_SEND, response.body().getError().getMessage()));
             } else {
-              EventBus.getDefault().post(new OnStatusError(BaseActivity.REQUEST_CODE_SEND));
+              EventBus.getDefault()
+                      .post(new OnStatusError(BaseActivity.REQUEST_CODE_SEND, response.body().getResult()));
             }
           }
         }

@@ -15,6 +15,9 @@ public class SendTransactions {
   @SerializedName("jsonrpc")
   @Expose
   private String jsonrpc;
+  @SerializedName("status")
+  @Expose
+  private int status=-1;
   @SerializedName("result")
   @Expose
   private String result;
@@ -35,6 +38,10 @@ public class SendTransactions {
 
   public String getResult() {
     return result;
+  }
+
+  public int getStatus(){
+    return status;
   }
 
   public void setResult(String result) {
