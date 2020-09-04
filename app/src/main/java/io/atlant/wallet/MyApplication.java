@@ -9,6 +9,10 @@ package io.atlant.wallet;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
+
+import com.facebook.stetho.Stetho;
+
+import atlant.wallet.BuildConfig;
 import io.atlant.wallet.dagger2.component.AppComponent;
 import io.atlant.wallet.dagger2.component.DaggerAppComponent;
 import io.atlant.wallet.dagger2.modules.AppModule;
@@ -28,6 +32,13 @@ public class MyApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
+
+
+    if (BuildConfig.DEBUG) {
+      Stetho.initializeWithDefaults(this);
+    }
+
+
     JodaTimeAndroid.init(this);
     appComponent = DaggerAppComponent.builder()
         .appModule(new AppModule(this))
