@@ -6,7 +6,7 @@
 
 package io.atlant.wallet.rest;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import io.atlant.wallet.Config;
 import io.atlant.wallet.model.Balance;
 import io.atlant.wallet.model.GasPrice;
@@ -15,12 +15,6 @@ import io.atlant.wallet.model.SendTransactions;
 import io.atlant.wallet.model.Transactions;
 import io.atlant.wallet.model.TransactionsTokens;
 
-import io.atlant.wallet.model.Balance;
-import io.atlant.wallet.model.GasPrice;
-import io.atlant.wallet.model.Nonce;
-import io.atlant.wallet.model.SendTransactions;
-import io.atlant.wallet.model.Transactions;
-import io.atlant.wallet.model.TransactionsTokens;
 import retrofit2.Call;
 import retrofit2.Callback;
 

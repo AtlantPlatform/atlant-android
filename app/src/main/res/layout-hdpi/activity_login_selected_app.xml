@@ -41,7 +41,7 @@
           android:textColor="@color/colorPrimaryText"
           android:textSize="30sp"/>
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
           android:id="@+id/login_selected_app_viewpager"
           android:layout_width="match_parent"
           android:layout_height="470dp"

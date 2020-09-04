@@ -6,7 +6,7 @@
 
 package io.atlant.wallet.rest;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import io.atlant.wallet.activities.base.BaseActivity;
 import io.atlant.wallet.events.network.OnStatusError;
 import io.atlant.wallet.events.network.OnStatusSuccess;
@@ -23,13 +23,6 @@ import org.web3j.crypto.TransactionEncoder;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.core.methods.request.RawTransaction;
 
-import io.atlant.wallet.activities.base.BaseActivity;
-import io.atlant.wallet.events.network.OnStatusError;
-import io.atlant.wallet.events.network.OnStatusSuccess;
-import io.atlant.wallet.model.GasPrice;
-import io.atlant.wallet.model.Nonce;
-import io.atlant.wallet.model.SendTransactions;
-import io.atlant.wallet.utils.DigitsUtils;
 import retrofit2.Call;
 import retrofit2.Response;
 

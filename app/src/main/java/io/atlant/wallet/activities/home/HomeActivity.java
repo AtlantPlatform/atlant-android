@@ -9,7 +9,7 @@ package io.atlant.wallet.activities.home;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 import butterknife.BindView;
@@ -17,7 +17,6 @@ import io.atlant.wallet.activities.camera.CameraActivity;
 
 import atlant.wallet.R;
 import io.atlant.wallet.activities.base.BaseActivity;
-import io.atlant.wallet.activities.camera.CameraActivity;
 import io.atlant.wallet.dagger2.component.AppComponent;
 import io.atlant.wallet.dagger2.component.DaggerHomeActivityComponent;
 import io.atlant.wallet.dagger2.component.HomeActivityComponent;

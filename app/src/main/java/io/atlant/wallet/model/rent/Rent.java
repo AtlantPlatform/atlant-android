@@ -8,7 +8,7 @@ package io.atlant.wallet.model.rent;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class Rent implements android.os.Parcelable {
 

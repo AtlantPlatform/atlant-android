@@ -17,7 +17,7 @@ import android.util.AttributeSet;
 import atlant.wallet.R;
 
 
-public class ImageViewRound extends android.support.v7.widget.AppCompatImageView {
+public class ImageViewRound extends androidx.appcompat.widget.AppCompatImageView {
 
   private float radius = 9.0f;
   private int color = Color.TRANSPARENT;

@@ -13,9 +13,9 @@ import android.content.DialogInterface;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
-import android.support.annotation.DrawableRes;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -25,9 +25,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import atlant.wallet.R;
-import io.atlant.wallet.activities.base.BaseActivity;
-import io.atlant.wallet.views.DialogError;
-
 import io.atlant.wallet.activities.base.BaseActivity;
 import io.atlant.wallet.views.DialogError;
 

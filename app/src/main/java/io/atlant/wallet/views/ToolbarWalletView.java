@@ -7,9 +7,9 @@
 package io.atlant.wallet.views;
 
 import android.content.Context;
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.TabLayout.OnTabSelectedListener;
-import android.support.design.widget.TabLayout.Tab;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
+import com.google.android.material.tabs.TabLayout.Tab;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;

@@ -6,7 +6,7 @@
 
 package io.atlant.wallet.model.rent;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class RentCity {
 

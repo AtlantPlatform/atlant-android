@@ -8,7 +8,7 @@ package io.atlant.wallet.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.annotation.DimenRes;
+import androidx.annotation.DimenRes;
 import android.util.TypedValue;
 
 public class DimensUtils {

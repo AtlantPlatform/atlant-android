@@ -8,7 +8,7 @@ package io.atlant.wallet;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
 import com.facebook.stetho.Stetho;
 
@@ -17,9 +17,6 @@ import io.atlant.wallet.dagger2.component.AppComponent;
 import io.atlant.wallet.dagger2.component.DaggerAppComponent;
 import io.atlant.wallet.dagger2.modules.AppModule;
 import net.danlew.android.joda.JodaTimeAndroid;
-
-import io.atlant.wallet.dagger2.component.AppComponent;
-import io.atlant.wallet.dagger2.modules.AppModule;
 
 public class MyApplication extends Application {
 

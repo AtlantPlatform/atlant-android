@@ -8,7 +8,7 @@ package io.atlant.wallet.activities.backup;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;

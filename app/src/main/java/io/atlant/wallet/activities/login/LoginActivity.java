@@ -7,7 +7,7 @@
 package io.atlant.wallet.activities.login;
 
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
