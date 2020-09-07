@@ -6,10 +6,12 @@
 
 package io.atlant.wallet;
 
+import atlant.wallet.BuildConfig;
+
 public class Config {
 
   //NETWORK
-  public static String ENDPOINT_URL = "https://api.etherscan.io/";
+  public static String ENDPOINT_URL = BuildConfig.BASE_URL;
   public static String API_KEY_ETHERSCAN = "K9NRZB3QX3WG9J5PWWHWXA3MDJZ18VCQJS";
   public static long GAS_LIMIT = 100000L;
 
